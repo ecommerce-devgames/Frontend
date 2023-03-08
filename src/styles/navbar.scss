@@ -1,0 +1,43 @@
+@import "./mixins";
+@import "./maps";
+@import "./variables";
+
+.navbarContainer {
+  @include flex(row, space-between, center);
+  position: sticky;
+  top: 0;
+  background-color: $navbar-background-color;  
+  padding: 0rem 1rem .5rem 0rem;
+  height: 4rem;
+}
+
+//Logo
+.logoWrapper {
+  @include flex(row, flex-start, center);
+}
+
+.navbarLogo {
+  margin: 2rem 0rem 0rem 2rem;
+  color:$logo-color;
+  font-size: map-get($font-size, "large");
+  text-transform: uppercase;
+}
+
+//Searchbar
+.searchBarWrapper {
+  @include flex(row, center, center);
+}
+
+.searchBar{
+  color:white;
+}
+
+
+//Navigation
+.navigationWrapper {
+  @include flex(row, space-between, center);
+}
+
+.dropdownForm{
+    background-color: $navbar-background-color
+}
