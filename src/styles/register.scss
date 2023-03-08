@@ -1,0 +1,86 @@
+@import "./mixins";
+@import "./maps";
+@import "./variables";
+
+.registerConteiner {
+  background-image: url(../assets/register.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  //width: 100vw;
+  height: 100vh;
+}
+.registerForm {
+  height: 700px;
+  width: 500px;
+  margin: 15vh auto;
+  background-color: rgba(255, 255, 255, 0.13);
+  border-radius: 10px;
+  padding: 50px 35px;
+  border-radius: 10px;
+  @include flex(column, space-evenly, center);
+  backdrop-filter: blur(10px);
+}
+
+* {
+  font-family: Helvetica, sans-serif;  
+  letter-spacing: 0.5px;
+  outline: none;
+  border: none;
+}
+
+.registerTitle {
+  font-size: map-get($font-size, "x-large");
+  color: $primary-color;
+  font-weight: 500;
+  line-height: 42px;
+  text-align: center;
+}
+
+.registerInput {
+  color: $primary-color;
+  height: 50px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-top: 8px;
+  font-size: map-get($font-size, "medium");
+  font-weight: 300;
+
+  &::placeholder {
+    color: #e5e5e5;
+  }
+}
+
+.registerButton {
+  margin-top: 50px;
+  width: 100%;
+  background-color: #ffffff;
+  color: #080710;
+  padding: 15px 0;
+  font-size: map-get($font-size, "medium");
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $logo-color;
+  }
+}
+
+.registerAlreadyAccount {
+  @include flex(row, space-evenly, center);
+
+  p {
+    margin-right: 1rem;
+    font-size: map-get($font-size, "small");
+    color: $primary-color;
+  }
+}
+
+.registerLink {
+  font-size: map-get($font-size, "small");
+  font-weight: bold;
+  color: $primary-color;
+}

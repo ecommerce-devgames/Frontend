@@ -1,0 +1,41 @@
+@import "./styles/mixins";
+@import "./styles/maps";
+@import "./styles/variables";
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+//LINKS
+link,
+a {
+  text-decoration: none;
+  &:hover{
+    cursor: pointer;   
+  }
+}
+
+//APP
+.appContainer {
+  background-color: $background-color;
+  min-height: 100vh;
+}
+
+
+@import "./styles/navbar.scss";
+@import "./styles/banner.scss";
+@import "./styles/grid";
+@import "styles/card";
+@import "./styles/register.scss";
+@import "./styles/login.scss"

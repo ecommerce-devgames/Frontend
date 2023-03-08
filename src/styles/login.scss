@@ -1,0 +1,30 @@
+@import "./mixins";
+@import "./maps";
+@import "./variables";
+
+.loginConteiner {
+  background-image: url(../assets/login.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  //width: 100vw;
+  height: 100vh;
+}
+.loginForm {
+  height: 500px;
+  width: 500px;
+  margin: 15vh auto;
+  background-color: rgba(255, 255, 255, 0.13);
+  border-radius: 10px;
+  padding: 50px 35px;
+  border-radius: 10px;
+  @include flex(column, space-evenly, center);
+  backdrop-filter: blur(10px);
+}
+
+
+
+
+
+
+

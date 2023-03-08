@@ -1,0 +1,15 @@
+@import "./mixins";
+@import "./maps";
+@import "./variables";
+
+.gridContainer{
+    margin: 10rem auto 0em auto;  
+    width: 90%;  
+}
+
+.gridImage{
+    width: 100%;
+    height: 300px;
+    border-radius: .5rem;
+   // margin: 1rem
+}
