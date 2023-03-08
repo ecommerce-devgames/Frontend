@@ -57,9 +57,11 @@ const Product = () => {
 
       <div className="lowerConteiner">
         {/* lower div, con titulo, descripcion y tags y genres*/}
-        <h2 className="productTitle">{product.name}</h2>
-
-        <p className="productDescription">{product.description_raw}</p>
+        <div className="lowerWrapper">
+          <h2 className="productTitle">{product.name}</h2>
+          <p className="productDescription">{product.description_raw}</p>
+        </div>
+        <div className="lowerFill"></div>
       </div>
     </div>
   );

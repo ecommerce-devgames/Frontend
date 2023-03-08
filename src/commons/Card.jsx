@@ -4,20 +4,21 @@ import { FaShoppingCart, FaCheck, FaStar } from "react-icons/fa";
 
 const Card = ({ item, singleProductHandler }) => {
   return (
-    <div className="cardConteiner" onClick={singleProductHandler}>
+    <div className="cardConteiner" onClick={() => singleProductHandler(item)}>
       <img className="gridImage" src={item.background_image} />
 
-      <div className="cardSubconteiner">
-        <span className="cardTitle">{item.name}</span>
-        <span className="cardRanking">
-          {item.rating_top}
-          <FaStar />
-        </span>
-      </div>
-
-      <div>
-        <span className="cardCart">15.000$</span>
-        <button className="cardButton">Add to cart</button>
+      <div className="cardContent">
+        <div className="cardSubconteiner">
+          <span className="cardTitle">{item.name}</span>
+          <span className="cardRanking">
+            {item.rating_top}
+            <FaStar />
+          </span>
+        </div>
+        <div className="cardSubcontainerB">
+          <button className="cardButton">Add to cart</button>
+          <p className="cardCart">15.000$</p>
+        </div>
       </div>
     </div>
   );
