@@ -26,15 +26,16 @@ const GridContainer = () => {
       )
       .then((res) => {
         dispatch(setProduct(res.data));
-
+        console.log(res.data)
         navigate(`/products/${res.data.id}`);
       });
   };
 
   console.log(data);
   if (!data) return <h5>No content</h5>;
-  return (
+  return (    
     <div className="gridContainer">
+    <h2 className="gridTitle">Games</h2>
       <Grid container rowSpacing={6} columnSpacing={3}>
         {data.map((item) => {
           return (
@@ -49,12 +50,7 @@ const GridContainer = () => {
         })}
       </Grid>
     </div>
-    // <div className="gridContainer">
-    //   {data.map((item)=>{
-    //     return <Card key={item.id} item={item} singleProductHandler={singleProductHandler}/>
-    //   })}
-
-    // </div>
+   
   );
 };
 

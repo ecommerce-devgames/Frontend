@@ -2,6 +2,16 @@
 @import "./maps";
 @import "./variables";
 
+.cardConteiner{  
+  &:hover{
+    cursor: pointer;
+}
+}
+
+.cardContent{
+  height: 50%;
+  @include flex(column, space-between, space-between);
+}
 
 .cardSubconteiner {
   @include flex(row, space-between, center);
@@ -11,7 +21,7 @@
 .cardTitle {
   font-size: map-get($font-size, "large");
   width: 70%;
-  color: $primary-color;
+  color: $secondary-color;
   font-family: Helvetica, sans-serif;
   font-weight: 500;
   //text-align: center;
@@ -19,23 +29,27 @@
 
 .cardRanking {  
   font-size: map-get($font-size, "x-small");
-  color: $primary-color;
+  color: $secondary-color;
   margin: 0rem 1rem 0rem 0rem;
   text-align: left;
 }
 
+.cardSubcontainerB{
+  @include flex(row, space-between, center);
+  margin-top: 2rem;
+}
 .cardCart {
   font-size: map-get($font-size, "medium");
-  font-weight: 300;
-  color: $primary-color;
+  font-weight: lighter;
+  color: $secondary-color;
   margin: 1rem;
 }
 
 .cardButton {   
     font-size: map-get($font-size, "small"); 
     padding: .5rem;  
-    color: $primary-color;
-    width: 30%;    
+    color: $secondary-color;
+    width: 50%;    
     text-align: center;
     border-radius:.5rem;
     background-color: rgb(4, 4, 4);
