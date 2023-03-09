@@ -9,6 +9,8 @@ import { setCart } from "../state/cart";
 
 const GridView = () => {
   const [data, setData] = useState([]);
+  const cart = useSelector(state=> state.cart);
+  const user = useSelector(state=> state.user)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,7 +30,7 @@ const GridView = () => {
       )
       .then((res) => {
         dispatch(setProduct(res.data));
-        console.log(res.data);
+        localStorage.setItem("singleProduct", res.data)
         navigate(`/products/${res.data.id}`);
       });
   };
@@ -55,6 +57,8 @@ const GridView = () => {
               <Card
                 key={item.id}
                 item={item}
+                cart={cart}
+                user={user}
                 singleProductHandler={singleProductHandler}
                 addToCartHandler={addToCartHandler}
               />

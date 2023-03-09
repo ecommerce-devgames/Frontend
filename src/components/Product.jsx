@@ -1,17 +1,37 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import useStringGenerator from "../hooks/useStringGenerator";
+import { useNavigate } from "react-router";
+import { setCart } from "../state/cart";
 
 const Product = () => {
   const product = useSelector((state) => state.product);
+  const user = useSelector((state) => state.user);
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   //para product.developers. Nos tiene que llegar un array de strings
   // const developersString = products.developers.join(" ")
   const developerString = useStringGenerator(product.developers);
-  console.log(product);
   const platformString = useStringGenerator(product.platforms);
   const genreString = useStringGenerator(product.genres);
   const tagString = useStringGenerator(product.tags);
 
+  const buyHandler = () => {
+    if (user) {
+      dispatch(setCart(product));
+      navigate("/cart");
+    } else {
+      navigate("/login");
+    }
+  };
+
+  const addToCartHandler = () => {
+    dispatch(setCart(product));
+  };
+
+  console.log("CARTTTT", cart);
   return (
     <div className="mainConteiner">
       {/* upper div, imagen y ficha tecnica*/}
@@ -49,8 +69,16 @@ const Product = () => {
           </div>
           {/* botones  */}
           <div className="productButtonsWrapper">
-            <button className="productButton">Buy</button>
-            <button className="productButton">Add to cart</button>
+            {user.isAdmin ? null : (
+              <>
+                <button className="productButton" onClick={buyHandler}>
+                  Buy
+                </button>
+                <button className="productButton" onClick={addToCartHandler}>
+                  Add to cart
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
