@@ -2,16 +2,34 @@ import React from "react";
 import Input from "../commons/Input";
 import useInput from "../hooks/useInput";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
   const name = useInput();
   const lastname = useInput();
   const email = useInput();
   const password = useInput();
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    axios
+      .post(
+        "http://localhost:3001/api/user/register",
+        {
+          name: name.value,
+          lastName: lastname.value,
+          email: email.value,
+          password: password.value,
+        },
+       
+      )
+      .then((res) => {
+        console.log(res.data);
+      });
+  };
 
   return (
     <div className="registerConteiner">
-      <form className="registerForm">
+      <form className="registerForm" onSubmit={onSubmitHandler}>
         <h3 className="registerTitle">Register</h3>
         <Input name="name" type="text" placeholder="Name" valueHandler={name} />
         <Input
