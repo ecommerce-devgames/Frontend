@@ -3,10 +3,16 @@ import useInput from "../hooks/useInput";
 import Input from "../commons/Input";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import {useDispatch} from "react-redux";
+import {setUser} from "../state/user";
+import {useNavigate} from "react-router-dom"
 
 const Login = () => {
   const email = useInput();
   const password = useInput();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
     axios
@@ -16,7 +22,8 @@ const Login = () => {
       })
       .then(
         (res) => {
-          console.log(res.data);
+          dispatch(setUser(res.data));          
+          navigate("/")          
         },
         { withCredentials: true }
       );
