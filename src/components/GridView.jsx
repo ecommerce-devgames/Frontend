@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setProduct } from "../state/product";
 import { useNavigate } from "react-router";
 
-const GridContainer = () => {
+const GridView = () => {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,10 +36,10 @@ const GridContainer = () => {
   return (    
     <div className="gridContainer">
     <h2 className="gridTitle">Games</h2>
-      <Grid container rowSpacing={6} columnSpacing={3}>
+      <Grid container rowSpacing={6} columnSpacing={5}>
         {data.map((item) => {
           return (
-            <Grid item xs={3}>
+            <Grid item s={12} sm={6} md={6} lg={6} xl={3}>
               <Card
                 key={item.id}
                 item={item}
@@ -54,4 +54,4 @@ const GridContainer = () => {
   );
 };
 
-export default GridContainer;
+export default GridView;

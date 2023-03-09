@@ -17,13 +17,18 @@ const UserAvatar = () => {
   const open = Boolean(anchorEl);
   const navigate = useNavigate()
   const handleClose = () => {
-    setAnchorEl(null);
-    navigate("/login")
+    setAnchorEl(null);    
   };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handleNavigateLogin=()=>{
+    setAnchorEl(null);  
+    navigate("/login")
+  }
+
   return (
     <React.Fragment>
     <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', mt: 2.2}}>      
@@ -94,7 +99,7 @@ const UserAvatar = () => {
         </ListItemIcon>
         Settings
       </MenuItem>
-      <MenuItem onClick={handleClose}>
+      <MenuItem onClick={handleNavigateLogin}>
         <ListItemIcon>
           <Logout fontSize="small" />
         </ListItemIcon>
