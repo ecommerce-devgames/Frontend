@@ -22,7 +22,7 @@ const Dropdown = () => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        sx={{fontSize:"1.3rem", mt: 3.2}}
+        sx={{fontSize:"1.3rem", mt: 3.5, ml: 3, mr: 2}}
       >
         Categories
       </Button>

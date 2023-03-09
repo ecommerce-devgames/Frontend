@@ -1,14 +1,14 @@
-import React from 'react'
-import Banner from '../commons/Banner'
-import GridContainer from './Grid'
+import React from "react";
+import Banner from "../commons/Banner";
+import GridView from "./GridView";
 
 const Home = () => {
   return (
-    <>       
-        <Banner />
-        <GridContainer />
+    <>
+      <Banner />
+      <GridView />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
