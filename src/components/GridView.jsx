@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../commons/Card";
 import Grid from "@mui/material/Grid";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setProduct } from "../state/product";
 import { useNavigate } from "react-router";
+import { setCart } from "../state/cart";
 
 const GridView = () => {
   const [data, setData] = useState([]);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -26,16 +28,26 @@ const GridView = () => {
       )
       .then((res) => {
         dispatch(setProduct(res.data));
-        console.log(res.data)
+        console.log(res.data);
         navigate(`/products/${res.data.id}`);
+      });
+  };
+
+  const addToCartHandler = (item) => {
+    axios
+      .get(
+        `https://api.rawg.io/api/games/${item.id}?key=679adbda4ffc4cd5a68fad9b1e98f040&dates=2019-09-01,2019-09-30&platforms=18,1,7`
+      )
+      .then((res) => {
+        dispatch(setCart(res.data));
       });
   };
 
   console.log(data);
   if (!data) return <h5>No content</h5>;
-  return (    
+  return (
     <div className="gridContainer">
-    <h2 className="gridTitle">Games</h2>
+      <h2 className="gridTitle">Games</h2>
       <Grid container rowSpacing={6} columnSpacing={5}>
         {data.map((item) => {
           return (
@@ -44,13 +56,13 @@ const GridView = () => {
                 key={item.id}
                 item={item}
                 singleProductHandler={singleProductHandler}
+                addToCartHandler={addToCartHandler}
               />
             </Grid>
           );
         })}
       </Grid>
     </div>
-   
   );
 };
 

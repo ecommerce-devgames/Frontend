@@ -2,7 +2,7 @@ import { SpaOutlined } from "@mui/icons-material";
 import React from "react";
 import { FaShoppingCart, FaCheck, FaStar } from "react-icons/fa";
 
-const Card = ({ item, singleProductHandler }) => {
+const Card = ({ item, singleProductHandler, addToCartHandler }) => {
   return (
     <div className="cardConteiner" onClick={() => singleProductHandler(item)}>
       <img className="gridImage" src={item.background_image} />
@@ -16,7 +16,9 @@ const Card = ({ item, singleProductHandler }) => {
           </span>
         </div>
         <div className="cardSubcontainerB">
-          <button className="cardButton">Add to cart</button>
+          <button className="cardButton" onClick={() => addToCartHandler(item)}>
+            Add to cart
+          </button>
           <p className="cardCart">15.000$</p>
         </div>
       </div>

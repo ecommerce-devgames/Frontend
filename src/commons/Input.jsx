@@ -1,16 +1,17 @@
 import React from "react";
 
-const Input = ({ type, name, placeholder, valueHandler }) => { 
+const Input = ({ type, name, placeholder, valueHandler }) => {
   return (
     <input
-    className="registerInput"
+      className="registerInput"
       name={name}
       type={type}
-      placeholder={placeholder}      
+      placeholder={placeholder}
       {...valueHandler}
-      required
     />
   );
 };
 
 export default Input;
+
+//

@@ -1,0 +1,16 @@
+@import "./mixins";
+@import "./maps";
+@import "./variables";
+
+.cartIcon {
+  font-size: map-get($font-size, "medium");
+}
+
+.cartWrapper {
+  margin-top: 1.7rem;
+  color: $logo-color;
+}
+
+.cartCount {
+  padding-left: 0.2rem;
+}

@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Product from "./components/Product";
+import Cart from "./components/Cart"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/products/:id" element={<Product />} />
+        <Route path="/cart" element={<Cart /> } /> 
       </Routes>
     </div>
   );
