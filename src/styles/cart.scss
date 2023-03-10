@@ -1,0 +1,116 @@
+@import "./mixins";
+@import "./maps";
+@import "./variables";
+
+.cartIcon {
+  font-size: map-get($font-size, "medium");
+}
+
+.cartWrapper {
+  margin-top: 1.7rem;
+  color: $logo-color;
+}
+
+.cartCount {
+  padding-left: 0.2rem;
+}
+
+.cartContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: auto;
+  width: 50%;
+  background-color: rgba(255, 255, 255, 0.13);
+  border-radius: 10px;
+  margin: 25vh auto;
+}
+
+.cartViewWrapper {
+  @include flex(row, flex-start, center);
+  border-bottom: 1px solid rgb(43, 41, 41);
+  padding: 1.5rem;
+}
+
+.cartImg {
+  height: 200px;
+  width: 300px;
+  border-radius: 0.5rem;
+}
+
+.cartInfoWrapper {
+  @include flex(column, space-evenly, space-evenly);
+  margin-left: 2rem;
+}
+
+.cartInfoTop {
+  @include flex(row, space-between, center);
+  padding: 1rem;
+}
+
+.cartTitle {
+  color: $primary-color;
+  font-size: map-get($font-size, "large");
+}
+
+.cartPrice {
+  color: $primary-color;
+  font-size: map-get($font-size, "medium");
+  font-weight: lighter;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.cartExtraInfo {
+  color: $primary-color;
+  font-size: map-get($font-size, "medium");
+  font-weight: lighter;
+}
+.cartInfoBottom {
+  @include flex(row, space-between, center);
+  padding: 1rem;
+}
+
+.cartCheckoutWrapper {
+  @include flex(column, space-evenly, flex-start);
+  margin: 3rem 0 3rem 3rem;
+}
+
+.cartCheckoutData {
+  color: $primary-color;
+  font-size: map-get($font-size, "medium");
+  margin: 0.5rem;
+}
+
+.cartCheckoutButton {
+  width: 50%;
+  cursor: pointer;
+  font-size: map-get($font-size, "x-small");
+  font-weight: 500;
+  border-radius: 5px;
+  border: none;
+  color: $primary-color;
+  background-color: $logo-color;
+  margin-top: 1rem;
+  padding: 0.5rem;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $logo-color-hover;
+  }
+}
+
+.cartNoGames {
+  color: $logo-color;
+  width: 50%;
+  height: 200px;
+  margin: auto;
+}
+
+.noGamesTitle{
+  font-size: map-get($font-size, "medium");
+  margin: 85px auto;
+  text-align: center;
+  width: 50%;
+}

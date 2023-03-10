@@ -1,0 +1,111 @@
+@import "./mixins";
+@import "./maps";
+@import "./variables";
+
+*{
+  margin:0;
+  padding: 0;
+}
+
+.mainConteiner {
+  @include flex(column, space-evenly, center);
+  margin-top: 5rem;
+}
+
+.upperConteiner{
+  @include flex(row, space-evenly, flex-start);
+  width: 100%;
+}
+
+.productSidebar {
+  @include flex(column, space-evenly, center);
+  width: 30%;
+  height: 100%;  
+}
+
+.productImage {
+  width: 60%;
+  height: 100%;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.productDataSheet {
+  @include flex(column, center, flex-start);
+}
+
+.productData {
+  @include flex(row, flex-start, center);
+  width: 100%;
+  padding-left: 1rem;
+  color: $primary-color;  
+  font-size: map-get($font-size, "x-small");
+  border-bottom: 1px solid rgb(43, 41, 41);
+  padding: 1rem 0rem;
+}
+
+.productSpan {
+  font-weight: bold;
+  color: $primary-color;
+  margin-left: 1rem;
+}
+
+.productButtonsWrapper{
+  @include flex(column, space-around, center);
+  width: 100%;
+}
+
+.productButton {
+  width: 50%;    
+  cursor: pointer;
+  font-size: map-get($font-size, "x-small");
+  font-weight: 500;
+  border-radius: 5px;
+  border: none;
+  color: $primary-color;
+  background-color: $logo-color;  
+  margin-top: 1rem;
+  padding: .5rem;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $logo-color-hover;
+  }
+}
+
+.lowerConteiner {
+  @include flex(row, space-evenly, center);   
+}
+
+.lowerWrapper{
+  width: 65%;  
+  padding-left: 3rem;
+  @include flex(column, space-between, flex-start);   
+}
+
+.lowerFill{
+  width: 30%;
+}
+
+.productTitle {  
+  font-size: map-get($font-size, "large");
+   color: $primary-color;
+  font-family: Helvetica, sans-serif;
+  font-weight: 500;
+  margin: 3rem 0;
+  
+}
+
+.productDescription {  
+  color: $primary-color;
+  font-size: map-get($font-size, "small");
+  text-align: justify;
+  width: 90%;  
+  margin: 0 0 5rem 0;
+}
+
+
+
+

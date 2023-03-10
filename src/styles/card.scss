@@ -1,0 +1,66 @@
+@import "./mixins";
+@import "./maps";
+@import "./variables";
+
+.cardConteiner {
+  &:hover {
+    cursor: pointer;
+    transform: translate3D(0, -2px, 0) scale(1.04);
+    transition: transform 0.4s ease;    
+  }
+}
+
+.cardContent {
+  height: 50%;
+  @include flex(column, space-between, space-between);
+}
+
+.cardSubconteiner {
+  @include flex(row, space-between, center);
+  margin: 1rem 1rem 0rem 1rem;
+}
+
+.cardTitle {
+  font-size: map-get($font-size, "large");
+  width: 70%;
+  color: $secondary-color;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  //text-align: center;
+}
+
+.cardRanking {
+  font-size: map-get($font-size, "x-small");
+  color: $secondary-color;
+  margin: 0rem 1rem 0rem 0rem;
+  text-align: left;
+}
+
+.cardSubcontainerB {
+  @include flex(row, space-between, center);
+  margin-top: 2rem;
+}
+.cardCart {
+  font-size: map-get($font-size, "medium");
+  font-weight: lighter;
+  color: $secondary-color;
+  margin: 1rem;
+}
+
+.cardButton {
+  font-size: map-get($font-size, "small");
+  padding: 0.5rem;
+  color: $secondary-color;
+  width: 50%;
+  text-align: center;
+  border-radius: 0.5rem;
+  background-color: rgb(4, 4, 4);
+  border: 2px solid rgb(34, 32, 32);
+  margin: 1rem;
+  align-self: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(34, 32, 32);
+  }
+}
