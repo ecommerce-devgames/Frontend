@@ -7,5 +7,7 @@ const initialState = [];
 
 export default createReducer(initialState, {
   [setCart]: (state, action) => [...state, action.payload],
-  [removeFromCart]: (state, action) => {state.filter((item) => item.id !== action.payload.id)}
+  [removeFromCart]: (state, action) => {
+    return state.filter((item) => item.id !== action.payload.id);
+  },
 });
