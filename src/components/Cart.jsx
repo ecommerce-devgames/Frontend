@@ -33,7 +33,7 @@ const Cart = () => {
       ))}
       <div className="cartCheckoutWrapper">
         <p className="cartCheckoutData">Checkout</p> 
-        <p className="cartCheckoutData">Total: $ARS 45.000</p>
+        <p className="cartCheckoutData">Total: $USD 180</p>
         <button className="cartCheckoutButton">Purchase</button>
       </div>
      

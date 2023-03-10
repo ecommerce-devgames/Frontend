@@ -32,7 +32,7 @@ const Card = ({ item, singleProductHandler, addToCartHandler, cart, user }) => {
               )}
             </button>          )}
 
-          <p className="cardCart">15.000$</p>
+          <p className="cardCart">$USD 60</p>
         </div>
       </div>
     </div>
