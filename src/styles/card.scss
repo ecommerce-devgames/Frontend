@@ -2,13 +2,15 @@
 @import "./maps";
 @import "./variables";
 
-.cardConteiner{   
-  &:hover{
+.cardConteiner {
+  &:hover {
     cursor: pointer;
-}
+    transform: translate3D(0, -2px, 0) scale(1.04);
+    transition: transform 0.4s ease;    
+  }
 }
 
-.cardContent{
+.cardContent {
   height: 50%;
   @include flex(column, space-between, space-between);
 }
@@ -27,14 +29,14 @@
   //text-align: center;
 }
 
-.cardRanking {  
+.cardRanking {
   font-size: map-get($font-size, "x-small");
   color: $secondary-color;
   margin: 0rem 1rem 0rem 0rem;
   text-align: left;
 }
 
-.cardSubcontainerB{
+.cardSubcontainerB {
   @include flex(row, space-between, center);
   margin-top: 2rem;
 }
@@ -45,22 +47,20 @@
   margin: 1rem;
 }
 
-.cardButton {   
-    font-size: map-get($font-size, "small"); 
-    padding: .5rem;  
-    color: $secondary-color;
-    width: 50%;    
-    text-align: center;
-    border-radius:.5rem;
-    background-color: rgb(4, 4, 4);
-    border: 2px solid rgb(34, 32, 32);    
-    margin: 1rem;
-    align-self: center;
-    cursor: pointer;
+.cardButton {
+  font-size: map-get($font-size, "small");
+  padding: 0.5rem;
+  color: $secondary-color;
+  width: 50%;
+  text-align: center;
+  border-radius: 0.5rem;
+  background-color: rgb(4, 4, 4);
+  border: 2px solid rgb(34, 32, 32);
+  margin: 1rem;
+  align-self: center;
+  cursor: pointer;
 
-    &:hover{
-      background-color: rgb(34, 32, 32);
-    }
+  &:hover {
+    background-color: rgb(34, 32, 32);
+  }
 }
-  
-

@@ -21,6 +21,10 @@
   color:$logo-color;
   font-size: map-get($font-size, "large");
   text-transform: uppercase;
+
+  &:hover{
+    color: $logo-color-hover
+  }
 }
 
 //Searchbar
