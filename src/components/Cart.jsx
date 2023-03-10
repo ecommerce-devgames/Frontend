@@ -1,17 +1,18 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaTrash } from "react-icons/fa";
-import { removeFromCart } from "../state/cart";
+import { removeFromCart, setCart } from "../state/cart";
 
 const Cart = () => {
-  const dispatch = useDispatch()
-  const cart = useSelector((state) => state.cart);  
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  localStorage.setItem("cart", JSON.stringify(cart));
   console.log(cart);
-
-  const deleteItemHandler=(id)=>{
-    console.log(id)
-    dispatch(removeFromCart(id))
-  }
+  const DeleteItemHandler = (item) => {
+    console.log(item, "soy el juego que eliminaste");
+    dispatch(removeFromCart(item));
+    console.log(cart);
+  };
 
   return (
     <div className="cartContainer">
@@ -21,22 +22,29 @@ const Cart = () => {
           <div className="cartInfoWrapper">
             <div className="cartInfoTop">
               <p className="cartTitle">{item.name}</p>
-              <p className="cartPrice" onClick={()=> deleteItemHandler(item.id)}>
+              <p className="cartPrice" onClick={() => DeleteItemHandler(item)}>
                 $15.000 <FaTrash />
               </p>
             </div>
             <div className="cartInfoBottom">
-              <p className="cartExtraInfo">Aca me imagino tags o alguna descripcion corta</p>
+              <p className="cartExtraInfo">
+                Aca me imagino tags o alguna descripcion corta
+              </p>
             </div>
           </div>
         </div>
       ))}
-      <div className="cartCheckoutWrapper">
-        <p className="cartCheckoutData">Checkout</p> 
-        <p className="cartCheckoutData">Total: $USD 180</p>
-        <button className="cartCheckoutButton">Purchase</button>
-      </div>
-     
+      {cart[0] ? (
+        <div className="cartCheckoutWrapper">
+          <p className="cartCheckoutData">Checkout</p>
+          <p className="cartCheckoutData">Total: $USD 180</p>
+          <button className="cartCheckoutButton">Purchase</button>
+        </div>
+      ) : (
+        <div className="cartNotGames">
+          <h2>there´s nothing on cart</h2>
+        </div>
+      )}
     </div>
   );
 };
