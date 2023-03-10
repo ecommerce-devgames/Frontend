@@ -47,35 +47,6 @@ const Product = () => {
             <ProductData title="Platforms" info={platformString} />
             <ProductData title="Genres" info={genreString} />
             <ProductData title="Tags" info={tagString} />
-            
-            
-            {/* <div className="productData">
-              <p>Release Date: </p>
-              <span className="productSpan">{product.released}</span>
-            </div>
-            <div className="productData">
-              <p>Developers:</p>
-              <span className="productSpan">{developerString}</span>
-            </div>
-            <div className="productData">
-              <p>Playtime:</p>
-              <span className="productSpan">{product.playtime}</span>
-            </div>
-            <div className="productData">
-              <p>Platforms:</p>
-              <span className="productSpan">{platformString}</span>
-            </div>
-            <div className="productData">
-              <p>Genres:</p>
-              <span className="productSpan">{genreString}</span>
-            </div>
-            <div className="productData">
-              <p>Tags:</p>
-              <span className="productSpan">{tagString}</span>
-            </div>  */}
-             
-            
-            
           </div>
           {/* botones  */}
           <div className="productButtonsWrapper">

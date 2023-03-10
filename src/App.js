@@ -1,8 +1,10 @@
 import "./App.css";
+import axios from "axios"
 import {useEffect} from "react";
 import { Routes, Route } from "react-router";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setProduct } from "./state/product";
+import { setUser} from "./state/user";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
@@ -12,10 +14,14 @@ import Cart from "./components/Cart"
 
 function App() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   useEffect(()=>{  
-    dispatch(setProduct(JSON.parse(localStorage.getItem("singleProduct"))))
+    dispatch(setProduct(JSON.parse(localStorage.getItem("singleProduct"))));
+    axios.get("http://localhost:3001/api/user/me", {withCredentials:true}).then(res=> res.data).then(data=> dispatch(setUser(data)))
+    console.log(user)
   }, [])
+
 
   return (
     <div className="appContainer">

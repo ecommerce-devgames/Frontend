@@ -1,4 +1,5 @@
 import * as React from "react";
+import axios from "axios"
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -9,9 +10,11 @@ import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Logout from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../state/user";
 
 const UserAvatar = () => {
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const user = useSelector((state) => state.user);
   const open = Boolean(anchorEl);
@@ -23,6 +26,7 @@ const UserAvatar = () => {
   ];
   const userMenu = ["Shopping history", "Settings"];
   const navigate = useNavigate();
+  
   console.log("userrrrrrrr", user);
 
   const handleClose = () => {
@@ -33,8 +37,14 @@ const UserAvatar = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleNavigateLogin = () => {
+  const handleAccess = () => {
     setAnchorEl(null);
+    if(user.id){
+      axios.post("http://localhost:3001/api/user/logout", { withCredentials: true });
+      dispatch(setUser({}))
+      console.log("user logout", user)
+      navigate("/")
+    }
     navigate("/login");
   };
 
@@ -97,14 +107,14 @@ const UserAvatar = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         {/* ESTOS LOS PUEDE VER EL ADMIN */}
-        {(user !== {} && user.isAdmin === "true")
+        {user?.isAdmin 
           ? isAdminMenu.map((menu) => (
               <MenuItem onClick={handleClose}>{menu}</MenuItem>
             ))
           : null}
 
         {/*ESTOS LOS PUEDE VER EL USER NORMAL */}
-        {user.isAdmin === "false"
+        {!user?.isAdmin 
           ? userMenu.map((menu) => (
               <MenuItem onClick={handleClose}>
                 <ListItemIcon>
@@ -116,11 +126,11 @@ const UserAvatar = () => {
           : null}
 
         {/* ESTE LO PUEDEN VER TODOS  */}
-        <MenuItem onClick={handleNavigateLogin}>
+        <MenuItem onClick={handleAccess}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          {user.id ? "Login" : "Logout"}
+          {user.id ? "Logout" : "Login"}
         </MenuItem>
       </Menu>
     </React.Fragment>
