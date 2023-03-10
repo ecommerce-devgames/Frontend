@@ -3,9 +3,9 @@ import useInput from "../hooks/useInput";
 import Input from "../commons/Input";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import {useDispatch} from "react-redux";
-import {setUser} from "../state/user";
-import {useNavigate} from "react-router-dom"
+import { useDispatch } from "react-redux";
+import { setUser } from "../state/user";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const email = useInput();
@@ -16,17 +16,18 @@ const Login = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/api/user/login", {
-        email: email.value,
-        password: password.value,
-      })
-      .then(
-        (res) => {
-          dispatch(setUser(res.data));          
-          navigate("/")          
+      .post(
+        "http://localhost:3001/api/user/login",
+        {
+          email: email.value,
+          password: password.value,
         },
         { withCredentials: true }
-      );
+      )
+      .then((res) => {
+        dispatch(setUser(res.data));
+        navigate("/");
+      });
   };
 
   return (
