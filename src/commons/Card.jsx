@@ -1,6 +1,5 @@
-import { SpaOutlined } from "@mui/icons-material";
 import React from "react";
-import { FaShoppingCart, FaCheck, FaStar } from "react-icons/fa";
+import { FaCheck, FaStar } from "react-icons/fa";
 
 const Card = ({ item, singleProductHandler, addToCartHandler, cart, user }) => {
   return (
@@ -8,6 +7,7 @@ const Card = ({ item, singleProductHandler, addToCartHandler, cart, user }) => {
       <img
         className="gridImage"
         src={item.background_image}
+        alt="product"
         onClick={() => singleProductHandler(item)}
       />
 

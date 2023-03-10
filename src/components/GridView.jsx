@@ -30,7 +30,7 @@ const GridView = () => {
       )
       .then((res) => {
         dispatch(setProduct(res.data));
-        localStorage.setItem("singleProduct", res.data)
+        localStorage.setItem("singleProduct", JSON.stringify(res.data))
         navigate(`/products/${res.data.id}`);
       });
   };

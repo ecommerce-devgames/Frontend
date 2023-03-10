@@ -7,7 +7,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
-import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
@@ -106,14 +105,14 @@ const UserAvatar = () => {
 
         {/*ESTOS LOS PUEDE VER EL USER NORMAL */}
         {user.isAdmin === "false"
-          ? userMenu.map((menu) => {
+          ? userMenu.map((menu) => (
               <MenuItem onClick={handleClose}>
                 <ListItemIcon>
                   <PersonAdd fontSize="small" />
                 </ListItemIcon>
                 {menu}
-              </MenuItem>;
-            })
+              </MenuItem>
+            ))
           : null}
 
         {/* ESTE LO PUEDEN VER TODOS  */}

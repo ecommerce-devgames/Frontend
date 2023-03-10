@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import useStringGenerator from "../hooks/useStringGenerator";
 import { useNavigate } from "react-router";
 import { setCart } from "../state/cart";
+import ProductData from "../commons/ProductData.jsx";
 
 const Product = () => {
   const product = useSelector((state) => state.product);
@@ -21,10 +22,8 @@ const Product = () => {
   const buyHandler = () => {
     if (user) {
       dispatch(setCart(product));
-      navigate("/cart");
-    } else {
-      navigate("/login");
     }
+    navigate(user ? "/cart" : "/login");
   };
 
   const addToCartHandler = () => {
@@ -42,7 +41,15 @@ const Product = () => {
         <div className="productSidebar">
           {/* ficha técnica: developers, platforms, release day, playtime*/}
           <div className="productDataSheet">
-            <div className="productData">
+            <ProductData title="Release Date" info={product.released} />
+            <ProductData title="Developers" info={developerString} />
+            <ProductData title="Playtime" info={product.playtime} />
+            <ProductData title="Platforms" info={platformString} />
+            <ProductData title="Genres" info={genreString} />
+            <ProductData title="Tags" info={tagString} />
+            
+            
+            {/* <div className="productData">
               <p>Release Date: </p>
               <span className="productSpan">{product.released}</span>
             </div>
@@ -65,7 +72,10 @@ const Product = () => {
             <div className="productData">
               <p>Tags:</p>
               <span className="productSpan">{tagString}</span>
-            </div>
+            </div>  */}
+             
+            
+            
           </div>
           {/* botones  */}
           <div className="productButtonsWrapper">
@@ -84,7 +94,7 @@ const Product = () => {
       </div>
 
       <div className="lowerConteiner">
-        {/* lower div, con titulo, descripcion y tags y genres*/}
+        {/* lower div, con titulo, descripcion, tags y genres*/}
         <div className="lowerWrapper">
           <h2 className="productTitle">{product.name}</h2>
           <p className="productDescription">{product.description_raw}</p>
