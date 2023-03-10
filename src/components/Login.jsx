@@ -3,16 +3,21 @@ import useInput from "../hooks/useInput";
 import Input from "../commons/Input";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../state/user";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  //Hooks
   const email = useInput();
   const password = useInput();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  //States
+  const cart= useSelector(state=> state.cart)
+
+  //Handlers and functions
   const onSubmitHandler = (e) => {
     e.preventDefault();
     axios
@@ -25,10 +30,11 @@ const Login = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        dispatch(setUser(res.data));
-        navigate("/");
+        dispatch(setUser(res.data));        
+        navigate("/");        
       });
   };
+
 
   return (
     <div className="loginConteiner">

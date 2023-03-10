@@ -101,6 +101,16 @@
   }
 }
 
-.cartNotGames {
+.cartNoGames {
   color: $logo-color;
+  width: 50%;
+  height: 200px;
+  margin: auto;
+}
+
+.noGamesTitle{
+  font-size: map-get($font-size, "medium");
+  margin: 85px auto;
+  text-align: center;
+  width: 50%;
 }

@@ -8,13 +8,16 @@ import { useNavigate } from "react-router";
 import { setCart } from "../state/cart";
 
 const GridView = () => {
-  const [data, setData] = useState([]);
-  const cart = useSelector(state=> state.cart);
-  const user = useSelector(state=> state.user)
-
+  //Hooks
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  //States
+  const [data, setData] = useState([]);
+  const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user);
+
+  //Handlers and functions
   useEffect(() => {
     axios
       .get(
@@ -30,7 +33,7 @@ const GridView = () => {
       )
       .then((res) => {
         dispatch(setProduct(res.data));
-        localStorage.setItem("singleProduct", JSON.stringify(res.data))
+        localStorage.setItem("singleProduct", JSON.stringify(res.data));
         navigate(`/products/${res.data.id}`);
       });
   };
@@ -38,17 +41,17 @@ const GridView = () => {
   const addToCartHandler = (item) => {
     const validate = cart.some((el) => el.id === item.id);
     if (!validate) {
-    axios
-      .get(
-        `https://api.rawg.io/api/games/${item.id}?key=679adbda4ffc4cd5a68fad9b1e98f040&dates=2019-09-01,2019-09-30&platforms=18,1,7`
-      )
-      .then((res) => {
-        dispatch(setCart(res.data));      
-      });
-    }     
+      axios
+        .get(
+          `https://api.rawg.io/api/games/${item.id}?key=679adbda4ffc4cd5a68fad9b1e98f040&dates=2019-09-01,2019-09-30&platforms=18,1,7`
+        )
+        .then((res) => {
+          dispatch(setCart(res.data));
+        });
+    }
   };
 
-  console.log(data);
+  localStorage.setItem("cart", JSON.stringify(cart));
   if (!data) return <h5>No content</h5>;
   return (
     <div className="gridContainer">

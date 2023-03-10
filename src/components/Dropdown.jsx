@@ -5,8 +5,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 
 const Dropdown = () => {
+
+  //Variables
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  //Handlers
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };

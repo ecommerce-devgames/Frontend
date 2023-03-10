@@ -1,6 +1,6 @@
 import React from "react";
-import Banner from "../commons/Banner";
-import GridView from "./GridView";
+import Banner from "./Banner";
+import GridView from "../components/GridView";
 
 const Home = () => {
   return (

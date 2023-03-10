@@ -6,11 +6,14 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 
 const Register = () => {
+  //Hooks
   const name = useInput();
   const lastname = useInput();
   const email = useInput();
   const password = useInput();
   const navigate = useNavigate();
+
+  //Handlers and functions
   const onSubmitHandler = (e) => {
     e.preventDefault();
     axios

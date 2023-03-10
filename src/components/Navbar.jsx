@@ -2,14 +2,18 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {useSelector} from "react-redux";
 import Searchbar from "./Searchbar";
-import Dropdown from "../commons/Dropdown";
+import Dropdown from "../components/Dropdown";
 import UserAvatar from "./UserAvatar";
 import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
-  const cart = useSelector(state=> state.cart)
+  //Hooks
   const navigate = useNavigate();
 
+  //States
+  const cart = useSelector(state=> state.cart)
+  
+  //Handlers and functions
   const cartNavigationHandler=()=>{
     navigate("/cart")
   }

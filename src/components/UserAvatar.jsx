@@ -15,9 +15,15 @@ import { setUser } from "../state/user";
 import {FaUserAlt} from "react-icons/fa"
 
 const UserAvatar = () => {
+  //Hooks
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  //States
   const [anchorEl, setAnchorEl] = React.useState(null);
   const user = useSelector((state) => state.user);
+
+  //Variables
   const open = Boolean(anchorEl);
   const isAdminMenu = [
     "Edit products",
@@ -26,10 +32,8 @@ const UserAvatar = () => {
     "Orders",
   ];
   const userMenu = ["Shopping history", "Settings"];
-  const navigate = useNavigate();
   
-  console.log("userrrrrrrr", user);
-
+  //Handlers and functions
   const handleClose = () => {
     setAnchorEl(null);
   };

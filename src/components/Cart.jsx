@@ -1,17 +1,26 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaTrash } from "react-icons/fa";
-import { removeFromCart, setCart } from "../state/cart";
+import { removeFromCart } from "../state/cart";
+import { useNavigate } from "react-router";
 
 const Cart = () => {
+  //Hooks
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  //States
   const cart = useSelector((state) => state.cart);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  console.log(cart);
-  const DeleteItemHandler = (item) => {
-    console.log(item, "soy el juego que eliminaste");
+  const user = useSelector((state) => state.user);
+
+  //Handlers
+  const deleteItemHandler = (item) => {
     dispatch(removeFromCart(item));
-    console.log(cart);
+  };
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  const purchaseHandler = () => {
+    navigate(!user.name && "/login");
   };
 
   return (
@@ -22,7 +31,7 @@ const Cart = () => {
           <div className="cartInfoWrapper">
             <div className="cartInfoTop">
               <p className="cartTitle">{item.name}</p>
-              <p className="cartPrice" onClick={() => DeleteItemHandler(item)}>
+              <p className="cartPrice" onClick={() => deleteItemHandler(item)}>
                 $15.000 <FaTrash />
               </p>
             </div>
@@ -38,11 +47,15 @@ const Cart = () => {
         <div className="cartCheckoutWrapper">
           <p className="cartCheckoutData">Checkout</p>
           <p className="cartCheckoutData">Total: $USD 180</p>
-          <button className="cartCheckoutButton">Purchase</button>
+          <button className="cartCheckoutButton" onClick={purchaseHandler}>
+            Purchase
+          </button>
         </div>
       ) : (
-        <div className="cartNotGames">
-          <h2>there´s nothing on cart</h2>
+        <div className="cartNoGames">
+          <h2 className="noGamesTitle">
+            You didn't add anything to your cart yet
+          </h2>
         </div>
       )}
     </div>

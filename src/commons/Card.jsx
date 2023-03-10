@@ -30,7 +30,8 @@ const Card = ({ item, singleProductHandler, addToCartHandler, cart, user }) => {
               ) : (
                 "Add to cart"
               )}
-            </button>          )}
+            </button>
+          )}
 
           <p className="cardCart">$USD 60</p>
         </div>

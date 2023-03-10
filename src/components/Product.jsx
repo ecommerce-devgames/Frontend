@@ -4,15 +4,19 @@ import useStringGenerator from "../hooks/useStringGenerator";
 import { useNavigate } from "react-router";
 import { setCart } from "../state/cart";
 import ProductData from "../commons/ProductData.jsx";
-import {FaCheck} from "react-icons/fa"
+import { FaCheck } from "react-icons/fa";
 
 const Product = () => {
-  const product = useSelector((state) => state.product);
-  const user = useSelector((state) => state.user);
-  const cart = useSelector((state) => state.cart);
+  //Hooks
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  //States
+  const product = useSelector((state) => state.product);
+  const user = useSelector((state) => state.user);
+  const cart = useSelector((state) => state.cart);
+
+  //Variables
   //para product.developers. Nos tiene que llegar un array de strings
   // const developersString = products.developers.join(" ")
   const developerString = useStringGenerator(product.developers);
@@ -20,6 +24,7 @@ const Product = () => {
   const genreString = useStringGenerator(product.genres);
   const tagString = useStringGenerator(product.tags);
 
+  //Handlers and functions
   const buyHandler = () => {
     const validate = cart.some((el) => el.id === product.id);
     if (user && !validate) {
@@ -30,10 +35,13 @@ const Product = () => {
 
   const addToCartHandler = () => {
     const validate = cart.some((el) => el.id === product.id);
-    if(!validate) dispatch(setCart(product));
+    if (!validate) {
+      dispatch(setCart(product));
+    }
   };
 
-  console.log("CARTTTT", cart);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  
   return (
     <div className="mainConteiner">
       {/* upper div, imagen y ficha tecnica*/}
