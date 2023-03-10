@@ -83,4 +83,7 @@
   font-size: map-get($font-size, "small");
   font-weight: bold;
   color: $primary-color;
+  &:hover{
+    color: $logo-color
+  }
 }
