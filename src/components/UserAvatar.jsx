@@ -12,6 +12,7 @@ import Logout from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../state/user";
+import {FaUserAlt} from "react-icons/fa"
 
 const UserAvatar = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const UserAvatar = () => {
   const handleAccess = () => {
     setAnchorEl(null);
     if(user.id){
-      axios.post("http://localhost:3001/api/user/logout", { withCredentials: true });
+      axios.post("http://localhost:3001/api/user/logout", { }, { withCredentials: true });
       dispatch(setUser({}))
       console.log("user logout", user)
       navigate("/")
@@ -67,7 +68,7 @@ const UserAvatar = () => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar sx={{ width: 32, height: 32, backgroundColor: "rgb(53, 136, 230)"}}>{user.name? user.name.charAt(0) : <FaUserAlt/>}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -114,8 +115,8 @@ const UserAvatar = () => {
           : null}
 
         {/*ESTOS LOS PUEDE VER EL USER NORMAL */}
-        {!user?.isAdmin 
-          ? userMenu.map((menu) => (
+        {user.name?
+           userMenu.map((menu) => (
               <MenuItem onClick={handleClose}>
                 <ListItemIcon>
                   <PersonAdd fontSize="small" />

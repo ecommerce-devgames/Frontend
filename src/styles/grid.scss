@@ -9,9 +9,9 @@
 
 .gridTitle{
     color: $secondary-color;
-    font-weight: 300 ;
-    font-size: map-get($font-size, "medium");
-    margin: 3rem, 0;
+    font-weight: bold;
+    font-size: map-get($font-size, "x-large");
+    margin: 3rem 0;
 }
 .gridImage{
     width: 100%;

@@ -36,6 +36,8 @@ const GridView = () => {
   };
 
   const addToCartHandler = (item) => {
+    const validate = cart.some((el) => el.id === item.id);
+    if (!validate) {
     axios
       .get(
         `https://api.rawg.io/api/games/${item.id}?key=679adbda4ffc4cd5a68fad9b1e98f040&dates=2019-09-01,2019-09-30&platforms=18,1,7`
@@ -43,6 +45,7 @@ const GridView = () => {
       .then((res) => {
         dispatch(setCart(res.data));      
       });
+    }     
   };
 
   console.log(data);

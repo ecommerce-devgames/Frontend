@@ -4,6 +4,7 @@ import useStringGenerator from "../hooks/useStringGenerator";
 import { useNavigate } from "react-router";
 import { setCart } from "../state/cart";
 import ProductData from "../commons/ProductData.jsx";
+import {FaCheck} from "react-icons/fa"
 
 const Product = () => {
   const product = useSelector((state) => state.product);
@@ -20,14 +21,16 @@ const Product = () => {
   const tagString = useStringGenerator(product.tags);
 
   const buyHandler = () => {
-    if (user) {
+    const validate = cart.some((el) => el.id === product.id);
+    if (user && !validate) {
       dispatch(setCart(product));
     }
     navigate(user ? "/cart" : "/login");
   };
 
   const addToCartHandler = () => {
-    dispatch(setCart(product));
+    const validate = cart.some((el) => el.id === product.id);
+    if(!validate) dispatch(setCart(product));
   };
 
   console.log("CARTTTT", cart);
@@ -56,7 +59,11 @@ const Product = () => {
                   Buy
                 </button>
                 <button className="productButton" onClick={addToCartHandler}>
-                  Add to cart
+                  {cart.some((el) => el.id === product.id) ? (
+                    <FaCheck />
+                  ) : (
+                    "Add to cart"
+                  )}
                 </button>
               </>
             )}
