@@ -9,6 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: $background-color;
 }
 
 code {
@@ -29,6 +30,7 @@ a {
 .appContainer {
   background-color: $background-color;
   min-height: 200vh;
+  width: 100%
 }
 
 @import "./styles/navbar.scss";

@@ -12,6 +12,14 @@
     font-weight: bold;
     font-size: map-get($font-size, "x-large");
     margin: 3rem 0;
+    @media screen and (max-width: $medium-small-screen) {
+        font-size: map-get($font-size, "large");
+        margin: 2rem 0;
+      }
+      @media screen and (max-width: $small-screen) {
+        font-size: map-get($font-size, "medium");
+        margin: 1.5rem 0;
+      }
 }
 .gridImage{
     width: 100%;
