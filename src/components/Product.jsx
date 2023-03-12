@@ -41,16 +41,21 @@ const Product = () => {
   };
 
   localStorage.setItem("cart", JSON.stringify(cart));
-  
+
   return (
     <div className="mainConteiner">
-      {/* upper div, imagen y ficha tecnica*/}
       <div className="upperConteiner">
         <div className="productImage">
           <img src={product.background_image} alt="game" />
         </div>
+        <div className="lowerWrapper">
+          <h2 className="productTitle">{product.name}</h2>
+          <p className="productDescription">{product.description_raw}</p>
+        </div>
+      </div>
+
+      <div className="lowerConteiner">
         <div className="productSidebar">
-          {/* ficha técnica: developers, platforms, release day, playtime*/}
           <div className="productDataSheet">
             <ProductData title="Release Date" info={product.released} />
             <ProductData title="Developers" info={developerString} />
@@ -59,7 +64,7 @@ const Product = () => {
             <ProductData title="Genres" info={genreString} />
             <ProductData title="Tags" info={tagString} />
           </div>
-          {/* botones  */}
+
           <div className="productButtonsWrapper">
             {user.isAdmin ? null : (
               <>
@@ -77,15 +82,6 @@ const Product = () => {
             )}
           </div>
         </div>
-      </div>
-
-      <div className="lowerConteiner">
-        {/* lower div, con titulo, descripcion, tags y genres*/}
-        <div className="lowerWrapper">
-          <h2 className="productTitle">{product.name}</h2>
-          <p className="productDescription">{product.description_raw}</p>
-        </div>
-        <div className="lowerFill"></div>
       </div>
     </div>
   );

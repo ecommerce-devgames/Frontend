@@ -8,8 +8,16 @@
   background-repeat: no-repeat;
   background-blend-mode:darken; 
   background-size: cover;
-  min-height: 70vh; 
+  min-height: 90vh; 
   //padding-top: 30vh;
+
+  @media screen and (max-width: $medium-screen){
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('../assets/banner5Ipad.jpg');
+  }
+  @media screen and (max-width: $small-screen){
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('../assets/banner5Phone.jpg');    
+    min-height: 40vh; 
+  }
 }
 
 .bannerTitle {
@@ -22,4 +30,13 @@
   letter-spacing: 0.02em;
   text-shadow: 0 1px 0 #00000030;
   margin: 7rem auto;
+
+  @media screen and (max-width: $medium-screen){
+    font-size: map-get($font-size, "large" );
+    margin: 3rem auto;
+  }
+  @media screen and (max-width: $small-screen){
+    ont-size: map-get($font-size, "medium" );
+    margin: 3rem auto;
+  }
 }

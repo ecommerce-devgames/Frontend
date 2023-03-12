@@ -5,11 +5,11 @@ const Searchbar = () => {
   return (
     <form>
       <TextField
+        className="searchBar"
         id="standard-basic"
         label="SEARCH"
         variant="standard"
-        sx={{        
-          
+        sx={{         
           mr:2.5,
           "& .MuiInputBase-root": {
             color: "rgb(53, 136, 230)", // set text color to white
