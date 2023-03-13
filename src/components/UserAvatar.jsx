@@ -1,5 +1,5 @@
 import * as React from "react";
-import axios from "axios"
+import axios from "axios";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -12,7 +12,7 @@ import Logout from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../state/user";
-import {FaUserAlt} from "react-icons/fa"
+import { FaUserAlt } from "react-icons/fa";
 
 const UserAvatar = () => {
   //Hooks
@@ -32,31 +32,34 @@ const UserAvatar = () => {
     "Orders",
   ];
   const userMenu = ["Shopping history", "Settings"];
-  
+
   //Handlers and functions
-  const handleClose = ()=>{
-    setAnchorEl(null);    
-  }
+  const handleClose = () => {
+    setAnchorEl(null);
+    console.log("entre a esta funcion por");
+  };
 
   const handleAdminActions = (type) => {
     setAnchorEl(null);
-    console.log(type)
-    navigate(`/edit/${type}`)
+    console.log(type);
+    navigate(`/edit/${type}`);
   };
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleAccess = () => {
     setAnchorEl(null);
-    if(user.id){
-      axios.post("http://localhost:3001/api/user/logout", { }, { withCredentials: true });
-      dispatch(setUser({}))
-      console.log("user logout", user)
-      navigate("/")
+    if (user.id) {
+      axios.post(
+        "http://localhost:3001/api/user/logout",
+        {},
+        { withCredentials: true }
+      );
+      dispatch(setUser({}));
+      console.log("user logout", user);
+      navigate("/login");
     }
-    navigate("/login");
   };
 
   return (
@@ -78,7 +81,15 @@ const UserAvatar = () => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32, backgroundColor: "rgb(53, 136, 230)"}}>{user.name? user.name.charAt(0) : <FaUserAlt/>}</Avatar>
+            <Avatar
+              sx={{
+                width: 32,
+                height: 32,
+                backgroundColor: "rgb(53, 136, 230)",
+              }}
+            >
+              {user.name ? user.name.charAt(0) : <FaUserAlt />}
+            </Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -118,16 +129,18 @@ const UserAvatar = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         {/* ESTOS LOS PUEDE VER EL ADMIN */}
-        {user?.isAdmin 
+        {user?.isAdmin
           ? isAdminMenu.map((menu) => (
-              <MenuItem onClick={()=> handleAdminActions(menu.split(" ")[1])}>{menu}</MenuItem>
+              <MenuItem onClick={() => handleAdminActions(menu.split(" ")[1])}>
+                {menu}
+              </MenuItem>
             ))
           : null}
 
         {/*ESTOS LOS PUEDE VER EL USER NORMAL */}
-        {user.name?
-           userMenu.map((menu) => (
-              <MenuItem onClick={handleClose}>
+        {user.name
+          ? userMenu.map((menu) => (
+              <MenuItem onClick={() => navigate(menu)}>
                 <ListItemIcon>
                   <PersonAdd fontSize="small" />
                 </ListItemIcon>
