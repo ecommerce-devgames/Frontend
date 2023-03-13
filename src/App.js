@@ -5,13 +5,13 @@ import { Routes, Route } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { setProduct } from "./state/product";
 import { setUser} from "./state/user";
-import { setCart} from "./state/cart";
 import Home from "./commons/Home";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Product from "./components/Product";
 import Cart from "./components/Cart"
+import EditProducts from "./components/EditProducts";
 
 function App() {
   //Hooks
@@ -39,6 +39,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/products/:id" element={<Product />} />
         <Route path="/cart" element={<Cart /> } /> 
+        <Route path="/edit/products" element={<EditProducts /> } /> 
       </Routes>
     </div>
   );

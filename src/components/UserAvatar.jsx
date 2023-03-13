@@ -34,8 +34,14 @@ const UserAvatar = () => {
   const userMenu = ["Shopping history", "Settings"];
   
   //Handlers and functions
-  const handleClose = () => {
+  const handleClose = ()=>{
+    setAnchorEl(null);    
+  }
+
+  const handleAdminActions = (type) => {
     setAnchorEl(null);
+    console.log(type)
+    navigate(`/edit/${type}`)
   };
 
   const handleClick = (event) => {
@@ -114,7 +120,7 @@ const UserAvatar = () => {
         {/* ESTOS LOS PUEDE VER EL ADMIN */}
         {user?.isAdmin 
           ? isAdminMenu.map((menu) => (
-              <MenuItem onClick={handleClose}>{menu}</MenuItem>
+              <MenuItem onClick={()=> handleAdminActions(menu.split(" ")[1])}>{menu}</MenuItem>
             ))
           : null}
 
