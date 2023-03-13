@@ -6,7 +6,8 @@ export const removeFromCart = createAction("REMOVE_FROM_CART");
 const initialState = [];
 
 export default createReducer(initialState, {
-  [setCart]: (state, action) => [...state, action.payload],
+  [setCart]: (state, action) =>
+    action.payload === "" ? [] : [...state, action.payload],
   [removeFromCart]: (state, action) => {
     return state.filter((item) => item.id !== action.payload.id);
   },
