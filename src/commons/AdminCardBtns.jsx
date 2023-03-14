@@ -2,7 +2,6 @@ import React from "react";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditIcon from '@mui/icons-material/Edit';
 
 const AdminCardBtns = ({
@@ -10,6 +9,7 @@ const AdminCardBtns = ({
   open,
   anchorEl,
   setAnchorEl,
+  handleClose,
   handleClick,  
   handleAdminNavigate,
   handleAdminDeleteProduct,
@@ -26,6 +26,8 @@ const AdminCardBtns = ({
         color="primary" 
         fontSize="large"
         onClick={handleClick}
+        onClose={handleClose}
+
       >
         <EditIcon />
       </IconButton >
@@ -36,7 +38,7 @@ const AdminCardBtns = ({
         }}
         anchorEl={anchorEl}
         open={open}
-        // onClose={handleClose}
+        onClose={handleClose}
         PaperProps={{
           style: {
             maxHeight: ITEM_HEIGHT * 4.5,
