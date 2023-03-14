@@ -1,17 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Avatar } from "@mui/material";
+import React, { useEffect } from "react";
 import axios from "axios";
-import { FaTrash } from "react-icons/fa";
-import UserDetails from "../commons/UserDetails";
 import { useSelector, useDispatch } from "react-redux";
 import { setUsersDb, removeFromUsersDb, editAdmin } from "../state/usersDb";
 import { message } from "antd";
+import { Avatar } from "@mui/material";
+import { FaTrash } from "react-icons/fa";
+import UserDetails from "../commons/UserDetails";
+
 
 const EditUsers = () => {
-  const usersDb = useSelector((state) => state.usersDb);
-  const user = useSelector((state) => state.user);
+  //Hooks 
   const dispatch = useDispatch();
 
+  //States
+  const usersDb = useSelector((state) => state.usersDb);
+  const user = useSelector((state) => state.user);
+
+
+  //Handlers and functions
   useEffect(() => {
     axios
       .get("http://localhost:3001/api/user/admin/all", {
@@ -53,7 +59,7 @@ const EditUsers = () => {
       {usersDb.map((userDb) => {
         if (userDb.id !== user.id)
           return (
-            <div className="userData">
+            <div key={userDb.id} className="userData">
               <Avatar
                 className="userAvatar"
                 sx={{

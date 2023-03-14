@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-//import useInput from "../hooks/useInput";
-//import Input from "../commons/Input";
+import useInput from "../hooks/useInput";
 import ProductData from "../commons/ProductData.jsx";
 import { FaPlus } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 
 const EditCategories = () => {
-  //const newCategories = useInput();
+  const newCategorie = useInput();
+  const oldCategorie = useInput();
   //States
   const categories = [
     {
@@ -40,7 +40,7 @@ const EditCategories = () => {
   };
 
   const addFormFieldsHandler = () => {
-    setFormValues([...formValues, { name: "", email: "" }]);
+    setFormValues([...formValues, { categorie: " "}]);
   };
 
   const inputChangeHandler = (i, e) => {
@@ -72,11 +72,11 @@ const EditCategories = () => {
           id="editCategoriesForm"
           onSubmit={onSubmitHandler}
         >
-          <h3 className="registerTitle">Edit categories</h3>
+          <h3 className="registerTitle">Create categories</h3>
           {formValues.map((element, index) => (
             <div className="formInline" key={index}>
               <input
-                className="editCategoriesInput"
+                className="createCategoriesInput"
                 name="name"
                 type="text"
                 placeholder="New categorie"
@@ -86,7 +86,7 @@ const EditCategories = () => {
 
               <button
                 type="button"
-                className="deleteCategorieButton"
+                className="deleteCategoriesButton"
                 onClick={() => removeFormFields(index)}
               >
                 <FaTrash />
@@ -94,14 +94,40 @@ const EditCategories = () => {
             </div>
           ))}
           <button
-            className="registerButton"
+            className="editCategoriesButton"
             type="button"
             onClick={() => addFormFieldsHandler()}
           >
             <FaPlus />
           </button>
-          <button className="registerButton" type="submit">
-            Change
+          <button className="editCategoriesButton" type="submit">
+            Create
+          </button>
+        </form>
+        <form
+          className="editCategoriesForm"
+          id="editCategoriesForm"
+          onSubmit={onSubmitHandler}
+        >
+          <h3 className="registerTitle">Edit categories</h3>          
+            <div className="formColumn">
+              <input
+                className="editCategoriesInput"
+                name="name"
+                type="text"
+                placeholder="Categorie to update"
+                {...oldCategorie}
+              />
+                <input
+                className="editCategoriesInput"
+                name="name"
+                type="text"
+                placeholder="Categorie updated"
+                {...newCategorie}
+              />            
+            </div>
+          <button className="editCategoriesButton" type="submit">
+            Edit
           </button>
         </form>
       </div>

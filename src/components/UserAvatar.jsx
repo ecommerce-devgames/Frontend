@@ -43,6 +43,7 @@ const UserAvatar = () => {
     console.log(type);
     navigate(type === "products" ? `/create/${type}` : `/edit/${type}`);
   };
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };

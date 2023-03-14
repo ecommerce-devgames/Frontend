@@ -56,9 +56,12 @@ const GridView = () => {
         });
     }
   };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    anchorEl === event.currentTarget ? setAnchorEl(null) : setAnchorEl(event.currentTarget);
   };
 
   const handleAdminNavigate = (item) => {
@@ -82,9 +85,8 @@ const GridView = () => {
       <Grid container rowSpacing={6} columnSpacing={5}>
         {games.map((game) => {
           return (
-            <Grid item s={12} sm={6} md={6} lg={6} xl={3}>
-              <Card
-                key={game.id}
+            <Grid key={game.id}item s={12} sm={6} md={6} lg={6} xl={3}>
+              <Card                
                 item={game}
                 cart={cart}
                 user={user}
@@ -93,6 +95,7 @@ const GridView = () => {
                 setAnchorEl={setAnchorEl}
                 singleProductHandler={singleProductHandler}
                 addToCartHandler={addToCartHandler}
+                handleClose = {handleClose}
                 handleClick={handleClick}
                 handleAdminNavigate={handleAdminNavigate}
                 handleAdminDeleteProduct={handleAdminDeleteProduct}

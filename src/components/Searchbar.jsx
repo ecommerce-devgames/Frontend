@@ -43,19 +43,19 @@ const Searchbar = () => {
         sx={{
           mr: 2.5,
           "& .MuiInputBase-root": {
-            color: "rgb(53, 136, 230)", // set text color to white
+            color: "rgb(53, 136, 230)", 
           },
           "& .MuiInput-underline:before": {
-            borderBottomColor: "rgb(53, 136, 230)", // set underline color to white
+            borderBottomColor: "rgb(53, 136, 230)", 
           },
           "& .MuiInput-underline:hover:not(.Mui-disabled):before": {
-            borderBottomColor: "rgb(53, 136, 230)", // set underline color to white on hover
+            borderBottomColor: "rgb(53, 136, 230)", 
           },
           "& .MuiInput-underline:after": {
-            borderBottomColor: "rgb(53, 136, 230)", // set underline color to white on focus
+            borderBottomColor: "rgb(53, 136, 230)", 
           },
           "& .MuiInputLabel-root": {
-            color: "rgb(53, 136, 230)", // set label color to white
+            color: "rgb(53, 136, 230)",
             fontSize: "1.3rem",
           },
         }}
