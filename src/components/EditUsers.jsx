@@ -76,7 +76,7 @@ const EditUsers = () => {
                   className="userButton"
                   onClick={() => editAdminHandler(userDb.id)}
                 >
-                  Remove from Admins
+                  Remove from admins
                 </button>
               ) : (
                 <button

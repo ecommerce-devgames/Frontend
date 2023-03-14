@@ -33,8 +33,7 @@ const Card = ({
               open={open}
               anchorEl={anchorEl}
               setAnchorEl={setAnchorEl}
-              handleClick={handleClick}
-              
+              handleClick={handleClick}              
               handleAdminNavigate={handleAdminNavigate}
               handleAdminDeleteProduct={handleAdminDeleteProduct}
             />

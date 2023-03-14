@@ -84,8 +84,9 @@ console.log( {
     <div className="editProductsWrapper">
       {params.id ? (
         <div className="dataSheetWrapper">
-          <p style={{color:"white", fontSize: "3rem"}}>Current information</p>
+          <p className="editProductTitle">Current information</p>
           <div className="editDataSheet">
+          <ProductData title="Image" info={<img className="editProductImg" src={selectedGame.background_image} alt="product" />} />
             <ProductData title="Name" info={selectedGame.name} />
             <ProductData
               title="Description"

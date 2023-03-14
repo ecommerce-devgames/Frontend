@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Card from "../commons/Card";
-import Grid from "@mui/material/Grid";
 import { useDispatch, useSelector } from "react-redux";
-import { setProduct } from "../state/product";
 import { useNavigate } from "react-router";
+import { setProduct } from "../state/product";
 import { setCart } from "../state/cart";
 import { setGames } from "../state/games";
+import Card from "../commons/Card";
+import Grid from "@mui/material/Grid";
 
 const GridView = () => {
   //Hooks
@@ -29,6 +29,7 @@ const GridView = () => {
         "https://api.rawg.io/api/games?key=679adbda4ffc4cd5a68fad9b1e98f040&dates=2019-09-01,2019-09-30&platforms=18,1,7"
       )
       .then((res) => dispatch(setGames(res.data.results)));
+    // eslint-disable-next-line
   }, []);
 
   const singleProductHandler = (item) => {
@@ -56,23 +57,24 @@ const GridView = () => {
     }
   };
 
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleAdminNavigate = (item) =>{
+  const handleAdminNavigate = (item) => {
     setAnchorEl(null);
-    navigate(`/edit/products/${item.id}`)
-  }
+    navigate(`/edit/products/${item.id}`);
+  };
 
-  const handleAdminDeleteProduct = (item) =>{
+  const handleAdminDeleteProduct = (item) => {
     setAnchorEl(null);
-    axios.delete(`http://localhost:3001/api/games/admin/delete/${item.id}`). then((res)=> console.log(res))
-    
-  }
+    axios
+      .delete(`http://localhost:3001/api/games/admin/delete/${item.id}`)
+      .then((res) => console.log(res));
+  };
 
   localStorage.setItem("cart", JSON.stringify(cart));
+
   if (!games) return <h5>No content</h5>;
   return (
     <div className="gridContainer">
@@ -86,14 +88,14 @@ const GridView = () => {
                 item={game}
                 cart={cart}
                 user={user}
-                open = {open}
-                anchorEl = {anchorEl}
-                setAnchorEl = {setAnchorEl}
+                open={open}
+                anchorEl={anchorEl}
+                setAnchorEl={setAnchorEl}
                 singleProductHandler={singleProductHandler}
                 addToCartHandler={addToCartHandler}
-                handleClick = {handleClick}              
-                handleAdminNavigate = {handleAdminNavigate}
-                handleAdminDeleteProduct = {handleAdminDeleteProduct}
+                handleClick={handleClick}
+                handleAdminNavigate={handleAdminNavigate}
+                handleAdminDeleteProduct={handleAdminDeleteProduct}
               />
             </Grid>
           );

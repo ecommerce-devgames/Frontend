@@ -7,8 +7,8 @@
   //   font-weight: bold;
   //   font-size: map-get($font-size, "x-large");
   //   margin: 3rem 0;
-  margin: 5rem auto 0em auto;
-  width: 90%;
+  margin: 5rem 0 5rem 3rem;
+ 
 }
 .usersTitle {
   font-weight: bold;
@@ -17,7 +17,7 @@
 }
 .userData {
   @include flex(row, flex-start, center);
-  width: 70%;
+  width: 90%;  
   font-size: map-get($font-size, "small");
   border-bottom: 1px solid rgb(43, 41, 41);
 }
@@ -25,15 +25,18 @@
 .userSpan {
   font-weight: bold;
 }
+
 .userAvatar {
   margin-right: 1rem;
 }
+
 .userDetails {
   @include flex(row, flex-start, center);
   margin-right: 5rem;
   gap: 1rem;
   width: 100%;
 }
+
 .userFaTrash {
   width: 8rem;
   &:hover {
@@ -42,6 +45,7 @@
     transition: transform 0.4s ease;
   }
 }
+
 .userButton {
   font-size: map-get($font-size, "x-small");
   font-weight: 500;
@@ -53,7 +57,7 @@
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   margin-left: 2rem;
-  width: 30%;
+  width: 40%;
 
   &:hover {
     cursor: pointer;

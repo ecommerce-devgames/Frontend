@@ -7,6 +7,7 @@ import { FaTrash } from "react-icons/fa";
 
 const EditCategories = () => {
   //const newCategories = useInput();
+  //States
   const categories = [
     {
       name: "Sandbox Real time strategy (RTS)",
@@ -32,6 +33,8 @@ const EditCategories = () => {
   ];
   const [formValues, setFormValues] = useState([{ categorie1: "" }]);
 
+
+  //Handlers and functions
   const onSubmitHandler = (e) => {
     console.log(e);
   };
