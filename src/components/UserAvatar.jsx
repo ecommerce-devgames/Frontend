@@ -40,8 +40,8 @@ const UserAvatar = () => {
 
   const handleAdminActions = (type) => {
     setAnchorEl(null);
-    console.log(type)
-    navigate(type === "products" ? `/create/${type}`:`/edit/${type}`)
+    console.log(type);
+    navigate(type === "products" ? `/create/${type}` : `/edit/${type}`);
   };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -57,8 +57,8 @@ const UserAvatar = () => {
       );
       dispatch(setUser({}));
       console.log("user logout", user);
-      navigate("/login");
     }
+    navigate("/login");
   };
 
   return (
@@ -127,17 +127,13 @@ const UserAvatar = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        {/* ESTOS LOS PUEDE VER EL ADMIN */}
         {user?.isAdmin
           ? isAdminMenu.map((menu) => (
               <MenuItem onClick={() => handleAdminActions(menu.split(" ")[1])}>
                 {menu}
               </MenuItem>
             ))
-          : null}
-
-        {/*ESTOS LOS PUEDE VER EL USER NORMAL */}
-        {user.name
+          : user.name
           ? userMenu.map((menu) => (
               <MenuItem onClick={() => navigate(menu)}>
                 <ListItemIcon>
@@ -148,7 +144,6 @@ const UserAvatar = () => {
             ))
           : null}
 
-        {/* ESTE LO PUEDEN VER TODOS  */}
         <MenuItem onClick={handleAccess}>
           <ListItemIcon>
             <Logout fontSize="small" />
