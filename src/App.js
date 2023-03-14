@@ -12,7 +12,9 @@ import Login from "./components/Login";
 import Product from "./components/Product";
 import Cart from "./components/Cart";
 import EditProducts from "./components/EditProducts";
+import EditUsers from "./components/EditUsers";
 import History from "./components/History";
+
 
 function App() {
   //Hooks
@@ -45,6 +47,7 @@ function App() {
         <Route path="/create/products" element={<EditProducts /> } /> 
         <Route path="/edit/products/:id" element={<EditProducts /> } />        
         <Route path="/Shopping history" element={<History />} />
+        <Route path="/edit/users" element={<EditUsers />} />
       </Routes>
     </div>
   );

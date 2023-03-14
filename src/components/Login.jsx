@@ -15,7 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   //States
-  const cart= useSelector(state=> state.cart)
+  const cart = useSelector((state) => state.cart);
 
   //Handlers and functions
   const onSubmitHandler = (e) => {
@@ -30,11 +30,10 @@ const Login = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        dispatch(setUser(res.data));        
-        navigate("/");        
+        dispatch(setUser(res.data));
+        navigate("/");
       });
   };
-
 
   return (
     <div className="loginConteiner">

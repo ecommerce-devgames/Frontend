@@ -28,7 +28,7 @@ const UserAvatar = () => {
   const isAdminMenu = [
     "Create products",
     "Edit categories",
-    "Edit admins",
+    "Edit users",
     "Orders",
   ];
   const userMenu = ["Shopping history", "Settings"];
@@ -36,14 +36,12 @@ const UserAvatar = () => {
   //Handlers and functions
   const handleClose = () => {
     setAnchorEl(null);
-    console.log("entre a esta funcion por");
   };
 
   const handleAdminActions = (type) => {
     setAnchorEl(null);
     console.log(type)
     navigate(type === "products" ? `/create/${type}`:`/edit/${type}`)
-
   };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

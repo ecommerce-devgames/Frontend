@@ -1,0 +1,62 @@
+@import "./mixins";
+@import "./maps";
+@import "./variables";
+
+.usersWrapper {
+  color: $secondary-color;
+  //   font-weight: bold;
+  //   font-size: map-get($font-size, "x-large");
+  //   margin: 3rem 0;
+  margin: 5rem auto 0em auto;
+  width: 90%;
+}
+.usersTitle {
+  font-weight: bold;
+  font-size: map-get($font-size, "x-large");
+  margin: 4rem 0;
+}
+.userData {
+  @include flex(row, flex-start, center);
+  width: 70%;
+  font-size: map-get($font-size, "small");
+  border-bottom: 1px solid rgb(43, 41, 41);
+}
+
+.userSpan {
+  font-weight: bold;
+}
+.userAvatar {
+  margin-right: 1rem;
+}
+.userDetails {
+  @include flex(row, flex-start, center);
+  margin-right: 5rem;
+  gap: 1rem;
+  width: 100%;
+}
+.userFaTrash {
+  width: 8rem;
+  &:hover {
+    cursor: pointer;
+    transform: translate3D(0, -10px, 0) scale(1.04);
+    transition: transform 0.4s ease;
+  }
+}
+.userButton {
+  font-size: map-get($font-size, "x-small");
+  font-weight: 500;
+  border-radius: 5px;
+  border: none;
+  color: $primary-color;
+  background-color: $logo-color;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  margin-left: 2rem;
+  width: 30%;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $logo-color-hover;
+  }
+}
