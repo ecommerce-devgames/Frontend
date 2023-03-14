@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setProduct } from "../state/product";
 import { useNavigate } from "react-router";
 import { setCart } from "../state/cart";
+import { setGames } from "../state/games";
 
 const GridView = () => {
   //Hooks
@@ -13,9 +14,13 @@ const GridView = () => {
   const navigate = useNavigate();
 
   //States
-  const [data, setData] = useState([]);
+  const games = useSelector((state) => state.games);
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  //Variables
+  const open = Boolean(anchorEl);
 
   //Handlers and functions
   useEffect(() => {
@@ -23,7 +28,7 @@ const GridView = () => {
       .get(
         "https://api.rawg.io/api/games?key=679adbda4ffc4cd5a68fad9b1e98f040&dates=2019-09-01,2019-09-30&platforms=18,1,7"
       )
-      .then((res) => setData(res.data.results));
+      .then((res) => dispatch(setGames(res.data.results)));
   }, []);
 
   const singleProductHandler = (item) => {
@@ -51,22 +56,44 @@ const GridView = () => {
     }
   };
 
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleAdminNavigate = (item) =>{
+    setAnchorEl(null);
+    navigate(`/edit/products/${item.id}`)
+  }
+
+  const handleAdminDeleteProduct = (item) =>{
+    setAnchorEl(null);
+    axios.delete(`http://localhost:3001/api/games/admin/delete/${item.id}`). then((res)=> console.log(res))
+    
+  }
+
   localStorage.setItem("cart", JSON.stringify(cart));
-  if (!data) return <h5>No content</h5>;
+  if (!games) return <h5>No content</h5>;
   return (
     <div className="gridContainer">
       <h2 className="gridTitle">Games</h2>
       <Grid container rowSpacing={6} columnSpacing={5}>
-        {data.map((item) => {
+        {games.map((game) => {
           return (
             <Grid item s={12} sm={6} md={6} lg={6} xl={3}>
               <Card
-                key={item.id}
-                item={item}
+                key={game.id}
+                item={game}
                 cart={cart}
                 user={user}
+                open = {open}
+                anchorEl = {anchorEl}
+                setAnchorEl = {setAnchorEl}
                 singleProductHandler={singleProductHandler}
                 addToCartHandler={addToCartHandler}
+                handleClick = {handleClick}              
+                handleAdminNavigate = {handleAdminNavigate}
+                handleAdminDeleteProduct = {handleAdminDeleteProduct}
               />
             </Grid>
           );

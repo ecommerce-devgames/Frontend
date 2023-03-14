@@ -26,7 +26,7 @@ const UserAvatar = () => {
   //Variables
   const open = Boolean(anchorEl);
   const isAdminMenu = [
-    "Edit products",
+    "Create products",
     "Edit categories",
     "Edit users",
     "Orders",
@@ -40,9 +40,9 @@ const UserAvatar = () => {
 
   const handleAdminActions = (type) => {
     setAnchorEl(null);
-    navigate(`/edit/${type}`);
+    console.log(type)
+    navigate(type === "products" ? `/create/${type}`:`/edit/${type}`)
   };
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -56,9 +56,9 @@ const UserAvatar = () => {
         { withCredentials: true }
       );
       dispatch(setUser({}));
-      navigate("/");
+      console.log("user logout", user);
+      navigate("/login");
     }
-    navigate("/login");
   };
 
   return (
@@ -139,7 +139,7 @@ const UserAvatar = () => {
         {/*ESTOS LOS PUEDE VER EL USER NORMAL */}
         {user.name
           ? userMenu.map((menu) => (
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={() => navigate(menu)}>
                 <ListItemIcon>
                   <PersonAdd fontSize="small" />
                 </ListItemIcon>

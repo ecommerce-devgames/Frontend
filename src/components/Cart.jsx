@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaTrash } from "react-icons/fa";
-import { removeFromCart } from "../state/cart";
+import { removeFromCart, setCart } from "../state/cart";
+import { setShoppedProducts } from "../state/shoppedProducts";
 import { useNavigate } from "react-router";
 
 const Cart = () => {
@@ -20,7 +21,9 @@ const Cart = () => {
   localStorage.setItem("cart", JSON.stringify(cart));
 
   const purchaseHandler = () => {
-    navigate(!user.name && "/login");
+    //cambie el condicional del navigate para hacer el dispatch del estado para el historial
+    !user.name ? navigate("/login") : dispatch(setShoppedProducts(cart));
+    dispatch(setCart(""));
   };
 
   return (

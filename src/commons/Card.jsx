@@ -1,7 +1,20 @@
 import React from "react";
+import AdminCardBtns from "../commons/AdminCardBtns";
 import { FaCheck, FaStar } from "react-icons/fa";
 
-const Card = ({ item, singleProductHandler, addToCartHandler, cart, user }) => {
+const Card = ({
+  item,
+  singleProductHandler,
+  addToCartHandler,
+  cart,
+  user,
+  open,
+  anchorEl,
+  setAnchorEl,
+  handleClick,
+  handleAdminNavigate,
+  handleAdminDeleteProduct,
+}) => {
   return (
     <div className="cardConteiner">
       <img
@@ -14,26 +27,41 @@ const Card = ({ item, singleProductHandler, addToCartHandler, cart, user }) => {
       <div className="cardContent">
         <div className="cardSubconteiner">
           <span className="cardTitle">{item.name}</span>
-          <span className="cardRanking">
-            {item.rating_top}
-            <FaStar />
-          </span>
+          {user?.isAdmin ? (
+            <AdminCardBtns
+              item={item}
+              open={open}
+              anchorEl={anchorEl}
+              setAnchorEl={setAnchorEl}
+              handleClick={handleClick}
+              
+              handleAdminNavigate={handleAdminNavigate}
+              handleAdminDeleteProduct={handleAdminDeleteProduct}
+            />
+          ) : (
+            <span className="cardRanking">
+              {item.rating_top}
+              <FaStar />
+            </span>
+          )}
         </div>
         <div className="cardSubcontainerB">
           {user?.isAdmin ? null : (
-            <button
-              className="cardButton"
-              onClick={() => addToCartHandler(item)}
-            >
-              {cart.some((el) => el.id === item.id) ? (
-                <FaCheck />
-              ) : (
-                "Add to cart"
-              )}
-            </button>
+            <>
+              {" "}
+              <button
+                className="cardButton"
+                onClick={() => addToCartHandler(item)}
+              >
+                {cart.some((el) => el.id === item.id) ? (
+                  <FaCheck />
+                ) : (
+                  "Add to cart"
+                )}
+              </button>
+              <p className="cardCart">$USD 60</p>
+            </>
           )}
-
-          <p className="cardCart">$USD 60</p>
         </div>
       </div>
     </div>

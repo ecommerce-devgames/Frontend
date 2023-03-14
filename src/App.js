@@ -13,6 +13,8 @@ import Product from "./components/Product";
 import Cart from "./components/Cart";
 import EditProducts from "./components/EditProducts";
 import EditUsers from "./components/EditUsers";
+import History from "./components/History";
+
 
 function App() {
   //Hooks
@@ -40,9 +42,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/products/:id" element={<Product />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/edit/products" element={<EditProducts />} />
+        <Route path="/products/:id" element={<Product />} /> 
+        <Route path="/cart" element={<Cart /> } /> 
+        <Route path="/create/products" element={<EditProducts /> } /> 
+        <Route path="/edit/products/:id" element={<EditProducts /> } />        
+        <Route path="/Shopping history" element={<History />} />
         <Route path="/edit/users" element={<EditUsers />} />
       </Routes>
     </div>

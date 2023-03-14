@@ -1,0 +1,13 @@
+@import "./mixins";
+@import "./maps";
+@import "./variables";
+
+.editProductsWrapper{
+    @include flex(row, space-around, center);    
+    margin: 10rem 2rem;
+}
+
+.dataSheetWrapper{
+    width: 50%;    
+}
+
