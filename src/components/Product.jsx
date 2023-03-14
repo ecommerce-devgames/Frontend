@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
+import axios from "axios"
 import { useSelector, useDispatch } from "react-redux";
 import useStringGenerator from "../hooks/useStringGenerator";
 import { useNavigate } from "react-router";
 import { setCart } from "../state/cart";
 import ProductData from "../commons/ProductData.jsx";
 import { FaCheck } from "react-icons/fa";
+
 
 const Product = () => {
   //Hooks
@@ -15,6 +17,7 @@ const Product = () => {
   const product = useSelector((state) => state.product);
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   //Variables
   //para product.developers. Nos tiene que llegar un array de strings
@@ -42,6 +45,18 @@ const Product = () => {
 
   localStorage.setItem("cart", JSON.stringify(cart));
 
+  const handleAdminNavigate = (item) => {
+    setAnchorEl(null);
+    navigate(`/edit/products/${item.id}`);
+  };
+
+  const handleAdminDeleteProduct = (item) => {
+    setAnchorEl(null);
+    axios
+      .delete(`http://localhost:3001/api/games/admin/delete/${item.id}`)
+      .then((res) => console.log(res));
+  };
+
   return (
     <div className="mainConteiner">
       <div className="upperConteiner">
@@ -66,7 +81,16 @@ const Product = () => {
           </div>
 
           <div className="productButtonsWrapper">
-            {user.isAdmin ? null : (
+            {user.isAdmin ? (
+              <>
+                <button className="productButton" onClick={handleAdminNavigate}>
+                  Edit
+                </button>
+                <button className="productButton" onClick={handleAdminDeleteProduct}>
+                  Delete
+                </button>
+              </>
+            ) : (
               <>
                 <button className="productButton" onClick={buyHandler}>
                   Buy

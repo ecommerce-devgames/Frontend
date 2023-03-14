@@ -2,7 +2,7 @@ import "./App.css";
 import axios from "axios";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setProduct } from "./state/product";
 import { setUser } from "./state/user";
 import Home from "./commons/Home";
@@ -22,7 +22,7 @@ function App() {
   const dispatch = useDispatch();
 
   //States
-  const user = useSelector((state) => state.user);
+  
 
   //Handlers and functions
   useEffect(() => {
