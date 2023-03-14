@@ -26,7 +26,7 @@ const UserAvatar = () => {
   //Variables
   const open = Boolean(anchorEl);
   const isAdminMenu = [
-    "Edit products",
+    "Create products",
     "Edit categories",
     "Edit admins",
     "Orders",
@@ -41,7 +41,7 @@ const UserAvatar = () => {
   const handleAdminActions = (type) => {
     setAnchorEl(null);
     console.log(type)
-    navigate(`/edit/${type}`)
+    navigate(type === "products" ? `/create/${type}`:`/edit/${type}`)
   };
 
   const handleClick = (event) => {
