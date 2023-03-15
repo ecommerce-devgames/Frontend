@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios"
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import useStringGenerator from "../hooks/useStringGenerator";
 import { useNavigate } from "react-router";
@@ -10,8 +10,6 @@ import { FaCheck } from "react-icons/fa";
 import ProductRating from "../commons/ProductRating";
 import MyProductRating from "../commons/MyProductRating";
 import { TextField } from "@mui/material";
-import axios from "axios";
-
 
 const Product = () => {
   //Hooks
@@ -136,7 +134,10 @@ const Product = () => {
                 <button className="productButton" onClick={handleAdminNavigate}>
                   Edit
                 </button>
-                <button className="productButton" onClick={handleAdminDeleteProduct}>
+                <button
+                  className="productButton"
+                  onClick={handleAdminDeleteProduct}
+                >
                   Delete
                 </button>
               </>
