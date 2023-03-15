@@ -14,7 +14,6 @@ import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import DehazeIcon from "@mui/icons-material/Dehaze";
 
-
 const NavbarResponsive = () => {
   //Hooks
   const dispatch = useDispatch();
@@ -61,6 +60,11 @@ const NavbarResponsive = () => {
       console.log("user logout", user);
     }
     navigate("/login");
+  };
+
+  const searchByCategoryHandler = (category) => {
+    setAnchorEl(null);
+    navigate(`/category/${category}`);
   };
 
   return (
@@ -130,26 +134,42 @@ const NavbarResponsive = () => {
           transformOrigin={{ horizontal: "center", vertical: "top" }}
           anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
         >
-          
           <MenuItem readOnly>CATEGORIES</MenuItem>
-          <MenuItem onClick={handleClose}>Sandbox Real time strategy</MenuItem>
-          <MenuItem onClick={handleClose}>Shooters</MenuItem>
-          <MenuItem onClick={handleClose}>
-            Multiplayer online battle arena
+          <MenuItem onClick={() => searchByCategoryHandler("action")}>
+            Action
+          </MenuItem>
+          <MenuItem onClick={() => searchByCategoryHandler("indie")}>
+            Indie
+          </MenuItem>
+          <MenuItem onClick={() => searchByCategoryHandler("adventure")}>
+            Adventure
+          </MenuItem>
+          <MenuItem onClick={() => searchByCategoryHandler("RPG")}>
+            RPG
+          </MenuItem>
+          <MenuItem onClick={() => searchByCategoryHandler("strategy")}>
+            Strategy
+          </MenuItem>
+          <MenuItem onClick={() => searchByCategoryHandler("shooter")}>
+            Shooter
+          </MenuItem>
+          <MenuItem onClick={() => searchByCategoryHandler("casual")}>
+            Casual
           </MenuItem>
 
           <Divider />
           {user?.isAdmin
-            ? isAdminMenu.map((menu) => (
+            ? isAdminMenu.map((menu, i) => (
                 <MenuItem
+                  key={i}
                   onClick={() => handleAdminActions(menu.split(" ")[1])}
                 >
                   {menu}
                 </MenuItem>
               ))
             : user.name
-            ? userMenu.map((menu) => (
-                <MenuItem onClick={() => navigate(menu)}>
+            ? userMenu.map((menu, i) => (
+                <MenuItem key={i} onClick={() => navigate(menu)}>
                   <ListItemIcon>
                     <PersonAdd fontSize="small" />
                   </ListItemIcon>

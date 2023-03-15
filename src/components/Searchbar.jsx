@@ -3,11 +3,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useInput from "../hooks/useInput";
-//import { setSearchQuery } from "../state/searchQuery";
-import { setGames } from "../state/games";
+import { setSearchQuery } from "../state/searchQuery";
 import TextField from "@mui/material/TextField";
-import SearchIcon from '@mui/icons-material/Search';
-
 
 const Searchbar = () => {
   //Hooks
@@ -18,17 +15,9 @@ const Searchbar = () => {
   //Functions
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    const query = searchQuery.value;
-
-    axios
-      .get(`http://localhost:3001/api/games/search?name=${query}`, {
-        withCredentials: true,
-      })
-      .then((result) => {
-        dispatch(setGames(result.data));
-      });
-
-    navigate("/");
+    const query = searchQuery.value;    
+    dispatch(setSearchQuery(query));   
+    navigate("/search");
   };
 
   return (

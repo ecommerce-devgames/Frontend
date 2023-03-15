@@ -1,10 +1,13 @@
 import * as React from "react";
+import { useNavigate } from "react-router";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 
 const Dropdown = () => {
+  //Hooks
+  const navigate = useNavigate();
 
   //Variables
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -14,9 +17,15 @@ const Dropdown = () => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const searchByCategoryHandler =(category)=>{
+    setAnchorEl(null);
+    navigate(`/category/${category}`)    
+  }
 
   return (
     <div className="navbarDropdown">
@@ -40,13 +49,13 @@ const Dropdown = () => {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <MenuItem onClick={handleClose}>Sandbox Real time strategy</MenuItem>
-        <MenuItem onClick={handleClose}>Shooters</MenuItem>
-        <MenuItem onClick={handleClose}>Multiplayer online battle arena</MenuItem>
-        <MenuItem onClick={handleClose}>Role-playing</MenuItem>
-        <MenuItem onClick={handleClose}>Simulation and sports</MenuItem>
-        <MenuItem onClick={handleClose}>Puzzlers and party games</MenuItem>
-        <MenuItem onClick={handleClose}>Platformer</MenuItem>
+        <MenuItem onClick={()=>searchByCategoryHandler("action")}>Action</MenuItem>
+        <MenuItem onClick={()=>searchByCategoryHandler("indie")}>Indie</MenuItem>
+        <MenuItem onClick={()=>searchByCategoryHandler("adventure")}>Adventure</MenuItem>
+        <MenuItem onClick={()=>searchByCategoryHandler("RPG")}>RPG</MenuItem>
+        <MenuItem onClick={()=>searchByCategoryHandler("strategy")}>Strategy</MenuItem>
+        <MenuItem onClick={()=>searchByCategoryHandler("shooter")}>Shooter</MenuItem>
+        <MenuItem onClick={()=>searchByCategoryHandler("casual")}>Casual</MenuItem>
         
       </Menu>
     </div>

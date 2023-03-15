@@ -50,6 +50,8 @@ function App() {
         <Route path="/edit/products/:id" element={<EditProducts /> } />       
         <Route path="/edit/users" element={<EditUsers />} />
         <Route path="/edit/categories" element={<EditCategories />} />
+        <Route path="/search" element={<Home />} />
+        <Route path="/category/:category" element={<Home />} />
       </Routes>
     </div>
   );
