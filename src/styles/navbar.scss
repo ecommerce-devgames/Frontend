@@ -6,10 +6,10 @@
   @include flex(row, space-between, center);
   position: sticky;
   top: 0;
-  background-color: $navbar-background-color;  
-  padding: 0rem 1rem .5rem 0rem;
+  background-color: $navbar-background-color;
+  padding: 0rem 1rem 0.5rem 0rem;
   height: 4rem;
-
+  z-index: 1;
   @media screen and (max-width: $medium-small-screen) {
     @include flex(column, space-around, center);
   }
@@ -22,14 +22,13 @@
 
 .navbarLogo {
   margin: 2rem 0rem 0rem 2rem;
-  color:$logo-color;
+  color: $logo-color;
   font-size: map-get($font-size, "large");
   text-transform: uppercase;
 
-  &:hover{
-    color: $logo-color-hover
+  &:hover {
+    color: $logo-color-hover;
   }
-
 
   @media screen and (max-width: $small-screen) {
     font-size: map-get($font-size, "medium");
@@ -41,18 +40,17 @@
   @include flex(row, center, center);
 }
 
-.searchBar{
+.searchBar {
   @media screen and (max-width: $medium-small-screen) {
     font-size: map-get($font-size, "small");
   }
 }
-
 
 //Navigation
 .navigationWrapper {
   @include flex(row, space-between, center);
 }
 
-.dropdownForm{
-    background-color: $navbar-background-color
+.dropdownForm {
+  background-color: $navbar-background-color;
 }

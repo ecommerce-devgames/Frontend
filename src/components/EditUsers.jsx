@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Avatar } from "@mui/material";
 import axios from "axios";
 import { FaTrash } from "react-icons/fa";
@@ -23,28 +23,26 @@ const EditUsers = () => {
   }, []);
 
   const deleteUserHandler = (id) => {
-    if (user.id !== id)
-      axios
-        .delete(`http://localhost:3001/api/user/admin/delete/${id}`, {
-          withCredentials: true,
-        })
-        .then(() => dispatch(removeFromUsersDb(id)));
+    axios
+      .delete(`http://localhost:3001/api/user/admin/delete/${id}`, {
+        withCredentials: true,
+      })
+      .then(() => dispatch(removeFromUsersDb(id)));
   };
 
   const editAdminHandler = (id) => {
-    if (user.id !== id)
-      axios
-        .put(
-          "http://localhost:3001/api/user/admin/access",
-          { id },
-          {
-            withCredentials: true,
-          }
-        )
-        .then((res) => {
-          dispatch(editAdmin(id));
-          message.success(`Admin permissions successfully modified`);
-        });
+    axios
+      .put(
+        `http://localhost:3001/api/user/admin/access/${id}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        dispatch(editAdmin(id));
+        message.success(`Admin permissions successfully modified`);
+      });
   };
 
   return (

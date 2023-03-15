@@ -40,8 +40,7 @@ const UserAvatar = () => {
 
   const handleAdminActions = (type) => {
     setAnchorEl(null);
-    console.log(type)
-    navigate(type === "products" ? `/create/${type}`:`/edit/${type}`)
+    navigate(type === "products" ? `/create/${type}` : `/edit/${type}`);
   };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -56,9 +55,8 @@ const UserAvatar = () => {
         { withCredentials: true }
       );
       dispatch(setUser({}));
-      console.log("user logout", user);
-      navigate("/login");
     }
+    navigate("/login");
   };
 
   return (

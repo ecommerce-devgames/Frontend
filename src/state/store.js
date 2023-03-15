@@ -7,17 +7,19 @@ import userReducer from "./user";
 import usersDbReducer from "./usersDb";
 import gamesReducer from "./games";
 import shoppedProductsReducer from "./shoppedProducts";
+import reviewsReducer from "./reviews";
 
 const store = configureStore({
   reducer: {
     product: productReducer,
     cart: cartReducer,
     user: userReducer,
-    cart: cartReducer, 
+    cart: cartReducer,
     user: userReducer,
     games: gamesReducer,
     shoppedProducts: shoppedProductsReducer,
     usersDb: usersDbReducer,
+    reviews: reviewsReducer,
   },
   middleware: [logger],
 });

@@ -37,6 +37,7 @@ const GridView = () => {
         `https://api.rawg.io/api/games/${item.id}?key=679adbda4ffc4cd5a68fad9b1e98f040&dates=2019-09-01,2019-09-30&platforms=18,1,7`
       )
       .then((res) => {
+        console.log("producto", res.data);
         dispatch(setProduct(res.data));
         localStorage.setItem("singleProduct", JSON.stringify(res.data));
         navigate(`/products/${res.data.id}`);
@@ -56,21 +57,21 @@ const GridView = () => {
     }
   };
 
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleAdminNavigate = (item) =>{
+  const handleAdminNavigate = (item) => {
     setAnchorEl(null);
-    navigate(`/edit/products/${item.id}`)
-  }
+    navigate(`/edit/products/${item.id}`);
+  };
 
-  const handleAdminDeleteProduct = (item) =>{
+  const handleAdminDeleteProduct = (item) => {
     setAnchorEl(null);
-    axios.delete(`http://localhost:3001/api/games/admin/delete/${item.id}`). then((res)=> console.log(res))
-    
-  }
+    axios
+      .delete(`http://localhost:3001/api/games/admin/delete/${item.id}`)
+      .then((res) => console.log(res));
+  };
 
   localStorage.setItem("cart", JSON.stringify(cart));
   if (!games) return <h5>No content</h5>;
@@ -86,14 +87,14 @@ const GridView = () => {
                 item={game}
                 cart={cart}
                 user={user}
-                open = {open}
-                anchorEl = {anchorEl}
-                setAnchorEl = {setAnchorEl}
+                open={open}
+                anchorEl={anchorEl}
+                setAnchorEl={setAnchorEl}
                 singleProductHandler={singleProductHandler}
                 addToCartHandler={addToCartHandler}
-                handleClick = {handleClick}              
-                handleAdminNavigate = {handleAdminNavigate}
-                handleAdminDeleteProduct = {handleAdminDeleteProduct}
+                handleClick={handleClick}
+                handleAdminNavigate={handleAdminNavigate}
+                handleAdminDeleteProduct={handleAdminDeleteProduct}
               />
             </Grid>
           );
