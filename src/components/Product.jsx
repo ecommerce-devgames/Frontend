@@ -16,18 +16,15 @@ const Product = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //state local
-  const [selectedReviews, setSelectedReviews] = useState([]);
   //States
   const product = useSelector((state) => state.product);
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
   const reviews = useSelector((state) => state.reviews);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [selectedReviews, setSelectedReviews] = useState([]);
 
-  //Variables
-  //para product.developers. Nos tiene que llegar un array de strings
-  // const developersString = products.developers.join(" ")
+  //Variables 
   const developerString = useStringGenerator(product.developers);
   const platformString = useStringGenerator(product.platforms);
   const genreString = useStringGenerator(product.genres);

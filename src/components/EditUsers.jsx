@@ -20,7 +20,7 @@ const EditUsers = () => {
   //Handlers and functions
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/user/admin/all", {
+      .get("http://localhost:3001/api/user/admin", {
         withCredentials: true,
       })
       .then((res) => {

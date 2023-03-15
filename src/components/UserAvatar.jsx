@@ -130,16 +130,17 @@ const UserAvatar = () => {
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
           {user?.isAdmin
-            ? isAdminMenu.map((menu) => (
+            ? isAdminMenu.map((menu, i) => (
                 <MenuItem
+                  key={i}
                   onClick={() => handleAdminActions(menu.split(" ")[1])}
                 >
                   {menu}
                 </MenuItem>
               ))
             : user.name
-            ? userMenu.map((menu) => (
-                <MenuItem onClick={() => navigate(menu)}>
+            ? userMenu.map((menu, i) => (
+                <MenuItem key={i} onClick={() => navigate(menu)}>
                   <ListItemIcon>
                     <PersonAdd fontSize="small" />
                   </ListItemIcon>
