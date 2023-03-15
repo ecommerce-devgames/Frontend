@@ -26,16 +26,18 @@ const GridView = () => {
   useEffect(() => {
     axios
       .get(
-        "https://api.rawg.io/api/games?key=679adbda4ffc4cd5a68fad9b1e98f040&dates=2019-09-01,2019-09-30&platforms=18,1,7"
+        "http://localhost:3001/api/games"
       )
-      .then((res) => dispatch(setGames(res.data.results)));
+      .then((res) => {       
+        dispatch(setGames(res.data))
+      });
     // eslint-disable-next-line
   }, []);
 
   const singleProductHandler = (item) => {
     axios
       .get(
-        `https://api.rawg.io/api/games/${item.id}?key=679adbda4ffc4cd5a68fad9b1e98f040&dates=2019-09-01,2019-09-30&platforms=18,1,7`
+        `http://localhost:3001/api/games/${item.id}`
       )
       .then((res) => {
         console.log("producto", res.data);

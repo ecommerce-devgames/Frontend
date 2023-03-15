@@ -67,14 +67,14 @@ const Product = () => {
     <div className="mainConteiner">
       <div className="upperConteiner">
         <div className="productImage">
-          <img src={product.background_image} alt="game" />
+          <img src={product.poster} alt="game" />
         </div>
         <div className="lowerWrapper">
           <div className="productTitleRating">
             <h2 className="productTitle">{product.name}</h2>
             <ProductRating className="productRating" />
           </div>
-          <p className="productDescription">{product.description_raw}</p>
+          <p className="productDescription">{product.description}</p>
           <div className="productReviewsRating">
             <p className="productReviewsTitle">
               1910 reviews.

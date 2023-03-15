@@ -1,6 +1,6 @@
 const useStringGenerator = (array) => {
   return array
-    .map((item) => (item.platform ? item.platform.name : item.name))
+    .map((item) => (item.name))
     .join(", ");
 };
 
