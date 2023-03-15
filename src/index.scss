@@ -29,7 +29,7 @@ a {
 //APP
 .appContainer {
   background-color: $background-color;
-  min-height: 200vh;
+  //min-height: 100vh;
   width: 100%;
 }
 
@@ -43,4 +43,5 @@ a {
 @import "./styles/cart.scss";
 @import "./styles/users.scss";
 @import "./styles/editProduct.scss";
+@import "./styles/editCategories.scss";
 

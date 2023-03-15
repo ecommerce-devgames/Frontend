@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Card from "../commons/Card";
-import Grid from "@mui/material/Grid";
 import { useDispatch, useSelector } from "react-redux";
-import { setProduct } from "../state/product";
 import { useNavigate } from "react-router";
+import { setProduct } from "../state/product";
 import { setCart } from "../state/cart";
 import { setGames } from "../state/games";
+import Card from "../commons/Card";
+import Grid from "@mui/material/Grid";
 
 const GridView = () => {
   //Hooks
@@ -29,6 +29,7 @@ const GridView = () => {
         "https://api.rawg.io/api/games?key=679adbda4ffc4cd5a68fad9b1e98f040&dates=2019-09-01,2019-09-30&platforms=18,1,7"
       )
       .then((res) => dispatch(setGames(res.data.results)));
+    // eslint-disable-next-line
   }, []);
 
   const singleProductHandler = (item) => {
@@ -57,8 +58,12 @@ const GridView = () => {
     }
   };
 
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    anchorEl === event.currentTarget ? setAnchorEl(null) : setAnchorEl(event.currentTarget);
   };
 
   const handleAdminNavigate = (item) => {
@@ -74,6 +79,7 @@ const GridView = () => {
   };
 
   localStorage.setItem("cart", JSON.stringify(cart));
+
   if (!games) return <h5>No content</h5>;
   return (
     <div className="gridContainer">
@@ -81,9 +87,8 @@ const GridView = () => {
       <Grid container rowSpacing={6} columnSpacing={5}>
         {games.map((game) => {
           return (
-            <Grid item s={12} sm={6} md={6} lg={6} xl={3}>
-              <Card
-                key={game.id}
+            <Grid key={game.id}item s={12} sm={6} md={6} lg={6} xl={3}>
+              <Card                
                 item={game}
                 cart={cart}
                 user={user}
@@ -92,6 +97,7 @@ const GridView = () => {
                 setAnchorEl={setAnchorEl}
                 singleProductHandler={singleProductHandler}
                 addToCartHandler={addToCartHandler}
+                handleClose = {handleClose}
                 handleClick={handleClick}
                 handleAdminNavigate={handleAdminNavigate}
                 handleAdminDeleteProduct={handleAdminDeleteProduct}

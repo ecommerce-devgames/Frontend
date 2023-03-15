@@ -19,7 +19,7 @@ const Dropdown = () => {
   };
 
   return (
-    <div>
+    <div className="navbarDropdown">
       <Button
         id="fade-button"
         aria-controls={open ? "fade-menu" : undefined}
@@ -40,9 +40,14 @@ const Dropdown = () => {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}>Sandbox Real time strategy</MenuItem>
+        <MenuItem onClick={handleClose}>Shooters</MenuItem>
+        <MenuItem onClick={handleClose}>Multiplayer online battle arena</MenuItem>
+        <MenuItem onClick={handleClose}>Role-playing</MenuItem>
+        <MenuItem onClick={handleClose}>Simulation and sports</MenuItem>
+        <MenuItem onClick={handleClose}>Puzzlers and party games</MenuItem>
+        <MenuItem onClick={handleClose}>Platformer</MenuItem>
+        
       </Menu>
     </div>
   );

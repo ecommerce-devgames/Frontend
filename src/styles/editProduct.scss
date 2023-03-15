@@ -2,12 +2,53 @@
 @import "./maps";
 @import "./variables";
 
-.editProductsWrapper{
-    @include flex(row, space-around, center);    
-    margin: 10rem 2rem;
+.editProductsWrapper {
+  @include flex(row, space-around, center);
+  margin: 5rem auto;
+  @media screen and (max-width: $big-medium-screen) {
+    @include flex(column, space-evenly, center);
+    margin: 4rem 1rem;
+  }
 }
 
-.dataSheetWrapper{
-    width: 50%;    
+.dataSheetWrapper {
+  width: 50%;
+  margin: 10rem 2rem;
+  @media screen and (max-width: $big-medium-screen) {
+    width: 70%;
+    margin: 4rem 2rem;
+  }
+  @media screen and (max-width: $medium-small-screen) {
+    width: 80%;
+    margin: 2rem 1rem;
+  }
 }
 
+.editConteiner {
+  width: 100%;
+}
+
+.editProductTitle {
+  color: $primary-color;
+  font-size: map-get($font-size, "large");
+  margin-bottom: 1rem;
+
+}
+
+.editProductImg {
+  height: 300px;
+  width: 400px;
+  margin-left: 3rem;
+  @media screen and (max-width: $big-medium-screen) {
+    height: 250px;
+    width: 350px;
+  }
+  @media screen and (max-width: $medium-small-screen) {
+    height: 250px;
+    width: 350px;
+  }
+  @media screen and (max-width: $small-screen) {
+    height: 100px;
+    width: 150px;
+  }
+}

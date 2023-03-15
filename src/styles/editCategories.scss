@@ -1,0 +1,130 @@
+@import "./mixins";
+@import "./maps";
+@import "./variables";
+
+.editCategoriesForm{
+    height: auto;
+    width: 40%;
+    margin: 5rem auto;
+    background-color: rgba(255, 255, 255, 0.13);
+    border-radius: 10px;
+    padding: 50px 35px;
+    border-radius: 10px;
+    @include flex(column, center, center);
+    backdrop-filter: blur(10px);
+  
+    @media screen and (max-width: $medium-small-screen) {
+      width: 60%;
+      margin: 1rem auto;
+    }
+    @media screen and (max-width: $small-screen) {
+      width: 90%;
+      padding: 1rem;
+    }
+}
+
+.formInline {
+  @include flex(row, space-around, center);
+  width: 100%;
+  margin: 1rem;
+}
+
+.formColumn{
+  @include flex(column, center, center);
+  width: 100%;  
+  margin: 1rem 3rem;
+}
+
+
+.createCategoriesInput {
+  color: $primary-color;
+  height: 50px;
+  width: 90%;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-top: 8px;
+  font-size: map-get($font-size, "medium");
+  font-weight: 300;
+
+  &::placeholder {
+    color: #e5e5e5;
+  }
+  @media screen and (max-width: $medium-small-screen) {
+    font-size: map-get($font-size, "small");
+  }
+}
+
+.editCategoriesInput {
+  color: $primary-color;
+  height: 50px;
+  width: 96%;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-top: 8px;
+  font-size: map-get($font-size, "medium");
+  font-weight: 300;
+
+  &::placeholder {
+    color: #e5e5e5;
+  }
+  @media screen and (max-width: $medium-small-screen) {
+    font-size: map-get($font-size, "small");
+    width: 90%;
+  }
+  @media screen and (max-width: $small-screen) {   
+    width: 85%;
+  }
+}
+
+.deleteCategoriesButton{  
+    height: 50px; 
+    width: 10%;
+    padding: 0 10px;
+    margin-top: 8px;
+    margin-left: .5rem;
+    background-color: $logo-color;
+    color: #080710;    
+    font-size: map-get($font-size, "medium");
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: $logo-color-hover;
+    }
+    @media screen and (max-width: $medium-small-screen) {
+      font-size: map-get($font-size, "small");
+      width: 15%;
+    }
+    @media screen and (max-width: $small-screen) {
+      font-size: map-get($font-size, "x-small");
+      width: 15%;
+      
+    }
+  
+}
+
+.editCategoriesButton{
+  margin-top: 10px;
+  width: 100%;
+  background-color: $logo-color;
+  color: #080710;
+  padding: 10px 0;
+  font-size: map-get($font-size, "medium");
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $logo-color-hover;
+  }
+  @media screen and (max-width: $medium-small-screen) {
+    font-size: map-get($font-size, "small");
+  }
+  @media screen and (max-width: $small-screen) {
+    font-size: map-get($font-size, "small");
+    width:100%;
+  }
+}

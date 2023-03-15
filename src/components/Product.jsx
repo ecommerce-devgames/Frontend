@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
+import axios from "axios"
 import { useSelector, useDispatch } from "react-redux";
 import useStringGenerator from "../hooks/useStringGenerator";
 import { useNavigate } from "react-router";
@@ -10,6 +11,7 @@ import ProductRating from "../commons/ProductRating";
 import MyProductRating from "../commons/MyProductRating";
 import { TextField } from "@mui/material";
 import axios from "axios";
+
 
 const Product = () => {
   //Hooks
@@ -23,6 +25,7 @@ const Product = () => {
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
   const reviews = useSelector((state) => state.reviews);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   //Variables
   //para product.developers. Nos tiene que llegar un array de strings
@@ -49,6 +52,18 @@ const Product = () => {
   };
 
   localStorage.setItem("cart", JSON.stringify(cart));
+
+  const handleAdminNavigate = (item) => {
+    setAnchorEl(null);
+    navigate(`/edit/products/${item.id}`);
+  };
+
+  const handleAdminDeleteProduct = (item) => {
+    setAnchorEl(null);
+    axios
+      .delete(`http://localhost:3001/api/games/admin/delete/${item.id}`)
+      .then((res) => console.log(res));
+  };
 
   return (
     <div className="mainConteiner">
@@ -116,7 +131,16 @@ const Product = () => {
           </div>
 
           <div className="productButtonsWrapper">
-            {user.isAdmin ? null : (
+            {user.isAdmin ? (
+              <>
+                <button className="productButton" onClick={handleAdminNavigate}>
+                  Edit
+                </button>
+                <button className="productButton" onClick={handleAdminDeleteProduct}>
+                  Delete
+                </button>
+              </>
+            ) : (
               <>
                 <button className="productButton" onClick={buyHandler}>
                   Buy

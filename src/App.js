@@ -2,7 +2,7 @@ import "./App.css";
 import axios from "axios";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setProduct } from "./state/product";
 import { setUser } from "./state/user";
 import Home from "./commons/Home";
@@ -13,6 +13,7 @@ import Product from "./components/Product";
 import Cart from "./components/Cart";
 import EditProducts from "./components/EditProducts";
 import EditUsers from "./components/EditUsers";
+import EditCategories from "./components/EditCategories";
 import History from "./components/History";
 
 
@@ -21,7 +22,7 @@ function App() {
   const dispatch = useDispatch();
 
   //States
-  const user = useSelector((state) => state.user);
+  
 
   //Handlers and functions
   useEffect(() => {
@@ -44,10 +45,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/products/:id" element={<Product />} /> 
         <Route path="/cart" element={<Cart /> } /> 
-        <Route path="/create/products" element={<EditProducts /> } /> 
-        <Route path="/edit/products/:id" element={<EditProducts /> } />        
         <Route path="/Shopping history" element={<History />} />
+        <Route path="/create/products" element={<EditProducts /> } /> 
+        <Route path="/edit/products/:id" element={<EditProducts /> } />       
         <Route path="/edit/users" element={<EditUsers />} />
+        <Route path="/edit/categories" element={<EditCategories />} />
       </Routes>
     </div>
   );

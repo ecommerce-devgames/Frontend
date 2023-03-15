@@ -12,6 +12,7 @@ const Card = ({
   open,
   anchorEl,
   setAnchorEl,
+  handleClose,
   handleClick,
   handleAdminNavigate,
   handleAdminDeleteProduct,
@@ -34,7 +35,8 @@ const Card = ({
               open={open}
               anchorEl={anchorEl}
               setAnchorEl={setAnchorEl}
-              handleClick={handleClick}
+              handleClose={handleClose}
+              handleClick={handleClick}              
               handleAdminNavigate={handleAdminNavigate}
               handleAdminDeleteProduct={handleAdminDeleteProduct}
             />
