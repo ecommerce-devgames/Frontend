@@ -31,8 +31,8 @@
   font-size: map-get($font-size, "large");
   text-transform: uppercase;
 
-  &:hover{
-    color: $logo-color-hover
+  &:hover {
+    color: $logo-color-hover;
   }
 
   @media screen and (max-width: $medium-small-screen) {
@@ -50,12 +50,11 @@
   @include flex(row, center, center); 
 }
 
-.searchBar{
+.searchBar {
   @media screen and (max-width: $medium-small-screen) {
     font-size: map-get($font-size, "small");
   }
 }
-
 
 //Navigation
 .navigationWrapper {

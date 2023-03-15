@@ -2,8 +2,8 @@
 @import "./maps";
 @import "./variables";
 
-*{
-  margin:0;
+* {
+  margin: 0;
   padding: 0;
 }
 
@@ -16,13 +16,13 @@
   }
 }
 
-.upperConteiner{
+.upperConteiner {
   @include flex(column, space-evenly, flex-start);
   width: 70%;
-  padding-left: 2rem;  
+  padding-left: 2rem;
 
   @media screen and (max-width: $medium-small-screen) {
-    width: 100%;      
+    width: 100%;
     padding: 2rem;
   }
 }
@@ -36,41 +36,114 @@
   }
 }
 
-.lowerWrapper{
-  width: 100%;   
-  @include flex(column, space-between, flex-start);   
+.lowerWrapper {
+  width: 100%;
+  @include flex(column, space-between, flex-start);
+}
+.productTitleRating {
+  width: 100%;
+  @include flex(row, space-between, flex-start);
+  margin: 3rem 0;
 }
 
-.productTitle {  
+.productTitle {
+  width: 50%;
   font-size: map-get($font-size, "large");
-   color: $primary-color;
+  color: $primary-color;
   font-family: Helvetica, sans-serif;
   font-weight: 500;
-  margin: 3rem 0;
-  
 }
-
-.productDescription {  
+.productRating {
+  width: 50%;
+}
+.productDescription {
   color: $primary-color;
   font-size: map-get($font-size, "small");
   text-align: justify;
-  width: 90%;  
-  margin: 0 0 5rem 0;
+  width: 100%;
+  margin: 0 0 2rem 0;
+  border-bottom: 1.5px solid rgb(75, 71, 71);
+  padding-bottom: 2rem;
+}
+.productReviewsRating {
+  @include flex(row, space-between, flex-start);
+  width: 100%;
+  color: $primary-color;
+  margin-bottom: 2rem;
+}
+.productReviewsTitle {
+  font-size: map-get($font-size, "small");
+  span {
+    text-decoration: underline;
+    font-size: map-get($font-size, "x-small");
+    color: $logo-color;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+.poductMyRates {
+  font-size: map-get($font-size, "small");
+  @include flex(row, space-between, flex-end);
+  color: $logo-color;
+}
+.productUsersReviews {
+  margin: 0 0 2rem 0;
+  color: $primary-color;
+  border: 1.5px solid rgb(75, 71, 71);
+  @include flex(column, space-between, flex-start);
+  width: 100%;
+}
+.usersReviewsDetails {
+  padding: 1rem;
+  span {
+    text-decoration: underline;
+  }
+}
+.usersReviewsContent {
+  padding: 0rem 1rem 1rem 1rem;
+}
+
+.textFieldForm {
+  width: 100%;
+}
+.productTextField {
+  color: $primary-color;
+  width: 100%;
+  text-align: justify;
+  font-size: map-get($font-size, "small");
+}
+.textFieldButton {
+  width: 4rem;
+  cursor: pointer;
+  font-size: map-get($font-size, "x-small");
+  font-weight: 200;
+  border-radius: 5px;
+  border: none;
+  color: $primary-color;
+  background-color: $logo-color;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $logo-color-hover;
+  }
 }
 
 .lowerConteiner {
-  @include flex(column, space-evenly, flex-start);   
+  @include flex(column, space-evenly, flex-start);
   width: 30%;
   padding: 0 2rem;
   @media screen and (max-width: $medium-small-screen) {
-    width: 100%;      
+    width: 100%;
     padding: 2rem;
-  }  
+  }
 }
 
 .productSidebar {
-  @include flex(column, space-evenly, center); 
-  height: 100%;    
+  @include flex(column, space-evenly, center);
+  height: 100%;
 }
 
 .productDataSheet {
@@ -81,7 +154,7 @@
   @include flex(row, flex-start, center);
   width: 100%;
   padding-left: 1rem;
-  color: $primary-color;  
+  color: $primary-color;
   font-size: map-get($font-size, "x-small");
   border-bottom: 1px solid rgb(43, 41, 41);
   padding: 1rem 0rem;
@@ -93,22 +166,22 @@
   margin-left: 1rem;
 }
 
-.productButtonsWrapper{
+.productButtonsWrapper {
   @include flex(column, space-around, center);
   width: 100%;
 }
 
 .productButton {
-  width: 50%;    
+  width: 50%;
   cursor: pointer;
   font-size: map-get($font-size, "x-small");
   font-weight: 500;
   border-radius: 5px;
   border: none;
   color: $primary-color;
-  background-color: $logo-color;  
+  background-color: $logo-color;
   margin-top: 1rem;
-  padding: .5rem;
+  padding: 0.5rem;
 
   &:hover {
     cursor: pointer;

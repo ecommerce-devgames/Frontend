@@ -1,11 +1,16 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios"
 import { useSelector, useDispatch } from "react-redux";
 import useStringGenerator from "../hooks/useStringGenerator";
 import { useNavigate } from "react-router";
 import { setCart } from "../state/cart";
+import { setReviews } from "../state/reviews";
 import ProductData from "../commons/ProductData.jsx";
 import { FaCheck } from "react-icons/fa";
+import ProductRating from "../commons/ProductRating";
+import MyProductRating from "../commons/MyProductRating";
+import { TextField } from "@mui/material";
+import axios from "axios";
 
 
 const Product = () => {
@@ -13,10 +18,13 @@ const Product = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  //state local
+  const [selectedReviews, setSelectedReviews] = useState([]);
   //States
   const product = useSelector((state) => state.product);
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
+  const reviews = useSelector((state) => state.reviews);
   const [anchorEl, setAnchorEl] = useState(null);
 
   //Variables
@@ -64,8 +72,50 @@ const Product = () => {
           <img src={product.background_image} alt="game" />
         </div>
         <div className="lowerWrapper">
-          <h2 className="productTitle">{product.name}</h2>
+          <div className="productTitleRating">
+            <h2 className="productTitle">{product.name}</h2>
+            <ProductRating className="productRating" />
+          </div>
           <p className="productDescription">{product.description_raw}</p>
+          <div className="productReviewsRating">
+            <p className="productReviewsTitle">
+              1910 reviews.
+              <span>Show reviews</span>
+            </p>
+            <div className="poductMyRates">
+              <p>Your Rate:</p>
+              <MyProductRating />
+            </div>
+          </div>
+          <div className="productUsersReviews">
+            <p className="usersReviewsDetails">
+              <span>Francisco García</span> (mail@mail.com), 18/07/2018:
+            </p>
+            <p className="usersReviewsContent">
+              Acá iría el contenido de una review,
+              xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            </p>
+          </div>
+
+          <form className="textFieldForm">
+            <TextField
+              className="productTextField"
+              id="outlined-size-normal"
+              label="Your review"
+              color="primary"
+              focused
+              multiline
+              placeholder="Add a review..."
+              sx={{
+                "& .MuiOutlinedInput-input": {
+                  color: "#fff",
+                },
+              }}
+            />
+            <button className="textFieldButton" type="submit">
+              Send
+            </button>
+          </form>
         </div>
       </div>
 

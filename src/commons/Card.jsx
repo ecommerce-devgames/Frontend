@@ -1,6 +1,7 @@
 import React from "react";
 import AdminCardBtns from "../commons/AdminCardBtns";
-import { FaCheck, FaStar } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
+import GridRating from "./GridRating";
 
 const Card = ({
   item,
@@ -41,8 +42,7 @@ const Card = ({
             />
           ) : (
             <span className="cardRanking">
-              {item.rating_top}
-              <FaStar />
+              <GridRating />
             </span>
           )}
         </div>
