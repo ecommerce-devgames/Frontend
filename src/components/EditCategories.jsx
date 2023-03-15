@@ -58,7 +58,7 @@ const EditCategories = () => {
   return (
     <div className="editProductsWrapper">
       <div className="dataSheetWrapper">
-        <p style={{ color: "white", fontSize: "3rem" }}>Current categories</p>
+        <p className="editProductTitle">Current categories</p>
         <div className="editDataSheet">
           {categories.map((categorie, i) => (
             <ProductData info={categorie.name} />

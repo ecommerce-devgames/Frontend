@@ -7,12 +7,14 @@
   background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('../assets/banner5.jpg');
   background-repeat: no-repeat;
   background-blend-mode:darken; 
-  background-size: contain;
+  background-size: cover;
+  background-position: center;
   min-height: 90vh; 
   //padding-top: 30vh;
 
   @media screen and (max-width: $medium-screen){
     background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('../assets/banner5Ipad.jpg');
+    min-height: 60vh;    
   }
   @media screen and (max-width: $small-screen){
     background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('../assets/banner5Phone.jpg');    

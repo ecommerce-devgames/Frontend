@@ -1,20 +1,21 @@
 import * as React from "react";
 import axios from "axios";
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
-import Logout from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../state/user";
-import { FaUserAlt } from "react-icons/fa";
+import Box from "@mui/material/Box";
+import Menu from "@mui/material/Menu";
+import PersonAdd from "@mui/icons-material/PersonAdd";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import Logout from "@mui/icons-material/Logout";
+import DehazeIcon from "@mui/icons-material/Dehaze";
 
-const UserAvatar = () => {
+
+const NavbarResponsive = () => {
   //Hooks
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -63,7 +64,8 @@ const UserAvatar = () => {
   };
 
   return (
-    <div className="navbarUserAvatar">
+    <div className="navbarResponsive">
+      {" "}
       <React.Fragment>
         <Box
           sx={{
@@ -73,7 +75,7 @@ const UserAvatar = () => {
             mt: 2.2,
           }}
         >
-          <Tooltip title="Account settings">
+          <Tooltip>
             <IconButton
               onClick={handleClick}
               size="small"
@@ -82,15 +84,14 @@ const UserAvatar = () => {
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
             >
-              <Avatar
+              <DehazeIcon
                 sx={{
+                  mt: 2,
                   width: 32,
                   height: 32,
-                  backgroundColor: "rgb(53, 136, 230)",
+                  color: "rgb(53, 136, 230)",
                 }}
-              >
-                {user.name ? user.name.charAt(0) : <FaUserAlt />}
-              </Avatar>
+              ></DehazeIcon>
             </IconButton>
           </Tooltip>
         </Box>
@@ -126,9 +127,18 @@ const UserAvatar = () => {
               },
             },
           }}
-          transformOrigin={{ horizontal: "right", vertical: "top" }}
-          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+          transformOrigin={{ horizontal: "center", vertical: "top" }}
+          anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
         >
+          
+          <MenuItem readOnly>CATEGORIES</MenuItem>
+          <MenuItem onClick={handleClose}>Sandbox Real time strategy</MenuItem>
+          <MenuItem onClick={handleClose}>Shooters</MenuItem>
+          <MenuItem onClick={handleClose}>
+            Multiplayer online battle arena
+          </MenuItem>
+
+          <Divider />
           {user?.isAdmin
             ? isAdminMenu.map((menu) => (
                 <MenuItem
@@ -160,4 +170,4 @@ const UserAvatar = () => {
   );
 };
 
-export default UserAvatar;
+export default NavbarResponsive;

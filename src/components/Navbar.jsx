@@ -5,6 +5,7 @@ import Searchbar from "./Searchbar";
 import Dropdown from "../components/Dropdown";
 import UserAvatar from "./UserAvatar";
 import { FaShoppingCart } from "react-icons/fa";
+import NavbarResponsive from "./NavbarResponsive";
 
 const Navbar = () => {
   //Hooks
@@ -20,7 +21,7 @@ const Navbar = () => {
 
   return (
     <div className="navbarContainer">
-      <div className="logoWrapper">
+      <div className="logoWrapper">        
         <Link to="/">
           <h4 className="navbarLogo">DevGames3</h4>
         </Link>
@@ -36,6 +37,7 @@ const Navbar = () => {
           </div>
         </Link>
         <UserAvatar />
+        <NavbarResponsive />
       </div>
     </div>
   );
