@@ -4,7 +4,7 @@
 
 .editCategoriesForm{
     height: auto;
-    width: 500px;
+    width: 40%;
     margin: 5rem auto;
     background-color: rgba(255, 255, 255, 0.13);
     border-radius: 10px;
@@ -14,10 +14,12 @@
     backdrop-filter: blur(10px);
   
     @media screen and (max-width: $medium-small-screen) {
-      width: 100%
+      width: 60%;
+      margin: 1rem auto;
     }
     @media screen and (max-width: $small-screen) {
-      width: 100%
+      width: 90%;
+      padding: 1rem;
     }
 }
 
@@ -69,6 +71,10 @@
   }
   @media screen and (max-width: $medium-small-screen) {
     font-size: map-get($font-size, "small");
+    width: 90%;
+  }
+  @media screen and (max-width: $small-screen) {   
+    width: 85%;
   }
 }
 
@@ -90,6 +96,12 @@
     }
     @media screen and (max-width: $medium-small-screen) {
       font-size: map-get($font-size, "small");
+      width: 15%;
+    }
+    @media screen and (max-width: $small-screen) {
+      font-size: map-get($font-size, "x-small");
+      width: 15%;
+      
     }
   
 }
@@ -110,5 +122,9 @@
   }
   @media screen and (max-width: $medium-small-screen) {
     font-size: map-get($font-size, "small");
+  }
+  @media screen and (max-width: $small-screen) {
+    font-size: map-get($font-size, "small");
+    width:100%;
   }
 }

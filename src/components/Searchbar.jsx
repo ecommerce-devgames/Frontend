@@ -2,10 +2,12 @@ import React from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-//import { setSearchQuery } from "../state/searchQuery";
-import TextField from "@mui/material/TextField";
 import useInput from "../hooks/useInput";
+//import { setSearchQuery } from "../state/searchQuery";
 import { setGames } from "../state/games";
+import TextField from "@mui/material/TextField";
+import SearchIcon from '@mui/icons-material/Search';
+
 
 const Searchbar = () => {
   //Hooks
@@ -37,9 +39,9 @@ const Searchbar = () => {
         label="SEARCH"
         variant="standard"
         type="search"
-        placeholder="Search"
+        placeholder= "SEARCH"
         {...searchQuery}
-        style={{ marginRight: " 2rem" }}
+        style={{ marginRight: "2rem" }}
         sx={{
           mr: 2.5,
           "& .MuiInputBase-root": {
@@ -56,7 +58,7 @@ const Searchbar = () => {
           },
           "& .MuiInputLabel-root": {
             color: "rgb(53, 136, 230)",
-            fontSize: "1.3rem",
+            fontSize: "1.2rem",
           },
         }}
       />

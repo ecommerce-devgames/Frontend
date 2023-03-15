@@ -19,7 +19,7 @@ const Dropdown = () => {
   };
 
   return (
-    <div>
+    <div className="navbarDropdown">
       <Button
         id="fade-button"
         aria-controls={open ? "fade-menu" : undefined}

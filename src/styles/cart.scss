@@ -4,10 +4,13 @@
 
 .cartIcon {
   font-size: map-get($font-size, "medium");
+  @media screen and (max-width: $medium-small-screen) {
+    font-size: map-get($font-size, "small");
+  }
 }
 
 .cartWrapper {
-  margin-top: 1.7rem;
+  margin-top: 2rem;
   color: $logo-color;
 }
 
