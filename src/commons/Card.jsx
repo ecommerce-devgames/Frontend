@@ -21,7 +21,7 @@ const Card = ({
     <div className="cardConteiner">
       <img
         className="gridImage"
-        src={item.background_image}
+        src={item.poster}
         alt="product"
         onClick={() => singleProductHandler(item)}
       />
