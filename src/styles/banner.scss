@@ -16,7 +16,7 @@
     background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('../assets/banner5Ipad.jpg');
     min-height: 60vh;    
   }
-  @media screen and (max-width: $small-screen){
+  @media screen and (max-width: $smallest-screen){
     background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('../assets/banner5Phone.jpg');    
     min-height: 40vh; 
   }
@@ -37,7 +37,7 @@
     font-size: map-get($font-size, "large" );
     margin: 3rem auto;
   }
-  @media screen and (max-width: $small-screen){
+  @media screen and (max-width: $smallest-screen){
     ont-size: map-get($font-size, "medium" );
     margin: 3rem auto;
   }

@@ -7,18 +7,18 @@
   background-repeat: no-repeat;
   background-size: cover;
   margin-top: 0;
-  padding-top: 15vh; 
+  padding-top: 17vh; 
   height: 100vh;
   @media screen and (max-width: $medium-small-screen) {
     height: 150vh;
   }
-  @media screen and (max-width: $small-screen) {
+  @media screen and (max-width: $smallest-screen) {
     height: 150vh;
   }
 
 }
 .registerForm {  
-  width: 40%;
+  width: 25%;
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.13);
   border-radius: 10px;
@@ -27,11 +27,18 @@
   @include flex(column, space-evenly, center);
   backdrop-filter: blur(10px);
 
+  @media screen and (max-width: $big-medium-screen) {
+    width: 40%;
+  }
   @media screen and (max-width: $medium-small-screen) {
-    width: 70%;
+    width: 50%;
   }
   @media screen and (max-width: $small-screen) {
+    width: 70%;
+  }
+  @media screen and (max-width: $smallest-screen) {
     width: 90%;
+    padding: 1rem;
   }
 }
 
@@ -52,7 +59,7 @@
   @media screen and (max-width: $medium-small-screen) {
     font-size: map-get($font-size, "large");
   }
-  @media screen and (max-width: $small-screen) {
+  @media screen and (max-width: $smallest-screen) {
     font-size: map-get($font-size, "medium");
   }
 }
@@ -74,6 +81,7 @@
   @media screen and (max-width: $medium-small-screen) {
     font-size: map-get($font-size, "small");
   }
+  
 }
 
 .registerButton {
@@ -102,11 +110,13 @@
   p {
     margin-right: 1rem;
     font-size: map-get($font-size, "small");
-    color: $primary-color;
+    color: $primary-color;    
   }
-  @media screen and (max-width: $medium-small-screen) {
+  @media screen and (max-width: $big-medium-screen) {
     @include flex(column, space-evenly, center);
+    text-align: center;
   }
+  
 
 }
 

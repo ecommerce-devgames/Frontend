@@ -14,6 +14,7 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
 
+  console.log(cart)
   //Handlers
   const deleteItemHandler = (item) => {
     dispatch(removeFromCart(item));
@@ -30,12 +31,12 @@ const Cart = () => {
     <div className="cartContainer">
       {cart.map((item) => (
         <div className="cartViewWrapper">
-          <img className="cartImg" src={item.background_image} alt="product" />
+          <img className="cartImg" src={item.poster} alt="product" />
           <div className="cartInfoWrapper">
             <div className="cartInfoTop">
               <p className="cartTitle">{item.name}</p>
               <p className="cartPrice" onClick={() => deleteItemHandler(item)}>
-                $15.000 <FaTrash />
+                $US {item.price} <FaTrash className="trash"/>
               </p>
             </div>
             <div className="cartInfoBottom">

@@ -3,36 +3,63 @@
 @import "./variables";
 
 .editProductsWrapper {
-  @include flex(row, space-around, center);
-  margin: 5rem auto;
+  @include flex(row, space-evenly, center);
+  margin: 5rem 0;
+  padding-left: 5rem;
+  color: white;
   @media screen and (max-width: $big-medium-screen) {
     @include flex(column, space-evenly, center);
     margin: 4rem 1rem;
+    padding: 0;
   }
 }
 
 .dataSheetWrapper {
-  width: 50%;
-  margin: 10rem 2rem;
+  width: 40%;
+  margin: 10rem auto;
   @media screen and (max-width: $big-medium-screen) {
     width: 70%;
     margin: 4rem 2rem;
   }
   @media screen and (max-width: $medium-small-screen) {
-    width: 80%;
+    width: 70%;
     margin: 2rem 1rem;
+  }
+  @media screen and (max-width: $small-screen) {
+    width: 100%;
+    margin: 1rem 1rem;
   }
 }
 
 .editConteiner {
-  width: 100%;
+  width: 60%;
+  margin-top: 5rem;
+  @media screen and (max-width: $big-medium-screen) {
+    width: 100%;
+  }
 }
 
+.editForm{
+  width: 40%;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.13);
+  border-radius: 10px;
+  padding: 50px 35px;
+  border-radius: 10px;
+  @include flex(column, space-evenly, center);
+  backdrop-filter: blur(10px);
+  @media screen and (max-width: $medium-small-screen) {
+    width: 70%;
+  }
+  @media screen and (max-width: $smallest-screen) {
+    width: 90%;
+    padding: 1rem;
+  }
+}
 .editProductTitle {
   color: $primary-color;
   font-size: map-get($font-size, "large");
   margin-bottom: 1rem;
-
 }
 
 .editProductImg {
@@ -42,13 +69,51 @@
   @media screen and (max-width: $big-medium-screen) {
     height: 250px;
     width: 350px;
+    margin-left: 2.5rem;
   }
   @media screen and (max-width: $medium-small-screen) {
     height: 250px;
     width: 350px;
+    margin-left: 2rem;
   }
   @media screen and (max-width: $small-screen) {
-    height: 100px;
-    width: 150px;
+    height: 175px;
+    width: 255px;
+    margin-left: 1.5rem;
   }
+  @media screen and (max-width: $smallest-screen) {
+    height: 125px;
+    width: 195px;
+  }
+}
+
+.createProductSelect {
+  width: 100%;
+  color: $primary-color;
+}
+
+.createProductSelectItem {
+  background-color: $secondary-color;
+}
+
+.imageInput {
+  color: $primary-color;
+  height: 35px;
+  width: 95%;
+  padding: 15px 10px;
+  margin: 8px 0;
+  font-size: map-get($font-size, "medium");
+  font-weight: 300;
+  border-radius: 0.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  &::placeholder {
+    color: #e5e5e5;
+  }
+  @media screen and (max-width: $medium-small-screen) {
+    font-size: map-get($font-size, "small");
+  }
+}
+#file-upload-button {
+  margin: 1rem;
 }

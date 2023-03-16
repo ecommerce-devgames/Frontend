@@ -17,7 +17,11 @@
       width: 60%;
       margin: 1rem auto;
     }
-    @media screen and (max-width: $small-screen) {
+     @media screen and (max-width: $small-screen) {
+      width: 75%;
+      padding: 1rem;
+    }
+    @media screen and (max-width: $smallest-screen) {
       width: 90%;
       padding: 1rem;
     }
@@ -73,7 +77,7 @@
     font-size: map-get($font-size, "small");
     width: 90%;
   }
-  @media screen and (max-width: $small-screen) {   
+  @media screen and (max-width: $smallest-screen) {   
     width: 85%;
   }
 }

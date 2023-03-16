@@ -16,7 +16,7 @@
         font-size: map-get($font-size, "large");
         margin-bottom:  2rem;
       }
-      @media screen and (max-width: $small-screen) {
+      @media screen and (max-width: $smallest-screen) {
         font-size: map-get($font-size, "medium");
         margin: 0;
       }

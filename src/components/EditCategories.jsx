@@ -1,38 +1,19 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import useInput from "../hooks/useInput";
 import ProductData from "../commons/ProductData.jsx";
 import { FaPlus } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 
 const EditCategories = () => {
+
+  //Hooks
   const newCategorie = useInput();
   const oldCategorie = useInput();
+  
   //States
-  const categories = [
-    {
-      name: "Sandbox Real time strategy (RTS)",
-    },
-    {
-      name: "Shooters (FPS and TPS)",
-    },
-    {
-      name: "Multiplayer online battle arena (MOBA)",
-    },
-    {
-      name: "Role-playing (RPG, ARPG, and More)",
-    },
-    {
-      name: "Simulation and sports",
-    },
-    {
-      name: "Puzzlers and party games",
-    },
-    {
-      name: "Platformer",
-    },
-  ];
   const [formValues, setFormValues] = useState([{ categorie1: "" }]);
-
+  const genres = useSelector((state) => state.gameProperties.genres[0]);
 
   //Handlers and functions
   const onSubmitHandler = (e) => {
@@ -60,8 +41,8 @@ const EditCategories = () => {
       <div className="dataSheetWrapper">
         <p className="editProductTitle">Current categories</p>
         <div className="editDataSheet">
-          {categories.map((categorie, i) => (
-            <ProductData info={categorie.name} />
+          {genres.map((genre, i) => (
+            <ProductData info={genre.name} />
           ))}
         </div>
       </div>

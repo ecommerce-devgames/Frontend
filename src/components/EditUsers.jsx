@@ -7,15 +7,13 @@ import { Avatar } from "@mui/material";
 import { FaTrash } from "react-icons/fa";
 import UserDetails from "../commons/UserDetails";
 
-
 const EditUsers = () => {
-  //Hooks 
+  //Hooks
   const dispatch = useDispatch();
 
   //States
   const usersDb = useSelector((state) => state.usersDb);
   const user = useSelector((state) => state.user);
-
 
   //Handlers and functions
   useEffect(() => {
@@ -70,11 +68,13 @@ const EditUsers = () => {
                 title="Fullname"
                 info={`${userDb.name} ${userDb.lastName}`}
               />
+
               <UserDetails title="Email" info={userDb.email} />
               <FaTrash
                 className="userFaTrash"
                 onClick={() => deleteUserHandler(userDb.id)}
               />
+
               {userDb.isAdmin ? (
                 <button
                   className="userButton"
