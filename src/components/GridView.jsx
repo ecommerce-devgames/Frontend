@@ -69,8 +69,8 @@ const GridView = () => {
     const validate = cart.some((el) => el.id === item.id);
     if (!validate) {
       axios.get(`http://localhost:3001/api/games/${item.id}`).then((res) => {
-        dispatch(setCart(res.data));
-      });
+        dispatch(setCart(res.data));        
+      }).then(()=> user.id ? axios.post(`http://localhost:3001/api/cart/addItem/${user.id}/${item.id}`, { } , {withCredentials : true}).then((res)=> console.log(res)) : null)
     }
   };
 

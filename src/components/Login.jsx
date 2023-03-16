@@ -5,10 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { setUser } from "../state/user";
+import { importCartFromDb } from "../state/cart";
 import Input from "../commons/Input";
-
-
-
 
 const Login = () => {
   //Hooks
@@ -34,6 +32,16 @@ const Login = () => {
       )
       .then((res) => {
         dispatch(setUser(res.data));
+        console.log("iddddd", res.data);
+        axios
+          .get(`http://localhost:3001/api/cart/${res.data.id}`, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            if (typeof res.data !== "string") dispatch(importCartFromDb(res.data))
+            
+            //localStorage.setItem("cart", JSON.stringify(res.data));
+          });
         navigate("/");
       });
   };

@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { removeFromCart, setCart } from "../state/cart";
@@ -14,17 +15,36 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
 
-  
   //Handlers
   const deleteItemHandler = (item) => {
     dispatch(removeFromCart(item));
+    if (user.id) {
+      axios
+        .post(
+          `http://localhost:3001/api/cart/removeItem/${user.id}/${item.id}`,
+          {},
+          { withCredentials: true }
+        )
+        .then((res) => console.log(res));
+    }
   };
   localStorage.setItem("cart", JSON.stringify(cart));
 
   const purchaseHandler = () => {
-    //cambie el condicional del navigate para hacer el dispatch del estado para el historial
-    !user.name ? navigate("/login") : dispatch(setShoppedProducts(cart));
-    dispatch(setCart(""));
+    if (!user.name) return navigate("/login");
+
+    dispatch(setShoppedProducts(cart));
+    if (user.id) {
+      axios
+        .post(
+          `http://localhost:3001/api/cart/purchase/${user.id}`,
+          {},
+          { withCredentials: true }
+        )
+        .then((res) => {
+          dispatch(setCart(""));
+        });
+    }
   };
 
   return (
@@ -36,7 +56,7 @@ const Cart = () => {
             <div className="cartInfoTop">
               <p className="cartTitle">{item.name}</p>
               <p className="cartPrice" onClick={() => deleteItemHandler(item)}>
-                $US {item.price} <FaTrash className="trash"/>
+                $US {item.price} <FaTrash className="trash" />
               </p>
             </div>
             <div className="cartInfoBottom">
@@ -57,9 +77,7 @@ const Cart = () => {
         </div>
       ) : (
         <div className="cartNoGames">
-          <h2 className="noGamesTitle">
-            You didn't add anything to your cart yet
-          </h2>
+          <h2 className="noGamesTitle">Your cart is empty</h2>
         </div>
       )}
     </div>
