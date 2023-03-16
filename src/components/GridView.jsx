@@ -27,7 +27,7 @@ const GridView = () => {
   //Variables
   const open = Boolean(anchorEl);
   const pathname = location.pathname.split("/")[1];
-  console.log(pathname);
+  
   //Handlers and functions
   useEffect(() => {
     if (pathname === "") {
@@ -69,13 +69,10 @@ const GridView = () => {
   const addToCartHandler = (item) => {
     const validate = cart.some((el) => el.id === item.id);
     if (!validate) {
-      axios
-        .get(
-          `https://api.rawg.io/api/games/${item.id}?key=679adbda4ffc4cd5a68fad9b1e98f040&dates=2019-09-01,2019-09-30&platforms=18,1,7`
-        )
-        .then((res) => {
-          dispatch(setCart(res.data));
-        });
+      axios.get(`http://localhost:3001/api/games/${item.id}`).then((res) => {
+        dispatch(setCart(res.data));
+      });
+       
     }
   };
 
@@ -98,15 +95,13 @@ const GridView = () => {
     setAnchorEl(null);
     axios
       .delete(`http://localhost:3001/api/games/admin/delete/${item.id}`)
-      .then((res) => console.log(res));
+      .then((res) => localStorage.setItem("cart", JSON.stringify(cart)));
   };
-
-  localStorage.setItem("cart", JSON.stringify(cart));
 
   return (
     <div className="gridContainer">
       <h2 className="gridTitle">
-        {games && games[0] ? "Games" : "No games for this category" }
+        {games && games[0] ? "Games" : "No games for this category"}
       </h2>
       <Grid container rowSpacing={6} columnSpacing={5}>
         {games.map((game) => {

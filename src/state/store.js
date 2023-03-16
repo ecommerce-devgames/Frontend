@@ -9,6 +9,7 @@ import gamesReducer from "./games";
 import shoppedProductsReducer from "./shoppedProducts";
 import reviewsReducer from "./reviews";
 import searchQueryReducer from "./searchQuery";
+import gamePropertiesReducer from "./gameProperties";
 
 const store = configureStore({
   reducer: {
@@ -19,7 +20,8 @@ const store = configureStore({
     shoppedProducts: shoppedProductsReducer,
     usersDb: usersDbReducer,
     reviews: reviewsReducer,
-    searchQuery: searchQueryReducer
+    searchQuery: searchQueryReducer,
+    gameProperties: gamePropertiesReducer,
   },
   middleware: [logger],
 });

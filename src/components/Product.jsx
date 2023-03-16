@@ -35,18 +35,19 @@ const Product = () => {
     const validate = cart.some((el) => el.id === product.id);
     if (user && !validate) {
       dispatch(setCart(product));
-    }
+    
+    }    
     navigate(user ? "/cart" : "/login");
   };
 
   const addToCartHandler = () => {
     const validate = cart.some((el) => el.id === product.id);
     if (!validate) {
-      dispatch(setCart(product));
+      dispatch(setCart(product));      
     }
   };
 
-  localStorage.setItem("cart", JSON.stringify(cart));
+  
 
   const handleAdminNavigate = (item) => {
     setAnchorEl(null);
@@ -57,7 +58,9 @@ const Product = () => {
     setAnchorEl(null);
     axios
       .delete(`http://localhost:3001/api/games/admin/delete/${item.id}`)
-      .then((res) => console.log(res));
+      .then((res) => {
+        console.log(res)
+      });
   };
 
   return (

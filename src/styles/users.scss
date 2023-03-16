@@ -20,6 +20,7 @@
   width: 90%;  
   font-size: map-get($font-size, "small");
   border-bottom: 1px solid rgb(43, 41, 41);
+  
 }
 
 .userSpan {
@@ -63,4 +64,7 @@
     cursor: pointer;
     background-color: $logo-color-hover;
   }
+}
+.rowUserDiv{
+  @include flex(row, center, center)
 }

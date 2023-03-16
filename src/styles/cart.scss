@@ -28,23 +28,41 @@
   border-radius: 10px;
   margin: 25vh auto;
 
-  @media screen and (max-width: $medium-small-screen) {
-    width: 100%;
-    margin: 25vw 1rem;
+  @media screen and (max-width: $big-medium-screen) {
+    width: 70%;    
   }
-  
+  @media screen and (max-width: $medium-screen) {
+    width: 75%; 
+  }
+  @media screen and (max-width: $medium-small-screen) {
+    width: 70%;   
+  }
+  @media screen and (max-width: $small-screen) {
+    width: 80%;   
+  }
+   @media screen and (max-width: $smallest-screen) {
+    width: 90%;   
+  }
 }
 
 .cartViewWrapper {
   @include flex(row, flex-start, center);
   border-bottom: 1px solid rgb(43, 41, 41);
   padding: 1.5rem;
+  @media screen and (max-width: $medium-small-screen) {
+    @include flex(column, space-evenly, flex-start);   
+  }
 }
 
 .cartImg {
   height: 200px;
   width: 300px;
   border-radius: 0.5rem;
+  @media screen and (max-width: $medium-small-screen) {
+    height: 150px;
+    width: 250px;
+    margin-left: 3rem;
+  }
 }
 
 .cartInfoWrapper {
@@ -53,21 +71,41 @@
 }
 
 .cartInfoTop {
-  @include flex(row, space-between, center);
+  @include flex(column, space-between, flex-start); 
   padding: 1rem;
+
+ 
 }
 
 .cartTitle {
   color: $primary-color;
   font-size: map-get($font-size, "large");
+  padding-bottom: .5rem;
+
+  @media screen and (max-width: $medium-screen) {
+    font-size: map-get($font-size, "medium"); 
+  }
+
+ 
 }
 
 .cartPrice {
   color: $primary-color;
   font-size: map-get($font-size, "medium");
   font-weight: lighter;
+  
   &:hover {
     cursor: pointer;
+  }
+  @media screen and (max-width: $medium-screen) {
+    font-size: map-get($font-size, "small"); 
+  }
+}
+
+.trash{
+  color: $logo-color;
+  &:hover{
+    color: $logo-color-hover
   }
 }
 
@@ -75,6 +113,9 @@
   color: $primary-color;
   font-size: map-get($font-size, "medium");
   font-weight: lighter;
+  @media screen and (max-width: $medium-screen) {
+    font-size: map-get($font-size, "x-small"); 
+  }
 }
 .cartInfoBottom {
   @include flex(row, space-between, center);
@@ -83,7 +124,7 @@
 
 .cartCheckoutWrapper {
   @include flex(column, space-evenly, flex-start);
-  margin: 3rem 0 3rem 3rem;
+  margin: 3rem 0 3rem 4rem;
 }
 
 .cartCheckoutData {
@@ -117,14 +158,14 @@
   margin: auto;
 }
 
-.noGamesTitle{
+.noGamesTitle {
   font-size: map-get($font-size, "medium");
   margin: 85px auto;
   text-align: center;
   width: 50%;
 }
 
-.HistoryTitle{
- margin-left: 35%;
- color: $logo-color
+.HistoryTitle {
+  margin-left: 35%;
+  color: $logo-color;
 }

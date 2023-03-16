@@ -20,8 +20,9 @@ const NavbarResponsive = () => {
   const navigate = useNavigate();
 
   //States
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const genres = useSelector((state) => state.gameProperties.genres[0]);
   const user = useSelector((state) => state.user);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   //Variables
   const open = Boolean(anchorEl);
@@ -135,28 +136,14 @@ const NavbarResponsive = () => {
           anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
         >
           <MenuItem readOnly>CATEGORIES</MenuItem>
-          <MenuItem onClick={() => searchByCategoryHandler("action")}>
-            Action
-          </MenuItem>
-          <MenuItem onClick={() => searchByCategoryHandler("indie")}>
-            Indie
-          </MenuItem>
-          <MenuItem onClick={() => searchByCategoryHandler("adventure")}>
-            Adventure
-          </MenuItem>
-          <MenuItem onClick={() => searchByCategoryHandler("RPG")}>
-            RPG
-          </MenuItem>
-          <MenuItem onClick={() => searchByCategoryHandler("strategy")}>
-            Strategy
-          </MenuItem>
-          <MenuItem onClick={() => searchByCategoryHandler("shooter")}>
-            Shooter
-          </MenuItem>
-          <MenuItem onClick={() => searchByCategoryHandler("casual")}>
-            Casual
-          </MenuItem>
-
+          {genres?.map((genre) => (
+            <MenuItem
+              key={genre.id}
+              onClick={() => searchByCategoryHandler(genre.name)}
+            >
+              {genre.name}
+            </MenuItem>
+          ))}
           <Divider />
           {user?.isAdmin
             ? isAdminMenu.map((menu, i) => (
