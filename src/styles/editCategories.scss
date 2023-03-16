@@ -27,6 +27,36 @@
     }
 }
 
+.categoriesDataSheetWrapper{
+  width: 40%;
+  margin: 10rem auto; 
+  @include flex (column, space-evenly, center);
+  @media screen and (max-width: $big-medium-screen) {
+    width: 70%;
+    margin: 4rem 2rem;
+  }
+  @media screen and (max-width: $medium-small-screen) {
+    width: 70%;
+    margin: 2rem 1rem;
+  }
+  @media screen and (max-width: $small-screen) {
+    width: 100%;
+    margin: 1rem 1rem;
+  }
+}
+
+.categoriesTitle{
+  color: $primary-color;
+  font-size: map-get($font-size, "large");
+  margin-bottom: 1rem;
+}
+.categories{
+  width: 50%;
+  margin: 0 auto;
+  @include flex(row, space-between, center);
+}
+
+
 .formInline {
   @include flex(row, space-around, center);
   width: 100%;

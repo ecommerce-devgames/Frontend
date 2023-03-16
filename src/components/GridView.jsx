@@ -16,7 +16,6 @@ const GridView = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log(category);
   //States
   const games = useSelector((state) => state.games);
   const cart = useSelector((state) => state.cart);
@@ -27,7 +26,7 @@ const GridView = () => {
   //Variables
   const open = Boolean(anchorEl);
   const pathname = location.pathname.split("/")[1];
-  
+
   //Handlers and functions
   useEffect(() => {
     if (pathname === "") {
@@ -72,7 +71,6 @@ const GridView = () => {
       axios.get(`http://localhost:3001/api/games/${item.id}`).then((res) => {
         dispatch(setCart(res.data));
       });
-       
     }
   };
 
@@ -86,34 +84,42 @@ const GridView = () => {
       : setAnchorEl(event.currentTarget);
   };
 
-  const handleAdminNavigate = (item) => {
+  const handleAdminNavigate = (id) => {
     setAnchorEl(null);
-    navigate(`/edit/products/${item.id}`);
+    navigate(`/edit/products/${id}`);
   };
 
-  const handleAdminDeleteProduct = (item) => {
+  const handleAdminDeleteProduct = (id) => {
     setAnchorEl(null);
+    console.log(id);
     axios
-      .delete(`http://localhost:3001/api/games/admin/delete/${item.id}`)
-      .then((res) => localStorage.setItem("cart", JSON.stringify(cart)));
+      .delete(`http://localhost:3001/api/games/admin/delete/${id}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        axios.get("http://localhost:3001/api/games").then((res) => {
+          dispatch(setGames(res.data));
+        });
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
     <div className="gridContainer">
       <h2 className="gridTitle">
-        {games && games[0] ? "Games" : "No games for this category"}
+        {games && games[0] ? "Games" : "No games found for this category"}
       </h2>
       <Grid container rowSpacing={6} columnSpacing={5}>
         {games.map((game) => {
           return (
             <Grid key={game.id} item s={12} sm={6} md={6} lg={6} xl={3}>
               <Card
-                item={game}
+                singleGame={game}
                 cart={cart}
                 user={user}
                 open={open}
                 anchorEl={anchorEl}
-                setAnchorEl={setAnchorEl}
                 singleProductHandler={singleProductHandler}
                 addToCartHandler={addToCartHandler}
                 handleClose={handleClose}

@@ -9,7 +9,10 @@ import gamesReducer from "./games";
 import shoppedProductsReducer from "./shoppedProducts";
 import reviewsReducer from "./reviews";
 import searchQueryReducer from "./searchQuery";
-import gamePropertiesReducer from "./gameProperties";
+import genresReducer from "./genres";
+import developersReducer from "./developers";
+import platformsReducer from "./platforms";
+import tagsReducer from "./tags";
 
 const store = configureStore({
   reducer: {
@@ -21,7 +24,10 @@ const store = configureStore({
     usersDb: usersDbReducer,
     reviews: reviewsReducer,
     searchQuery: searchQueryReducer,
-    gameProperties: gamePropertiesReducer,
+    genres: genresReducer,
+    developers: developersReducer,
+    platforms: platformsReducer,
+    tags: tagsReducer,
   },
   middleware: [logger],
 });
