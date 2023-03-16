@@ -2,13 +2,14 @@ import "./App.css";
 import axios from "axios";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setProduct } from "./state/product";
 import { setUser } from "./state/user";
 import { setGenres } from "./state/genres";
 import { setDevelopers } from "./state/developers";
 import { setPlatforms } from "./state/platforms";
 import { setTags } from "./state/tags";
+import { importCartFromLs, importCartFromDb } from "./state/cart";
 import Home from "./commons/Home";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
@@ -25,6 +26,9 @@ function App() {
   const dispatch = useDispatch();
 
   //States
+  const cart = useSelector((state) => state.cart);
+  const product = useSelector((state) => state.product);
+  const user = useSelector((state) => state.user);
 
   //Handlers and functions
   useEffect(() => {
@@ -35,17 +39,48 @@ function App() {
       .then((data) => dispatch(setUser(data)));
     axios
       .get("http://localhost:3001/api/genres/", { withCredentials: true })
-      .then((res) => {console.log(res); dispatch(setGenres(res.data))});
-      axios
+      .then((res) => {
+        console.log(res);
+        dispatch(setGenres(res.data));
+      });
+    axios
       .get("http://localhost:3001/api/developers/", { withCredentials: true })
-      .then((res) => { console.log(res); dispatch(setDevelopers(res.data))});
-      axios
+      .then((res) => {
+        console.log(res);
+        dispatch(setDevelopers(res.data));
+      });
+    axios
       .get("http://localhost:3001/api/platforms/", { withCredentials: true })
-      .then((res) => {console.log(res); dispatch(setPlatforms(res.data))});
+      .then((res) => {
+        console.log(res);
+        dispatch(setPlatforms(res.data));
+      });
+     
       
-    //dispatch(setCart(JSON.parse(localStorage.getItem('cart'))));
+      if (user.id) {
+        axios
+          .get(`http://localhost:3001/api/cart/${user.id}`, {
+            withCredentials: true,
+          })
+          .then((res) => dispatch(importCartFromDb(res.data)));
+      } else {
+       dispatch(importCartFromLs(JSON.parse(localStorage.getItem("cart"))));
+      };
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    // dispatch(
+    //   setCartTotalPrice(cart.reduce((acc, game) => (acc += game.price), 0))
+    // );
+   
+    localStorage.setItem("cart", JSON.stringify(cart)); 
+  }, [cart]);
+
+  useEffect(() => {
+    localStorage.setItem("product", JSON.stringify(product));
+  }, [product]);
+
 
   return (
     <div className="appContainer">

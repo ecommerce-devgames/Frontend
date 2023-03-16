@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { removeFromCart, setCart } from "../state/cart";
+import { removeFromCart, setCart, removeAllItems } from "../state/cart";
 import { setShoppedProducts } from "../state/shoppedProducts";
 import { FaTrash } from "react-icons/fa";
 
@@ -28,8 +28,7 @@ const Cart = () => {
         .then((res) => console.log(res));
     }
   };
-  localStorage.setItem("cart", JSON.stringify(cart));
-
+  
   const purchaseHandler = () => {
     if (!user.name) return navigate("/login");
 
@@ -42,7 +41,7 @@ const Cart = () => {
           { withCredentials: true }
         )
         .then((res) => {
-          dispatch(setCart(""));
+          dispatch(removeAllItems([]));
         });
     }
   };
