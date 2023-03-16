@@ -1,86 +1,103 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import useInput from "../hooks/useInput";
+import { setGenres, addGenres, deleteGenres } from "../state/genres";
 import ProductData from "../commons/ProductData.jsx";
-import { FaPlus } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 
 const EditCategories = () => {
-
   //Hooks
-  const newCategorie = useInput();
-  const oldCategorie = useInput();
-  
+  const newCategory = useInput();
+  const editedCategory = useInput();
+  const oldCategory = useInput();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   //States
-  const [formValues, setFormValues] = useState([{ categorie1: "" }]);
-  const genres = useSelector((state) => state.gameProperties.genres[0]);
+  const genres = useSelector((state) => state.genres);
 
-  //Handlers and functions
-  const onSubmitHandler = (e) => {
-    console.log(e);
+  //Handlers
+
+  const createOnSubmitHandler = (e) => {
+    e.preventDefault();
+    axios
+      .post(
+        "http://localhost:3001/api/genres/create",
+        { name: newCategory.value },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        dispatch(addGenres(newCategory.value));
+        newCategory.value = "";
+        navigate("/edit/categories");
+      });
   };
 
-  const addFormFieldsHandler = () => {
-    setFormValues([...formValues, { categorie: " "}]);
+  const editOnSubmitHandler = (e) => {
+    e.preventDefault();
+
+    axios
+      .put(
+        `http://localhost:3001/api/genres/edit/${oldCategory.value}`,
+        { name: editedCategory.value },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        axios
+          .get("http://localhost:3001/api/genres/", { withCredentials: true })
+          .then((res) => {
+            dispatch(setGenres(res.data));
+            editedCategory.value = "";
+            oldCategory.value = "";
+          });
+        navigate("/edit/categories");
+      });
   };
 
-  const inputChangeHandler = (i, e) => {
-    let newFormValues = [...formValues];
-    newFormValues[i][e.target.name] = e.target.value;
-    setFormValues(newFormValues);
-  };
-
-  const removeFormFields = (i) => {
-    let newFormValues = [...formValues];
-    newFormValues.splice(i, 1);
-    setFormValues(newFormValues);
+  const handleAdminDeleteCategory = (id) => {
+    axios
+      .delete(`http://localhost:3001/api/genres/${id}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        dispatch(deleteGenres(id));
+        navigate("/edit/categories");
+      });
   };
 
   return (
     <div className="editProductsWrapper">
-      <div className="dataSheetWrapper">
-        <p className="editProductTitle">Current categories</p>
-        <div className="editDataSheet">
-          {genres.map((genre, i) => (
-            <ProductData info={genre.name} />
-          ))}
-        </div>
+      <div className="categoriesDataSheetWrapper">
+        <p className="categoriesTitle">Current categories</p>
+
+        {genres?.map((genre, i) => (
+          <div className="categories">
+            <ProductData info={genre.name ? genre.name : genre} />
+            <FaTrash onClick={() => handleAdminDeleteCategory(genre.id)} />
+          </div>
+        ))}
       </div>
 
       <div className="editConteiner">
         <form
           className="editCategoriesForm"
           id="editCategoriesForm"
-          onSubmit={onSubmitHandler}
+          onSubmit={createOnSubmitHandler}
         >
           <h3 className="registerTitle">Create categories</h3>
-          {formValues.map((element, index) => (
-            <div className="formInline" key={index}>
-              <input
-                className="createCategoriesInput"
-                name="name"
-                type="text"
-                placeholder="New categorie"
-                value={element.name || ""}
-                onChange={(e) => inputChangeHandler(index, e)}
-              />
 
-              <button
-                type="button"
-                className="deleteCategoriesButton"
-                onClick={() => removeFormFields(index)}
-              >
-                <FaTrash />
-              </button>
-            </div>
-          ))}
-          <button
-            className="editCategoriesButton"
-            type="button"
-            onClick={() => addFormFieldsHandler()}
-          >
-            <FaPlus />
-          </button>
+          <div className="formInline">
+            <input
+              className="createCategoriesInput"
+              name="name"
+              type="text"
+              placeholder="New categorie"
+              {...newCategory}
+            />
+          </div>
+
           <button className="editCategoriesButton" type="submit">
             Create
           </button>
@@ -88,25 +105,25 @@ const EditCategories = () => {
         <form
           className="editCategoriesForm"
           id="editCategoriesForm"
-          onSubmit={onSubmitHandler}
+          onSubmit={editOnSubmitHandler}
         >
-          <h3 className="registerTitle">Edit categories</h3>          
-            <div className="formColumn">
-              <input
-                className="editCategoriesInput"
-                name="name"
-                type="text"
-                placeholder="Categorie to update"
-                {...oldCategorie}
-              />
-                <input
-                className="editCategoriesInput"
-                name="name"
-                type="text"
-                placeholder="Categorie updated"
-                {...newCategorie}
-              />            
-            </div>
+          <h3 className="registerTitle">Edit categories</h3>
+          <div className="formColumn">
+            <input
+              className="editCategoriesInput"
+              name="name"
+              type="text"
+              placeholder="Categorie to update"
+              {...oldCategory}
+            />
+            <input
+              className="editCategoriesInput"
+              name="name"
+              type="text"
+              placeholder="Categorie updated"
+              {...editedCategory}
+            />
+          </div>
           <button className="editCategoriesButton" type="submit">
             Edit
           </button>

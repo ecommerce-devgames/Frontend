@@ -2,9 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const History = () => {
+  //States
   const user = useSelector((state) => state.user);
   const shoppedProducts = useSelector((state) => state.shoppedProducts);
-  console.log(shoppedProducts);
+  
   return (
     <div className="cartContainer">
       <h1 className="HistoryTitle">{user.name}´ history</h1>

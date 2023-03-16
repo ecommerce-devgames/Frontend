@@ -1,47 +1,38 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useSelector } from "react-redux";
 import useInput from "../hooks/useInput";
 import Input from "../commons/Input";
 import ProductData from "../commons/ProductData.jsx";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import ListItemText from "@mui/material/ListItemText";
-import Checkbox from "@mui/material/Checkbox";
-import InputLabel from "@mui/material/InputLabel";
+import FormSelectBtn from "../commons/FormSelectBtn";
 
 const EditProducts = () => {
   //Hooks
   const params = useParams();
+  const navigate = useNavigate();
   const name = useInput();
   const description = useInput();
   const playtime = useInput();
   const released = useInput();
   const price = useInput();
   const image = useInput();
+  const tags = useInput();
+
+  //States
   const [gameGenres, setGameGenres] = useState([]);
   const [gameDevelopers, setGameDevelopers] = useState([]);
   const [gamePlatforms, setGamePlatforms] = useState([]);
-
-  //States
   const [selectedGame, setSelectedGame] = useState("");
-  const genres = useSelector((state) => state.gameProperties.genres[0]);
-  const developers = useSelector((state) => state.gameProperties.developers[0]);
-  const platforms = useSelector((state) => state.gameProperties.platforms[0]);
+  const genres = useSelector((state) => state.genres);
+  const developers = useSelector((state) => state.developers);
+  const platforms = useSelector((state) => state.platforms);
 
-  console.log(useSelector((state) => state.gameProperties.developers[0]));
   //Handlers
   useEffect(() => {
     if (params.id) {
       axios
-        .get(
-          `https://api.rawg.io/api/games/${Number(
-            params.id
-          )}?key=679adbda4ffc4cd5a68fad9b1e98f040&dates=2019-09-01,2019-09-30&platforms=18,1,7`
-        )
+        .get(`http://localhost:3001/api/games/${Number(params.id)}`)
         .then((res) => {
           setSelectedGame(res.data);
         });
@@ -52,55 +43,46 @@ const EditProducts = () => {
     const {
       target: { value },
     } = event;
-    setGameGenres(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-    console.log(gameGenres);
+    setGameGenres(typeof value === "string" ? value.split(",") : value);
   };
 
   const handleDevelopersChange = (event) => {
     const {
       target: { value },
     } = event;
-    setGameDevelopers(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-    console.log(gameDevelopers);
+    setGameDevelopers(typeof value === "string" ? value.split(",") : value);
   };
 
   const handlePlatformsChange = (event) => {
     const {
       target: { value },
     } = event;
-    setGamePlatforms(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-    console.log(gamePlatforms);
+    setGamePlatforms(typeof value === "string" ? value.split(",") : value);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (params.id) {
       axios
-        .post(
-          `http://localhost:3001/api/games/admin/edit/${Number(params.id)}`,
+        .put(
+          `http://localhost:3001/api/games/admin/edit/${params.id}`,
           {
             name: name.value,
             description: description.value,
-            playtime: playtime.value,
+            playtime: Number(playtime.value),
             released: released.value,
-            price: price.value,
             poster: image.value,
+            price: Number(price.value),
             genres: gameGenres,
             developers: gameDevelopers,
+            platforms: gamePlatforms,
+            tags: tags.value,
           },
           { withCredentials: true }
         )
         .then((res) => {
-          console.log(res);
+          alert("Game updated successfully");
+          navigate("/");
         });
     } else {
       axios
@@ -115,15 +97,18 @@ const EditProducts = () => {
             poster: image.value,
             genres: gameGenres,
             developers: gameDevelopers,
+            platforms: gamePlatforms,
+            tags: tags.value,
           },
           { withCredentials: true }
         )
         .then((res) => {
-          console.log(res);
+          alert("Game created successfully");
+          navigate("/");
         });
     }
   };
-  console.log(gameGenres);
+  
   return (
     <div className="editProductsWrapper">
       {params.id ? (
@@ -135,19 +120,44 @@ const EditProducts = () => {
               info={
                 <img
                   className="editProductImg"
-                  src={selectedGame.background_image}
+                  src={selectedGame.poster}
                   alt="product"
                 />
               }
             />
             <ProductData title="Name" info={selectedGame.name} />
-            <ProductData
-              title="Description"
-              info={selectedGame.description_raw}
-            />
+            <ProductData title="Description" info={selectedGame.description} />
             <ProductData title="Release Date" info={selectedGame.released} />
             <ProductData title="Playtime" info={selectedGame.playtime} />
             <ProductData title="Price" info="60" />
+            <ProductData
+              title="Genres"
+              info={
+                selectedGame.genres
+                  ? selectedGame.genres.map((genre) => genre.name).join(", ")
+                  : null
+              }
+            />
+            <ProductData
+              title="Developers"
+              info={
+                selectedGame.developers
+                  ? selectedGame.developers
+                      .map((developer) => developer.name)
+                      .join(", ")
+                  : null
+              }
+            />
+            <ProductData
+              title="Platforms"
+              info={
+                selectedGame.platforms
+                  ? selectedGame.platforms
+                      .map((platform) => platform.name)
+                      .join(", ")
+                  : null
+              }
+            />
           </div>
         </div>
       ) : null}
@@ -188,135 +198,40 @@ const EditProducts = () => {
             type="number"
             placeholder="Price"
             valueHandler={price}
-          />          
-          <FormControl
-            className="createProductSelect"
-            sx={{ m: 1, minWidth: 120, color: "primary" }}
-          >
-            <InputLabel
-              sx={{ color: "#fff", fontSize: "1.3rem" }}
-              id="demo-multiple-checkbox-label"
-            >
-              Genres
-            </InputLabel>
-            <Select
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
-              multiple
-              value={gameGenres}
-              onChange={handleGenresChange}
-              input={<OutlinedInput label="Genres" />}
-              renderValue={(selected) => selected.join(", ")}
-              sx={{
-                
-                bgcolor: "rgba(255, 255, 255, 0.07)",
-                color: "#fff",
-                "& .MuiSvgIcon-root": {
-                  color: "white",
-                },
-              }}
-              //color="primary"
-            >
-              {genres.map((genre) => (
-                <MenuItem
-                  className="createProductSelectItem"
-                  key={genre.id}
-                  value={genre.name}
-                  color="primary"
-                >
-                  <Checkbox checked={gameGenres.indexOf(genre.name) > -1} />
-                  <ListItemText primary={genre.name} />
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl
-            className="createProductSelect"
-            sx={{ m: 1, minWidth: 120, color: "primary" }}
-          >
-            <InputLabel
-              sx={{ color: "#fff", fontSize: "1.3rem" }}
-              id="demo-multiple-checkbox-label"
-            >
-              Developers
-            </InputLabel>
-            <Select
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
-              multiple
-              value={gameDevelopers}
-              onChange={handleDevelopersChange}
-              input={<OutlinedInput label="Developers" />}
-              renderValue={(selected) => selected.join(", ")}
-              sx={{
-                
-                bgcolor: "rgba(255, 255, 255, 0.07)",
-                color: "#fff",
-                "& .MuiSvgIcon-root": {
-                  color: "white",
-                },
-              }}
-              //color="primary"
-            >
-              {developers.map((developer) => (
-                <MenuItem
-                  className="createProductSelectItem"
-                  key={developer.id}
-                  value={developer.name}
-                  color="primary"
-                >
-                  <Checkbox
-                    checked={gameDevelopers.indexOf(developer.name) > -1}
-                  />
-                  <ListItemText primary={developer.name} />
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl
-            className="createProductSelect"
-            sx={{ m: 1, minWidth: 120, color: "primary" }}
-          >
-            <InputLabel
-              sx={{ color: "#fff", fontSize: "1.3rem" }}
-              id="demo-multiple-checkbox-label"
-            >
-              Platforms
-            </InputLabel>
-            <Select
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
-              multiple
-              value={gamePlatforms}
-              onChange={handlePlatformsChange}
-              input={<OutlinedInput label="Platforms" />}
-              renderValue={(selected) => selected.join(", ")}
-              sx={{
-                
-                bgcolor: "rgba(255, 255, 255, 0.07)",
-                color: "#fff",
-                "& .MuiSvgIcon-root": {
-                  color: "white",
-                },
-              }}
-              //color="primary"
-            >
-              {platforms.map((platforms) => (
-                <MenuItem
-                  className="createProductSelectItem"
-                  key={platforms.id}
-                  value={platforms.name}
-                  color="primary"
-                >
-                  <Checkbox
-                    checked={gamePlatforms.indexOf(platforms.name) > -1}
-                  />
-                  <ListItemText primary={platforms.name} />
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>        
-          <input className="imageInput" type="file" name="file" placeholder="Insert img" {...image}/>
+          />
+          <Input
+            name="image"
+            type="text"
+            placeholder="Image URL"
+            valueHandler={image}
+          />
+          <Input
+            name="tags"
+            type="text"
+            placeholder="Tags"
+            valueHandler={tags}
+          />
+          <FormSelectBtn
+            title={"Genres"}
+            handler={handleGenresChange}
+            array={genres}
+            state={gameGenres}
+            setState={setGameGenres}
+          />
+          <FormSelectBtn
+            title={"Developers"}
+            handler={handleDevelopersChange}
+            array={developers}
+            state={gameDevelopers}
+            setState={setGameDevelopers}
+          />
+          <FormSelectBtn
+            title={"Platforms"}
+            handler={handlePlatformsChange}
+            array={platforms}
+            state={gamePlatforms}
+            setState={setGamePlatforms}
+          />
           <button className="registerButton" type="submit">
             {params.id ? "Change" : "Create"}
           </button>

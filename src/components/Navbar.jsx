@@ -4,8 +4,8 @@ import {useSelector} from "react-redux";
 import Searchbar from "./Searchbar";
 import Dropdown from "../components/Dropdown";
 import UserAvatar from "./UserAvatar";
-import { FaShoppingCart } from "react-icons/fa";
 import NavbarResponsive from "./NavbarResponsive";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
   //Hooks

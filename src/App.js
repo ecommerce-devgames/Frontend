@@ -5,7 +5,10 @@ import { Routes, Route } from "react-router";
 import { useDispatch } from "react-redux";
 import { setProduct } from "./state/product";
 import { setUser } from "./state/user";
-import { setGenres, setDevelopers, setPlatforms } from "./state/gameProperties";
+import { setGenres } from "./state/genres";
+import { setDevelopers } from "./state/developers";
+import { setPlatforms } from "./state/platforms";
+import { setTags } from "./state/tags";
 import Home from "./commons/Home";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
@@ -32,13 +35,13 @@ function App() {
       .then((data) => dispatch(setUser(data)));
     axios
       .get("http://localhost:3001/api/genres/", { withCredentials: true })
-      .then((res) => dispatch(setGenres(res.data)));
+      .then((res) => {console.log(res); dispatch(setGenres(res.data))});
       axios
       .get("http://localhost:3001/api/developers/", { withCredentials: true })
-      .then((res) => dispatch(setDevelopers(res.data)));
+      .then((res) => { console.log(res); dispatch(setDevelopers(res.data))});
       axios
       .get("http://localhost:3001/api/platforms/", { withCredentials: true })
-      .then((res) => dispatch(setPlatforms(res.data)));
+      .then((res) => {console.log(res); dispatch(setPlatforms(res.data))});
       
     //dispatch(setCart(JSON.parse(localStorage.getItem('cart'))));
     // eslint-disable-next-line

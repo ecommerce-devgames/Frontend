@@ -1,9 +1,9 @@
 import React from "react";
-import Input from "../commons/Input";
-import useInput from "../hooks/useInput";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import useInput from "../hooks/useInput";
+import Input from "../commons/Input";
 
 const Register = () => {
   //Hooks

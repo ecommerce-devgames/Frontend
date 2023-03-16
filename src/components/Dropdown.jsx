@@ -10,12 +10,13 @@ const Dropdown = () => {
   //Hooks
   const navigate = useNavigate();  
 
-  //Variables and states
-  const genres = useSelector((state)=> state.gameProperties.genres[0])
+  //States
+  const genres = useSelector((state)=> state.genres)
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  //Variables
   const open = Boolean(anchorEl);
 
-  console.log(genres)
   //Handlers
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -52,14 +53,14 @@ const Dropdown = () => {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        {genres?.map((genre) => (
+        {genres? genres.map((genre) => (
           <MenuItem
             key={genre.id}
             onClick={() => searchByCategoryHandler(genre.name)}
           >
             {genre.name}
           </MenuItem>
-        ))}
+        )): null}
       </Menu>
     </div>
   );

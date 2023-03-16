@@ -1,10 +1,10 @@
 import React from "react";
-import AdminCardBtns from "../commons/AdminCardBtns";
 import { FaCheck } from "react-icons/fa";
+import AdminCardBtns from "../commons/AdminCardBtns";
 import GridRating from "./GridRating";
 
 const Card = ({
-  item,
+  singleGame,
   singleProductHandler,
   addToCartHandler,
   cart,
@@ -21,22 +21,21 @@ const Card = ({
     <div className="cardConteiner">
       <img
         className="gridImage"
-        src={item.poster}
+        src={singleGame.poster}
         alt="product"
-        onClick={() => singleProductHandler(item)}
+        onClick={() => singleProductHandler(singleGame)}
       />
 
       <div className="cardContent">
         <div className="cardSubconteiner">
-          <span className="cardTitle">{item.name}</span>
+          <span className="cardTitle">{singleGame.name}</span>
           {user?.isAdmin ? (
             <AdminCardBtns
-              item={item}
+              singleGame={singleGame}
               open={open}
-              anchorEl={anchorEl}
-              setAnchorEl={setAnchorEl}
+              anchorEl={anchorEl}              
               handleClose={handleClose}
-              handleClick={handleClick}              
+              handleClick={handleClick}
               handleAdminNavigate={handleAdminNavigate}
               handleAdminDeleteProduct={handleAdminDeleteProduct}
             />
@@ -52,15 +51,15 @@ const Card = ({
               {" "}
               <button
                 className="cardButton"
-                onClick={() => addToCartHandler(item)}
+                onClick={() => addToCartHandler(Gamepad)}
               >
-                {cart.some((el) => el.id === item.id) ? (
+                {cart.some((el) => el.id === singleGame.id) ? (
                   <FaCheck />
                 ) : (
                   "Add to cart"
                 )}
               </button>
-              <p className="cardCart">$USD 60</p>
+              <p className="cardCart">{singleGame.price}</p>
             </>
           )}
         </div>

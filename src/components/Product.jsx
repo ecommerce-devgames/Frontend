@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import useStringGenerator from "../hooks/useStringGenerator";
 import { useNavigate } from "react-router";
+import useStringGenerator from "../hooks/useStringGenerator";
 import { setCart } from "../state/cart";
+import { setGames } from "../state/games";
 import { setReviews } from "../state/reviews";
-import ProductData from "../commons/ProductData.jsx";
+import { TextField } from "@mui/material";
 import { FaCheck } from "react-icons/fa";
+import ProductData from "../commons/ProductData.jsx";
 import ProductRating from "../commons/ProductRating";
 import MyProductRating from "../commons/MyProductRating";
-import { TextField } from "@mui/material";
 
 const Product = () => {
   //Hooks
@@ -24,7 +25,7 @@ const Product = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedReviews, setSelectedReviews] = useState([]);
 
-  //Variables 
+  //Variables
   const developerString = useStringGenerator(product.developers);
   const platformString = useStringGenerator(product.platforms);
   const genreString = useStringGenerator(product.genres);
@@ -35,19 +36,16 @@ const Product = () => {
     const validate = cart.some((el) => el.id === product.id);
     if (user && !validate) {
       dispatch(setCart(product));
-    
-    }    
+    }
     navigate(user ? "/cart" : "/login");
   };
 
   const addToCartHandler = () => {
     const validate = cart.some((el) => el.id === product.id);
     if (!validate) {
-      dispatch(setCart(product));      
+      dispatch(setCart(product));
     }
   };
-
-  
 
   const handleAdminNavigate = (item) => {
     setAnchorEl(null);
@@ -56,11 +54,18 @@ const Product = () => {
 
   const handleAdminDeleteProduct = (item) => {
     setAnchorEl(null);
+    console.log(item.id);
     axios
-      .delete(`http://localhost:3001/api/games/admin/delete/${item.id}`)
+      .delete(`http://localhost:3001/api/games/admin/delete/${item.id}`, {
+        withCredentials: true,
+      })
       .then((res) => {
-        console.log(res)
-      });
+        axios.get("http://localhost:3001/api/games").then((res) => {
+          dispatch(setGames(res.data));
+        });
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -91,7 +96,7 @@ const Product = () => {
             </p>
             <p className="usersReviewsContent">
               Acá iría el contenido de una review,
-              xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
             </p>
           </div>
 
@@ -131,12 +136,15 @@ const Product = () => {
           <div className="productButtonsWrapper">
             {user.isAdmin ? (
               <>
-                <button className="productButton" onClick={handleAdminNavigate}>
+                <button
+                  className="productButton"
+                  onClick={() => handleAdminNavigate(product)}
+                >
                   Edit
                 </button>
                 <button
                   className="productButton"
-                  onClick={handleAdminDeleteProduct}
+                  onClick={() => handleAdminDeleteProduct(product)}
                 >
                   Delete
                 </button>

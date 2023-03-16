@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { FaTrash } from "react-icons/fa";
+import { useNavigate } from "react-router";
 import { removeFromCart, setCart } from "../state/cart";
 import { setShoppedProducts } from "../state/shoppedProducts";
-import { useNavigate } from "react-router";
+import { FaTrash } from "react-icons/fa";
 
 const Cart = () => {
   //Hooks
@@ -14,7 +14,7 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
 
-  console.log(cart)
+  
   //Handlers
   const deleteItemHandler = (item) => {
     dispatch(removeFromCart(item));

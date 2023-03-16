@@ -1,20 +1,19 @@
 import React from "react";
 import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const AdminCardBtns = ({
-  item,
+  singleGame,
   open,
   anchorEl,
-  setAnchorEl,
   handleClose,
-  handleClick,  
+  handleClick,
   handleAdminNavigate,
   handleAdminDeleteProduct,
 }) => {
   const ITEM_HEIGHT = 50;
+  
   return (
     <div>
       <IconButton
@@ -23,32 +22,26 @@ const AdminCardBtns = ({
         aria-controls={open ? "long-menu" : undefined}
         aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
-        color="primary" 
+        color="primary"
         fontSize="large"
         onClick={handleClick}
         onClose={handleClose}
-
       >
-        <EditIcon />
-      </IconButton >
-      <Menu
-        id="long-menu"
-        MenuListProps={{
-          "aria-labelledby": "long-button",
-        }}
-        anchorEl={anchorEl}
-        open={open}
+        <EditIcon onClick={()=> handleAdminNavigate(singleGame.id)}/>
+      </IconButton>      
+      <IconButton
+        aria-label="more"
+        id="long-button"
+        aria-controls={open ? "long-menu" : undefined}
+        aria-expanded={open ? "true" : undefined}
+        aria-haspopup="true"
+        color="primary"
+        fontSize="large"
+        onClick={handleClick}
         onClose={handleClose}
-        PaperProps={{
-          style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
-            width: "20ch",            
-          },
-        }}
       >
-        <MenuItem onClick={()=>handleAdminNavigate(item)}>Edit product</MenuItem>
-        <MenuItem onClick={()=>handleAdminDeleteProduct(item)}>Delete product</MenuItem>
-      </Menu>
+        <DeleteIcon onClick={()=> handleAdminDeleteProduct(singleGame.id)}/>
+      </IconButton> 
     </div>
   );
 };

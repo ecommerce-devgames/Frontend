@@ -1,6 +1,6 @@
 import React from "react";
-import { Rating } from "@mui/material";
 import useInput from "../hooks/useInput";
+import { Rating } from "@mui/material";
 
 const GridRating = () => {
   const ratingValue = useInput();
