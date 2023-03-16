@@ -44,6 +44,15 @@ const Product = () => {
     const validate = cart.some((el) => el.id === product.id);
     if (!validate) {
       dispatch(setCart(product));
+      if (user.id) {
+        axios
+          .post(
+            `http://localhost:3001/api/cart/addItem/${user.id}/${product.id}`,
+            {},
+            { withCredentials: true }
+          )
+          .then((res) => console.log(res));
+      }
     }
   };
 

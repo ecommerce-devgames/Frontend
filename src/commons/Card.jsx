@@ -51,7 +51,7 @@ const Card = ({
               {" "}
               <button
                 className="cardButton"
-                onClick={() => addToCartHandler(Gamepad)}
+                onClick={() => addToCartHandler(singleGame)}
               >
                 {cart.some((el) => el.id === singleGame.id) ? (
                   <FaCheck />

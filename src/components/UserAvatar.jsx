@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../state/user";
+import { setCart } from "../state/cart";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -57,6 +58,7 @@ const UserAvatar = () => {
         { withCredentials: true }
       );
       dispatch(setUser({}));
+      dispatch(setCart(""));
       console.log("user logout", user);
     }
     navigate("/login");
