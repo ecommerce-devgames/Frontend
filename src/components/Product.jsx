@@ -9,8 +9,6 @@ import { setReviews } from "../state/reviews";
 import { TextField, Rating } from "@mui/material";
 import { FaCheck } from "react-icons/fa";
 import ProductData from "../commons/ProductData.jsx";
-import ProductRating from "../commons/ProductRating";
-import MyProductRating from "../commons/MyProductRating";
 import useInput from "../hooks/useInput";
 import { useEffect } from "react";
 import average, { setAverage } from "../state/average";
@@ -83,7 +81,7 @@ const Product = () => {
         .get("http://localhost:3001/api/games")
         .then((res) => {
           dispatch(setGames(res.data));
-        });        
+        });
       navigate("/");
     } catch (error) {
       alert("Couldn't delete game");
@@ -164,31 +162,38 @@ const Product = () => {
             <p className="noReviews"> There are no reviews for this game.</p>
           )}
 
-          <form className="textFieldForm" onSubmit={reviewSubmitHandler}>
-            <TextField
-              className="productTextField"
-              color="primary"
-              focused
-              multiline
-              required
-              placeholder="your review..."
-              sx={{
-                "& .MuiOutlinedInput-input": {
-                  color: "#fff",
-                },
-              }}
-              id="outlined-controlled"
-              label="Add a review and a rate"
-              {...content}
-            />
-            <div className="poductMyRates">
-              <p>Rate:</p>
-              <Rating required {...ratingValue} precision={0.5} size="small" />
-            </div>
-            <button className="textFieldButton" type="submit">
-              Send
-            </button>
-          </form>
+          {user.id ? (
+            <form className="textFieldForm" onSubmit={reviewSubmitHandler}>
+              <TextField
+                className="productTextField"
+                color="primary"
+                focused
+                multiline
+                required
+                placeholder="your review..."
+                sx={{
+                  "& .MuiOutlinedInput-input": {
+                    color: "#fff",
+                  },
+                }}
+                id="outlined-controlled"
+                label="Add a review and a rate"
+                {...content}
+              />
+              <div className="poductMyRates">
+                <p>Rate:</p>
+                <Rating
+                  required
+                  {...ratingValue}
+                  precision={0.5}
+                  size="small"
+                />
+              </div>
+              <button className="textFieldButton" type="submit">
+                Send
+              </button>
+            </form>
+          ) : null}
         </div>
       </div>
 

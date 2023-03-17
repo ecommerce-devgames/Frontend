@@ -13,7 +13,6 @@ import genresReducer from "./genres";
 import developersReducer from "./developers";
 import platformsReducer from "./platforms";
 import tagsReducer from "./tags";
-import cartTotalPriceReducer from "./cartTotalPrice";
 import averageReducer from "./average";
 
 
@@ -31,7 +30,6 @@ const store = configureStore({
     developers: developersReducer,
     platforms: platformsReducer,
     tags: tagsReducer,
-    cartTotalPrice: cartTotalPriceReducer,
     average: averageReducer,
 
   },
