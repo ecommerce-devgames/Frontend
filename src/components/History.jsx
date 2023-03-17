@@ -1,32 +1,48 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, {useEffect} from "react";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setShoppingHistory } from "../state/shoppingHistory";
 
 const History = () => {
+  //Hooks
+  const dispatch= useDispatch();
+
   //States
   const user = useSelector((state) => state.user);
-  const shoppedProducts = useSelector((state) => state.shoppedProducts);
+  const shoppingHistory = useSelector((state) => state.shoppingHistory);
   
+  //Variables
+  const title = shoppingHistory[0] ? `${user.name}'s shopping history` : `Your shopping history is empty`;
+
+  useEffect(()=>{
+    if(user.id){
+      axios.get(`http://localhost:3001/api/cart/history/${user.id}`).then((res)=> dispatch(setShoppingHistory(res.data)))
+    }
+  }, [])
+
+
   return (
     <div className="cartContainer">
-      <h1 className="HistoryTitle">{user.name}´ history</h1>
-      {shoppedProducts.map((item) => (
+      <h1 className="HistoryTitle">{user.name ? title : `Login to see your shopping history`}</h1>
+      {shoppingHistory.length ? shoppingHistory.map((item) => (
         <div className="cartViewWrapper">
-          <img className="cartImg" src={item.background_image} alt="product" />
+          <img className="cartImg" src={item.poster} alt="product" />
           <div className="cartInfoWrapper">
             <div className="cartInfoTop">
               <p className="cartTitle">{item.name}</p>
+              <p className="cartTitle">{new Date (item.createdAt.slice(0,10)).toDateString()}</p>
               <p className="cartPrice" >
-                $15.000 
+                $USD {item.price} 
               </p>
             </div>
             <div className="cartInfoBottom">
               <p className="cartExtraInfo">
-                Aca me imagino tags o alguna descripcion corta
+               Tags: {item.tags.join(", ")}
               </p>
             </div>
           </div>
         </div>
-      ))}
+      )) : null}
     </div>
   );
 };

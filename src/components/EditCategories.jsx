@@ -90,7 +90,7 @@ const EditCategories = () => {
 
           <div className="formInline">
             <input
-              className="createCategoriesInput"
+              className="editCategoriesInput"
               name="name"
               type="text"
               placeholder="New categorie"
