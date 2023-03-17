@@ -83,8 +83,10 @@
   }
 }
 .poductMyRates {
+  margin: 1rem 0;
+  gap: 1rem;
   font-size: map-get($font-size, "small");
-  @include flex(row, space-between, flex-end);
+  @include flex(row, flex-start, flex-start);
   color: $logo-color;
 }
 .productUsersReviews {
@@ -102,6 +104,11 @@
 }
 .usersReviewsContent {
   padding: 0rem 1rem 1rem 1rem;
+}
+.noReviews {
+  font-size: map-get($font-size, "small");
+  color: $primary-color;
+  padding: 0rem 1rem 1rem 0rem;
 }
 
 .textFieldForm {

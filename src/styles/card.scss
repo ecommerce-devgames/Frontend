@@ -32,7 +32,7 @@
 .cardRanking {
   font-size: map-get($font-size, "x-small");
   color: $secondary-color;
-  margin: 0rem 1rem 0rem 0rem;
+  margin: 1rem 0rem 0rem 1rem;
   text-align: left;
 }
 
@@ -65,9 +65,8 @@
   }
 }
 
-
-.adminBtns{
-  &:hover{
+.adminBtns {
+  &:hover {
     color: $logo-color-hover;
   }
 }

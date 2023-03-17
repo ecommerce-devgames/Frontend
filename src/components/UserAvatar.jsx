@@ -41,7 +41,6 @@ const UserAvatar = () => {
 
   const handleAdminActions = (type) => {
     setAnchorEl(null);
-    console.log(type);
     navigate(type === "products" ? `/create/${type}` : `/edit/${type}`);
   };
 
@@ -58,8 +57,7 @@ const UserAvatar = () => {
         { withCredentials: true }
       );
       dispatch(setUser({}));
-      dispatch(removeAllItems([]))     
-      console.log("user logout", user);
+      dispatch(removeAllItems([]));
     }
     navigate("/login");
   };
@@ -142,7 +140,10 @@ const UserAvatar = () => {
               ))
             : user.name
             ? userMenu.map((menu, i) => (
-                <MenuItem key={i} onClick={() => navigate(menu.toLocaleLowerCase())}>
+                <MenuItem
+                  key={i}
+                  onClick={() => navigate(menu.toLocaleLowerCase())}
+                >
                   <ListItemIcon>
                     <PersonAdd fontSize="small" />
                   </ListItemIcon>
