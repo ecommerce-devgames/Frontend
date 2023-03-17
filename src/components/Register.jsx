@@ -14,21 +14,25 @@ const Register = () => {
   const navigate = useNavigate();
 
   //Handlers and functions
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    axios
-      .post("http://localhost:3001/api/user/register", {
-        name: name.value,
-        lastName: lastname.value,
-        email: email.value,
-        password: password.value,
-      })
-      .then(() => {
-        navigate("/login");
-      });
+  const onSubmitHandler = async (e) => {
+    try {
+      e.preventDefault();
+      const registeredUser = await axios.post(
+        "http://localhost:3001/api/user/register",
+        {
+          name: name.value,
+          lastName: lastname.value,
+          email: email.value,
+          password: password.value,
+        }
+      );
+
+      navigate("/login");
+    } catch (error) {
+      alert("Couldn't register");
+    }
   };
 
-  
   return (
     <div className="registerConteiner">
       <form className="registerForm" onSubmit={onSubmitHandler}>

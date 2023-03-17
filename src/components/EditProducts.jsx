@@ -60,11 +60,11 @@ const EditProducts = () => {
     setGamePlatforms(typeof value === "string" ? value.split(",") : value);
   };
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (params.id) {
-      return axios
-        .put(
+      try {
+        const editedGame = await axios.put(
           `http://localhost:3001/api/games/admin/edit/${params.id}`,
           {
             name: name.value,
@@ -79,15 +79,15 @@ const EditProducts = () => {
             //tags: [tags.value]
           },
           { withCredentials: true }
-        )
-        .then((res) => {
-          alert("Game updated successfully");
-          navigate("/");
-        })
-        .catch((err) => console.log(err));
+        );   
+        alert("Game updated successfully");
+        navigate("/");
+      } catch (error) {
+        alert("Couldn't edit game");
+      }
     } else {
-      axios
-        .post(
+      try {
+        const createdGame = await axios.post(
           `http://localhost:3001/api/games/admin/create`,
           {
             name: name.value,
@@ -102,37 +102,15 @@ const EditProducts = () => {
             tags: tags.value,
           },
           { withCredentials: true }
-        )
-        .then((res) => {
-          alert("Game created successfully");
-          navigate("/");
-        });
+        );        
+        alert("Game created successfully");
+        navigate("/");
+      } catch (error) {
+        alert("Couldn't edit game");
+      }
     }
   };
 
-  console.log(
-    params.id,
-    "name",
-    name.value,
-    "description",
-    description.value,
-    "playtime",
-    Number(playtime.value),
-    "released",
-    released.value,
-    "poster",
-    image.value,
-    "price",
-    Number(price.value),
-    "genres",
-    gameGenres,
-    "developers",
-    gameDevelopers,
-    "platforms",
-    gamePlatforms,
-    "tags",
-    tags.value
-  );
   return (
     <div className="editProductsWrapper">
       {params.id ? (

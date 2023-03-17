@@ -41,7 +41,6 @@ const NavbarResponsive = () => {
 
   const handleAdminActions = (type) => {
     setAnchorEl(null);
-    console.log(type);
     navigate(type === "products" ? `/create/${type}` : `/edit/${type}`);
   };
 
@@ -49,18 +48,21 @@ const NavbarResponsive = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleAccess = () => {
-    setAnchorEl(null);
-    if (user.id) {
-      axios.post(
-        "http://localhost:3001/api/user/logout",
-        {},
-        { withCredentials: true }
-      );
-      dispatch(setUser({}));
-      console.log("user logout", user);
+  const handleAccess = async () => {
+    try {
+      setAnchorEl(null);
+      if (user.id) {
+        const logOut = await axios.post(
+          "http://localhost:3001/api/user/logout",
+          {},
+          { withCredentials: true }
+        );
+        dispatch(setUser({}));
+      }
+      navigate("/login");
+    } catch (error) {
+      alert("Couldn't logout ");
     }
-    navigate("/login");
   };
 
   const searchByCategoryHandler = (category) => {
@@ -136,14 +138,16 @@ const NavbarResponsive = () => {
           anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
         >
           <MenuItem readOnly>CATEGORIES</MenuItem>
-          {genres? genres.map((genre) => (
-            <MenuItem
-              key={genre.id}
-              onClick={() => searchByCategoryHandler(genre.name)}
-            >
-              {genre.name}
-            </MenuItem>
-          )) : null}
+          {genres
+            ? genres.map((genre) => (
+                <MenuItem
+                  key={genre.id}
+                  onClick={() => searchByCategoryHandler(genre.name)}
+                >
+                  {genre.name}
+                </MenuItem>
+              ))
+            : null}
           <Divider />
           {user?.isAdmin
             ? isAdminMenu.map((menu, i) => (

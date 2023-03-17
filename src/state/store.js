@@ -16,6 +16,7 @@ import tagsReducer from "./tags";
 import cartTotalPriceReducer from "./cartTotalPrice";
 import averageReducer from "./average";
 
+
 const store = configureStore({
   reducer: {
     product: productReducer,
@@ -32,6 +33,7 @@ const store = configureStore({
     tags: tagsReducer,
     cartTotalPrice: cartTotalPriceReducer,
     average: averageReducer,
+
   },
   middleware: [logger],
 });
