@@ -45,6 +45,20 @@
   }
 }
 
+.cartTitleMain{
+  color: $secondary-color;
+  font-weight: bold;
+  font-size: map-get($font-size, "x-large");
+  margin: 3rem 2rem 3rem 3rem;
+  @media screen and (max-width: $medium-small-screen) {
+    font-size: map-get($font-size, "large");
+    margin-bottom: 2rem;
+  }
+  @media screen and (max-width: $smallest-screen) {
+    font-size: map-get($font-size, "large");
+    margin: 0;
+  }
+}
 .cartViewWrapper {
   @include flex(row, flex-start, center);
   border-bottom: 1px solid rgb(43, 41, 41);

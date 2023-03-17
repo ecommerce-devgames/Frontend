@@ -63,7 +63,7 @@ const EditProducts = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (params.id) {
-      axios
+      return axios
         .put(
           `http://localhost:3001/api/games/admin/edit/${params.id}`,
           {
@@ -76,14 +76,15 @@ const EditProducts = () => {
             genres: gameGenres,
             developers: gameDevelopers,
             platforms: gamePlatforms,
-            tags: tags.value,
+            //tags: [tags.value]
           },
           { withCredentials: true }
         )
         .then((res) => {
           alert("Game updated successfully");
           navigate("/");
-        });
+        })
+        .catch((err) => console.log(err));
     } else {
       axios
         .post(
@@ -109,6 +110,29 @@ const EditProducts = () => {
     }
   };
 
+  console.log(
+    params.id,
+    "name",
+    name.value,
+    "description",
+    description.value,
+    "playtime",
+    Number(playtime.value),
+    "released",
+    released.value,
+    "poster",
+    image.value,
+    "price",
+    Number(price.value),
+    "genres",
+    gameGenres,
+    "developers",
+    gameDevelopers,
+    "platforms",
+    gamePlatforms,
+    "tags",
+    tags.value
+  );
   return (
     <div className="editProductsWrapper">
       {params.id ? (
@@ -161,6 +185,7 @@ const EditProducts = () => {
             <ProductData
               title="Tags"
               info={selectedGame.tags ? selectedGame.tags.join(", ") : null}
+              star
             />
           </div>
         </div>
