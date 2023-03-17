@@ -8,7 +8,7 @@ const Input = ({ type, name, placeholder, valueHandler }) => {
       type={type}
       placeholder={placeholder}
       {...valueHandler}
-      required
+      
     />
   );
 };

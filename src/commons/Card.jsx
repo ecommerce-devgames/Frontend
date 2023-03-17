@@ -16,7 +16,7 @@ const Card = ({
   handleClick,
   handleAdminNavigate,
   handleAdminDeleteProduct,
-}) => {  
+}) => {
   return (
     <div className="cardConteiner">
       <img
@@ -33,18 +33,17 @@ const Card = ({
             <AdminCardBtns
               singleGame={singleGame}
               open={open}
-              anchorEl={anchorEl}              
+              anchorEl={anchorEl}
               handleClose={handleClose}
               handleClick={handleClick}
               handleAdminNavigate={handleAdminNavigate}
               handleAdminDeleteProduct={handleAdminDeleteProduct}
             />
-          ) : (
-            <span className="cardRanking">
-              <GridRating />
-            </span>
-          )}
+          ) : null}
         </div>
+        <span className="cardRanking">
+          <GridRating />
+        </span>
         <div className="cardSubcontainerB">
           {user?.isAdmin ? null : (
             <>
@@ -59,7 +58,7 @@ const Card = ({
                   "Add to cart"
                 )}
               </button>
-              <p className="cardCart">{singleGame.price}</p>
+              <p className="cardCart">USD {singleGame.price}</p>
             </>
           )}
         </div>

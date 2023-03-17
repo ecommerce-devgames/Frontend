@@ -22,7 +22,7 @@
 
 .cardTitle {
   font-size: map-get($font-size, "large");
-  width: 70%;
+  width: 100%;
   color: $secondary-color;
   font-family: Helvetica, sans-serif;
   font-weight: bold;
@@ -62,5 +62,12 @@
 
   &:hover {
     background-color: rgb(34, 32, 32);
+  }
+}
+
+
+.adminBtns{
+  &:hover{
+    color: $logo-color-hover;
   }
 }

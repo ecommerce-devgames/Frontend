@@ -13,7 +13,7 @@ const FormSelectBtn = ({ title, handler, array, state }) => {
     <FormControl
       className="createProductSelect"
       sx={{ m: 1, minWidth: 120, color: "primary" }}
-      required = "true"
+      
     >
       <InputLabel
         sx={{ color: "#fff", fontSize: "1.3rem" }}

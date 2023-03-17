@@ -68,9 +68,22 @@ const GridView = () => {
   const addToCartHandler = (item) => {
     const validate = cart.some((el) => el.id === item.id);
     if (!validate) {
-      axios.get(`http://localhost:3001/api/games/${item.id}`).then((res) => {
-        dispatch(setCart(res.data));        
-      }).then(()=> user.id ? axios.post(`http://localhost:3001/api/cart/addItem/${user.id}/${item.id}`, { } , {withCredentials : true}).then((res)=> console.log(res)) : null)
+      axios
+        .get(`http://localhost:3001/api/games/${item.id}`)
+        .then((res) => {
+          dispatch(setCart(res.data));
+        })
+        .then(() =>
+          user.id
+            ? axios
+                .post(
+                  `http://localhost:3001/api/cart/addItem/${user.id}/${item.id}`,
+                  {},
+                  { withCredentials: true }
+                )
+                .then((res) => console.log(res))
+            : null
+        );
     }
   };
 
@@ -110,6 +123,7 @@ const GridView = () => {
       <h2 className="gridTitle">
         {games && games[0] ? "Games" : "No games found for this category"}
       </h2>
+      {category ? <h2 className="gridSubtitle">{category}</h2> : null}
       <Grid container rowSpacing={6} columnSpacing={5}>
         {games.map((game) => {
           return (

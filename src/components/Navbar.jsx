@@ -13,7 +13,8 @@ const Navbar = () => {
 
   //States
   const cart = useSelector((state) => state.cart);
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user)
+
 
   //Handlers and functions
   const cartNavigationHandler = () => {
@@ -31,14 +32,16 @@ const Navbar = () => {
       <div className="navigationWrapper">
         <Searchbar />
         <Dropdown />
-        {!user.isAdmin ? (
-          <Link to="/cart">
+
+        <Link to="/cart">
+          {user?.isAdmin ? null : (
             <div className="cartWrapper" onClick={cartNavigationHandler}>
               <FaShoppingCart className="cartIcon" />
               <span className="cartCount">{cart.length}</span>
             </div>
-          </Link>
-        ) : null}
+          )}
+        </Link>
+
         <UserAvatar />
         <NavbarResponsive />
       </div>
