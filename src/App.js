@@ -9,6 +9,7 @@ import { setGenres } from "./state/genres";
 import { setDevelopers } from "./state/developers";
 import { setPlatforms } from "./state/platforms";
 import { setTags } from "./state/tags";
+import { setCartTotalPrice } from "./state/cartTotalPrice";
 import { importCartFromLs, importCartFromDb } from "./state/cart";
 import Home from "./commons/Home";
 import Navbar from "./components/Navbar";
@@ -39,45 +40,44 @@ function App() {
       .then((data) => dispatch(setUser(data)));
     axios
       .get("http://localhost:3001/api/genres/", { withCredentials: true })
-      .then((res) => {        
+      .then((res) => {
         dispatch(setGenres(res.data));
       });
     axios
       .get("http://localhost:3001/api/developers/", { withCredentials: true })
-      .then((res) => {        
+      .then((res) => {
         dispatch(setDevelopers(res.data));
       });
     axios
       .get("http://localhost:3001/api/platforms/", { withCredentials: true })
-      .then((res) => {        
+      .then((res) => {
         dispatch(setPlatforms(res.data));
       });
-     
-      console.log("el id del user es", user.id)
-      if (user.id) {
-        axios
-          .get(`http://localhost:3001/api/cart/${user.id}`, {
-            withCredentials: true,
-          })
-          .then((res) => dispatch(importCartFromDb(res.data)));
-      } else {
-       dispatch(importCartFromLs(JSON.parse(localStorage.getItem("cart"))));
-      };
+
+    console.log("el id del user es", user.id);
+    if (user.id) {
+      axios
+        .get(`http://localhost:3001/api/cart/${user.id}`, {
+          withCredentials: true,
+        })
+        .then((res) => dispatch(importCartFromDb(res.data)));
+    } else {
+      dispatch(importCartFromLs(JSON.parse(localStorage.getItem("cart"))));
+    }
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    // dispatch(
-    //   setCartTotalPrice(cart.reduce((acc, game) => (acc += game.price), 0))
-    // );
-   
-    localStorage.setItem("cart", JSON.stringify(cart)); 
+    dispatch(
+      setCartTotalPrice(cart.reduce((acc, game) => (acc += game.price), 0))
+    );
+
+    localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
   useEffect(() => {
     localStorage.setItem("product", JSON.stringify(product));
   }, [product]);
-
 
   return (
     <div className="appContainer">

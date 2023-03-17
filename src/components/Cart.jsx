@@ -13,6 +13,7 @@ const Cart = () => {
   //States
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
+  const cartTotalPrice = useSelector((state) => state.cartTotalPrice);
 
   //Variables
   const total = cart.reduce((acc, el) => acc + el.price, 0);
@@ -69,6 +70,7 @@ const Cart = () => {
         <div className="cartCheckoutWrapper">
           <p className="cartCheckoutData">Checkout</p>
           <p className="cartCheckoutData">Total: USD {total} </p>
+
           <button className="cartCheckoutButton" onClick={purchaseHandler}>
             Purchase
           </button>

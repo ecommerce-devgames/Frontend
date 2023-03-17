@@ -29,7 +29,7 @@ const Product = () => {
   const developerString = stringGenerator(product.developers);
   const platformString = stringGenerator(product.platforms);
   const genreString = stringGenerator(product.genres);
-  const tagString = product.tags.join(", ")
+  const tagString = product.tags.join(", ");
 
   //Handlers and functions
   const buyHandler = () => {
@@ -105,7 +105,7 @@ const Product = () => {
             </p>
             <p className="usersReviewsContent">
               Acá iría el contenido de una review,
-              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
             </p>
           </div>
 

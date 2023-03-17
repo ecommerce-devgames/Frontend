@@ -13,14 +13,15 @@ import genresReducer from "./genres";
 import developersReducer from "./developers";
 import platformsReducer from "./platforms";
 import tagsReducer from "./tags";
+import cartTotalPriceReducer from "./cartTotalPrice";
 
 const store = configureStore({
   reducer: {
     product: productReducer,
-    cart: cartReducer,     
+    cart: cartReducer,
     user: userReducer,
     games: gamesReducer,
-    shoppingHistory : shoppingHistoryReducer,
+    shoppingHistory: shoppingHistoryReducer,
     usersDb: usersDbReducer,
     reviews: reviewsReducer,
     searchQuery: searchQueryReducer,
@@ -28,6 +29,7 @@ const store = configureStore({
     developers: developersReducer,
     platforms: platformsReducer,
     tags: tagsReducer,
+    cartTotalPrice: cartTotalPriceReducer,
   },
   middleware: [logger],
 });

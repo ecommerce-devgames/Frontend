@@ -15,6 +15,7 @@ const Navbar = () => {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user)
 
+
   //Handlers and functions
   const cartNavigationHandler = () => {
     navigate("/cart");
@@ -31,6 +32,7 @@ const Navbar = () => {
       <div className="navigationWrapper">
         <Searchbar />
         <Dropdown />
+
         <Link to="/cart">
           {user?.isAdmin ? null : (
             <div className="cartWrapper" onClick={cartNavigationHandler}>
@@ -39,6 +41,7 @@ const Navbar = () => {
             </div>
           )}
         </Link>
+
         <UserAvatar />
         <NavbarResponsive />
       </div>

@@ -8,18 +8,36 @@
   //   font-size: map-get($font-size, "x-large");
   //   margin: 3rem 0;
   margin: 5rem 0 5rem 3rem;
- 
+  @media screen and (max-width: $medium-small-screen) {
+    @include flex(column, center, center);
+    height: auto;
+    margin: 5rem 0 5rem 0rem;
+  }
 }
 .usersTitle {
   font-weight: bold;
   font-size: map-get($font-size, "x-large");
   margin: 4rem 0;
+  @media screen and (max-width: $medium-small-screen) {
+    @include flex(column, center, center);
+    height: auto;
+    margin: 0;
+  }
+}
+.noUsers {
+  font-size: map-get($font-size, "medium");
+  margin: 4rem 0;
 }
 .userData {
   @include flex(row, flex-start, center);
-  width: 90%;  
+  width: 90%;
   font-size: map-get($font-size, "small");
-  border-bottom: 1px solid rgb(43, 41, 41); 
+  border-bottom: 1px solid rgb(43, 41, 41);
+  @media screen and (max-width: $medium-small-screen) {
+    @include flex(column, center, center);
+    height: auto;
+    margin: 5rem 0 5rem 0rem;
+  }
 }
 
 .userSpan {
@@ -35,8 +53,11 @@
   margin-right: 5rem;
   gap: 1rem;
   width: 100%;
-
-  
+  @media screen and (max-width: $medium-small-screen) {
+    @include flex(column, center, center);
+    height: auto;
+    margin: 1rem 0 1rem 0rem;
+  }
 }
 
 .userFaTrash {
@@ -65,7 +86,13 @@
     cursor: pointer;
     background-color: $logo-color-hover;
   }
+  @media screen and (max-width: $medium-small-screen) {
+    @include flex(column, center, center);
+    height: auto;
+    margin: 1rem 0;
+    width: 20%;
+  }
 }
-.rowUserDiv{
-  @include flex(row, center, center)
+.rowUserDiv {
+  @include flex(row, center, center);
 }
