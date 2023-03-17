@@ -15,6 +15,8 @@ const EditUsers = () => {
   const usersDb = useSelector((state) => state.usersDb);
   const user = useSelector((state) => state.user);
 
+  const otherUsers = usersDb.filter((eachUser) => user.id !== eachUser.id);
+
   //Handlers and functions
   useEffect(() => {
     axios
@@ -52,8 +54,9 @@ const EditUsers = () => {
   return (
     <div className="usersWrapper">
       <h2 className="usersTitle">Users</h2>
-      {usersDb.map((userDb) => {
-        if (userDb.id !== user.id)
+
+      {otherUsers.length ? (
+        otherUsers.map((userDb) => {
           return (
             <div key={userDb.id} className="userData">
               <Avatar
@@ -70,6 +73,7 @@ const EditUsers = () => {
               />
 
               <UserDetails title="Email" info={userDb.email} />
+
               <FaTrash
                 className="userFaTrash"
                 onClick={() => deleteUserHandler(userDb.id)}
@@ -92,7 +96,10 @@ const EditUsers = () => {
               )}
             </div>
           );
-      })}
+        })
+      ) : (
+        <p className="noUsers">There are no users registered</p>
+      )}
     </div>
   );
 };

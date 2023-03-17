@@ -13,9 +13,10 @@ const Cart = () => {
   //States
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
+  const cartTotalPrice = useSelector((state) => state.cartTotalPrice);
 
   //Handlers
-  const deleteItemHandler =(item) => {
+  const deleteItemHandler = (item) => {
     dispatch(removeFromCart(item));
     if (user.id) {
       axios
@@ -27,7 +28,7 @@ const Cart = () => {
         .then((res) => console.log(res));
     }
   };
-  
+
   const purchaseHandler = () => {
     if (!user.name) return navigate("/login");
     if (user.id) {
@@ -56,9 +57,7 @@ const Cart = () => {
               </p>
             </div>
             <div className="cartInfoBottom">
-              <p className="cartExtraInfo">
-               Tags: {item.tags.join(", ")}
-              </p>
+              <p className="cartExtraInfo">Tags: {item.tags.join(", ")}</p>
             </div>
           </div>
         </div>
@@ -66,7 +65,7 @@ const Cart = () => {
       {cart[0] ? (
         <div className="cartCheckoutWrapper">
           <p className="cartCheckoutData">Checkout</p>
-          <p className="cartCheckoutData">Total: $USD 180</p>
+          <p className="cartCheckoutData">Total: $USD {cartTotalPrice}</p>
           <button className="cartCheckoutButton" onClick={purchaseHandler}>
             Purchase
           </button>
