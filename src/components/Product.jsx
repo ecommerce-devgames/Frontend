@@ -6,24 +6,30 @@ import stringGenerator from "../utils/stringGenerator";
 import { setCart } from "../state/cart";
 import { setGames } from "../state/games";
 import { setReviews } from "../state/reviews";
-import { TextField } from "@mui/material";
+import { TextField, Rating } from "@mui/material";
 import { FaCheck } from "react-icons/fa";
 import ProductData from "../commons/ProductData.jsx";
 import ProductRating from "../commons/ProductRating";
 import MyProductRating from "../commons/MyProductRating";
+import useInput from "../hooks/useInput";
+import { useEffect } from "react";
+import average, { setAverage } from "../state/average";
 
 const Product = () => {
   //Hooks
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const content = useInput();
+  const ratingValue = useInput();
+  const ratingValueGiven = useInput();
 
   //States
   const product = useSelector((state) => state.product);
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
+  const average = useSelector((state) => state.average);
   const reviews = useSelector((state) => state.reviews);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedReviews, setSelectedReviews] = useState([]);
 
   //Variables
   const developerString = stringGenerator(product.developers);
@@ -77,13 +83,43 @@ const Product = () => {
         .get("http://localhost:3001/api/games")
         .then((res) => {
           dispatch(setGames(res.data));
-        });
-        
+        });        
       navigate("/");
     } catch (error) {
       alert("Couldn't delete game");
     }
   };
+
+  const showReviewsHandler = () => {
+    axios.get(`http://localhost:3001/api/review/${product.id}`).then((res) => {
+      console.log("revieewwsss", res.data);
+      dispatch(setReviews(res.data));
+    });
+  };
+
+  const reviewSubmitHandler = (e) => {
+    e.preventDefault();
+    axios
+      .post(`http://localhost:3001/api/review/${product.id}/${user.id}`, {
+        content: content.value,
+        rating: ratingValue.value,
+      })
+      .then((res) => {
+        console.log("mi review es", res.data);
+        content.value = "";
+      });
+  };
+
+  useEffect(() => {
+    axios.get(`http://localhost:3001/api/review/${product.id}`).then((res) => {
+      const averageArray = res.data.map((review) => review.rating);
+      const average =
+        averageArray.reduce((acc, num) => (acc += num)) / averageArray.length;
+      console.log("averageArray", averageArray);
+      console.log("average", average);
+      dispatch(setAverage(average));
+    });
+  }, []);
 
   return (
     <div className="mainConteiner">
@@ -94,44 +130,61 @@ const Product = () => {
         <div className="lowerWrapper">
           <div className="productTitleRating">
             <h2 className="productTitle">{product.name}</h2>
-            <ProductRating className="productRating" />
+            <Rating
+              className="productRating"
+              value={average}
+              precision={0.5}
+              readOnly
+              size="large"
+            />
           </div>
           <p className="productDescription">{product.description}</p>
           <div className="productReviewsRating">
             <p className="productReviewsTitle">
               1910 reviews.
-              <span>Show reviews</span>
-            </p>
-            <div className="poductMyRates">
-              <p>Your Rate:</p>
-              <MyProductRating />
-            </div>
-          </div>
-          <div className="productUsersReviews">
-            <p className="usersReviewsDetails">
-              <span>Francisco García</span> (mail@mail.com), 18/07/2018:
-            </p>
-            <p className="usersReviewsContent">
-              Acá iría el contenido de una review,
-              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+              <span onClick={showReviewsHandler}>Show reviews</span>
             </p>
           </div>
+          {reviews.length ? (
+            reviews.map((review) => (
+              <div className="productUsersReviews">
+                <p className="usersReviewsDetails">
+                  <span>
+                    {review.user.name} {review.user.lastName}
+                  </span>
+                  :
+                </p>
+                <p className="usersReviewsContent">{review.content}</p>
+                <p className="usersReviewsContent">
+                  Rate given: {review.rating}
+                </p>
+              </div>
+            ))
+          ) : (
+            <p className="noReviews"> There are no reviews for this game.</p>
+          )}
 
-          <form className="textFieldForm">
+          <form className="textFieldForm" onSubmit={reviewSubmitHandler}>
             <TextField
               className="productTextField"
-              id="outlined-size-normal"
-              label="Your review"
               color="primary"
               focused
               multiline
-              placeholder="Add a review..."
+              required
+              placeholder="your review..."
               sx={{
                 "& .MuiOutlinedInput-input": {
                   color: "#fff",
                 },
               }}
+              id="outlined-controlled"
+              label="Add a review and a rate"
+              {...content}
             />
+            <div className="poductMyRates">
+              <p>Rate:</p>
+              <Rating required {...ratingValue} precision={0.5} size="small" />
+            </div>
             <button className="textFieldButton" type="submit">
               Send
             </button>

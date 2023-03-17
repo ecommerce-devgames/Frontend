@@ -13,6 +13,9 @@ import genresReducer from "./genres";
 import developersReducer from "./developers";
 import platformsReducer from "./platforms";
 import tagsReducer from "./tags";
+import cartTotalPriceReducer from "./cartTotalPrice";
+import averageReducer from "./average";
+
 
 const store = configureStore({
   reducer: {
@@ -27,7 +30,10 @@ const store = configureStore({
     genres: genresReducer,
     developers: developersReducer,
     platforms: platformsReducer,
-    tags: tagsReducer,    
+    tags: tagsReducer,
+    cartTotalPrice: cartTotalPriceReducer,
+    average: averageReducer,
+
   },
   middleware: [logger],
 });

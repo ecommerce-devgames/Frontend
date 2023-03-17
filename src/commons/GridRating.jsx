@@ -6,7 +6,7 @@ const GridRating = () => {
   const ratingValue = useInput();
   return (
     <>
-      <Rating {...ratingValue} precision={0.5} readOnly size="small" />
+      <Rating {...ratingValue} readOnly precision={0.5} size="small" />
     </>
   );
 };
