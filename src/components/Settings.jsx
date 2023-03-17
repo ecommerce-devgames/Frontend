@@ -17,11 +17,11 @@ const Settings = () => {
   const password = useInput();
 
   //Handlers and functions
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
+  const onSubmitHandler = async (e) => {
+    try {
+      e.preventDefault();
 
-    axios
-      .put(
+      const updateInfo = await axios.put(
         "http://localhost:3001/api/user/me/edit",
         verifyData({
           name: name.value,
@@ -30,11 +30,13 @@ const Settings = () => {
           password: password.value,
         }),
         { withCredentials: true }
-      )
-      .then(() => {
-        alert("Updated successfuly");
-        navigate("/");
-      });
+      );
+
+      alert("Updated successfuly");
+      navigate("/");
+    } catch (error) {
+      alert("Could't update your info");
+    }
   };
 
   const verifyData = (data) => {

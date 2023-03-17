@@ -28,27 +28,34 @@ const EditUsers = () => {
       });
   }, []);
 
-  const deleteUserHandler = (id) => {
-    axios
-      .delete(`http://localhost:3001/api/user/admin/delete/${id}`, {
-        withCredentials: true,
-      })
-      .then(() => dispatch(removeFromUsersDb(id)));
+  const deleteUserHandler = async (id) => {
+    try {
+      const deletedUser = await axios.delete(
+        `http://localhost:3001/api/user/admin/delete/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
+      dispatch(removeFromUsersDb(id));
+    } catch (error) {
+      alert("Couldn't delete user");
+    }
   };
 
-  const editAdminHandler = (id) => {
-    axios
-      .put(
+  const editAdminHandler = async (id) => {
+    try {
+      const editedUser = await axios.put(
         `http://localhost:3001/api/user/admin/access/${id}`,
         {},
         {
           withCredentials: true,
         }
-      )
-      .then((res) => {
-        dispatch(editAdmin(id));
-        message.success(`Admin permissions successfully modified`);
-      });
+      );
+      dispatch(editAdmin(id));
+      message.success(`Admin permissions successfully modified`);
+    } catch (error) {
+      alert("Couldn't delete user");
+    }
   };
 
   return (

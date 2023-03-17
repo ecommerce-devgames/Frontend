@@ -19,52 +19,66 @@ const EditCategories = () => {
   const genres = useSelector((state) => state.genres);
 
   //Handlers
-
-  const createOnSubmitHandler = (e) => {
+  const createOnSubmitHandler = async (e) => {
     e.preventDefault();
-    axios
-      .post(
+    try {
+      const createdGenre = await axios.post(
         "http://localhost:3001/api/genres/create",
         { name: newCategory.value },
         { withCredentials: true }
-      )
-      .then((res) => {
-        dispatch(addGenres(newCategory.value));
-        newCategory.value = "";
-        navigate("/edit/categories");
-      });
+      );
+
+      dispatch(addGenres(newCategory.value));
+      newCategory.value = "";
+      navigate("/edit/categories");
+    } catch {
+      alert("Couldn't create category");
+      navigate("/");
+    }
   };
 
-  const editOnSubmitHandler = (e) => {
+  const editOnSubmitHandler = async (e) => {
     e.preventDefault();
 
-    axios
-      .put(
+    try {
+      const updatedGenre = await axios.put(
         `http://localhost:3001/api/genres/edit/${oldCategory.value}`,
         { name: editedCategory.value },
         { withCredentials: true }
-      )
-      .then((res) => {
-        axios
-          .get("http://localhost:3001/api/genres/", { withCredentials: true })
-          .then((res) => {
-            dispatch(setGenres(res.data));
-            editedCategory.value = "";
-            oldCategory.value = "";
-          });
-        navigate("/edit/categories");
-      });
+      );
+
+      const updateGenres = await axios.get(
+        "http://localhost:3001/api/genres/",
+        {
+          withCredentials: true,
+        }
+      );
+
+      dispatch(setGenres(updateGenres.data));
+      editedCategory.value = "";
+      oldCategory.value = "";
+    } catch {
+      alert("Could't update category");
+      navigate("/");
+    }
   };
 
-  const handleAdminDeleteCategory = (id) => {
-    axios
-      .delete(`http://localhost:3001/api/genres/${id}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        dispatch(deleteGenres(id));
-        navigate("/edit/categories");
-      });
+  const handleAdminDeleteCategory = async (id) => {
+    try {
+      const deletedGenre = axios.delete(
+        `http://localhost:3001/api/genres/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      dispatch(deleteGenres(id));
+      navigate("/edit/categories");
+      
+    } catch {
+      alert("Could't delete category");
+      navigate("/");
+    }
   };
 
   return (

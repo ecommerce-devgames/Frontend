@@ -40,19 +40,21 @@ const Product = () => {
     navigate(user ? "/cart" : "/login");
   };
 
-  const addToCartHandler = () => {
-    const validate = cart.some((el) => el.id === product.id);
-    if (!validate) {
-      dispatch(setCart(product));
-      if (user.id) {
-        axios
-          .post(
+  const addToCartHandler = async () => {
+    try {
+      const validate = cart.some((el) => el.id === product.id);
+      if (!validate) {
+        dispatch(setCart(product));
+        if (user.id) {
+          const addToCart = await axios.post(
             `http://localhost:3001/api/cart/addItem/${user.id}/${product.id}`,
             {},
             { withCredentials: true }
-          )
-          .then((res) => console.log(res));
+          );
+        }
       }
+    } catch (error) {
+      alert("Couldn't add to cart");
     }
   };
 
@@ -61,19 +63,26 @@ const Product = () => {
     navigate(`/edit/products/${item.id}`);
   };
 
-  const handleAdminDeleteProduct = (item) => {
-    setAnchorEl(null);
-    axios
-      .delete(`http://localhost:3001/api/games/admin/delete/${item.id}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        axios.get("http://localhost:3001/api/games").then((res) => {
+  const handleAdminDeleteProduct = async (item) => {
+    try {
+      setAnchorEl(null);
+      const deletedGame = await axios.delete(
+        `http://localhost:3001/api/games/admin/delete/${item.id}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      const resetGames = await axios
+        .get("http://localhost:3001/api/games")
+        .then((res) => {
           dispatch(setGames(res.data));
         });
-        navigate("/");
-      })
-      .catch((err) => console.log(err));
+        
+      navigate("/");
+    } catch (error) {
+      alert("Couldn't delete game");
+    }
   };
 
   return (

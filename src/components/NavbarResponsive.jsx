@@ -48,17 +48,21 @@ const NavbarResponsive = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleAccess = () => {
-    setAnchorEl(null);
-    if (user.id) {
-      axios.post(
-        "http://localhost:3001/api/user/logout",
-        {},
-        { withCredentials: true }
-      );
-      dispatch(setUser({}));
+  const handleAccess = async () => {
+    try {
+      setAnchorEl(null);
+      if (user.id) {
+        const logOut = await axios.post(
+          "http://localhost:3001/api/user/logout",
+          {},
+          { withCredentials: true }
+        );
+        dispatch(setUser({}));
+      }
+      navigate("/login");
+    } catch (error) {
+      alert("Couldn't logout ");
     }
-    navigate("/login");
   };
 
   const searchByCategoryHandler = (category) => {
