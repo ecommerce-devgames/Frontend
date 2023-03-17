@@ -1,11 +1,12 @@
 import React from "react";
-import useInput from "../hooks/useInput";
-import Input from "../commons/Input";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import useInput from "../hooks/useInput";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../state/user";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { setUser } from "../state/user";
+import { importCartFromDb, importCartFromLs } from "../state/cart";
+import Input from "../commons/Input";
 
 const Login = () => {
   //Hooks
@@ -15,7 +16,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   //States
-  const cart= useSelector(state=> state.cart)
+  const cart = useSelector((state) => state.cart);
 
   //Handlers and functions
   const onSubmitHandler = (e) => {
@@ -30,11 +31,20 @@ const Login = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        dispatch(setUser(res.data));        
-        navigate("/");        
+        dispatch(setUser(res.data));
+        axios
+          .get(`http://localhost:3001/api/cart/${res.data.id}`, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            if (res.data.length) return dispatch(importCartFromDb(res.data));
+            dispatch(
+              importCartFromLs(JSON.parse(localStorage.getItem("cart")))
+            );
+          });
+        navigate("/");
       });
   };
-
 
   return (
     <div className="loginConteiner">

@@ -7,41 +7,86 @@
   position: sticky;
   top: 0;
   background-color: $navbar-background-color;  
-  padding: 0rem 1rem .5rem 0rem;
+  padding: 0 1rem;
   height: 4rem;
+  z-index: 1;
+  @media screen and (max-width: $medium-small-screen) {
+    @include flex(column, center, center);
+    height: auto;
+  }
+ 
 }
 
 //Logo
 .logoWrapper {
   @include flex(row, flex-start, center);
+  @media screen and (max-width: $medium-small-screen) {
+    margin-top: 1rem;
+  }
 }
 
 .navbarLogo {
-  margin: 2rem 0rem 0rem 2rem;
+  margin: 1.8rem 0rem 0rem 2rem;
   color:$logo-color;
   font-size: map-get($font-size, "large");
   text-transform: uppercase;
 
-  &:hover{
-    color: $logo-color-hover
+  &:hover {
+    color: $logo-color-hover;
+  }
+
+  @media screen and (max-width: $medium-small-screen) {
+    font-size: map-get($font-size, "large");
+    margin: 0;
+  }
+  @media screen and (max-width: $smallest-screen) {
+    font-size: map-get($font-size, "medium");
+    margin: 0;
   }
 }
 
 //Searchbar
 .searchBarWrapper {
-  @include flex(row, center, center);
+  @include flex(row, center, center); 
 }
 
-.searchBar{
-  color:white;
+.searchBar {
+  @media screen and (max-width: $medium-small-screen) {
+    font-size: map-get($font-size, "small");
+  }
 }
-
 
 //Navigation
 .navigationWrapper {
   @include flex(row, space-between, center);
+  @media screen and (max-width: $medium-small-screen) {
+    @include flex(row, space-evenly, center);
+  }
 }
 
+.navbarDropdown{
+  @media screen and (max-width: $medium-small-screen) {
+    display: none;
+    
+  }
+}
 .dropdownForm{
     background-color: $navbar-background-color
+}
+
+
+.navbarUserAvatar{
+  @media screen and (max-width: $medium-small-screen) {
+    display: none;
+    
+  }
+}
+
+//Responsive
+.navbarResponsive{
+  display: none;
+  @media screen and (max-width: $medium-small-screen) {
+    display: unset;
+    
+  }
 }

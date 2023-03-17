@@ -9,6 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: $background-color;
 }
 
 code {
@@ -28,7 +29,8 @@ a {
 //APP
 .appContainer {
   background-color: $background-color;
-  min-height: 200vh;
+  //min-height: 100vh;
+  width: 100%;
 }
 
 @import "./styles/navbar.scss";
@@ -38,4 +40,8 @@ a {
 @import "./styles/register.scss";
 @import "./styles/login.scss";
 @import "./styles/product.scss";
-@import "./styles/cart.scss"
+@import "./styles/cart.scss";
+@import "./styles/editUsers.scss";
+@import "./styles/editProduct.scss";
+@import "./styles/editCategories.scss";
+

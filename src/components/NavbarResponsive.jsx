@@ -3,26 +3,26 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../state/user";
-import { removeAllItems } from "../state/cart";
 import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
+import PersonAdd from "@mui/icons-material/PersonAdd";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
 import Logout from "@mui/icons-material/Logout";
-import { FaUserAlt } from "react-icons/fa";
+import DehazeIcon from "@mui/icons-material/Dehaze";
 
-const UserAvatar = () => {
+const NavbarResponsive = () => {
   //Hooks
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   //States
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const genres = useSelector((state) => state.genres);
   const user = useSelector((state) => state.user);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   //Variables
   const open = Boolean(anchorEl);
@@ -41,7 +41,6 @@ const UserAvatar = () => {
 
   const handleAdminActions = (type) => {
     setAnchorEl(null);
-
     navigate(type === "products" ? `/create/${type}` : `/edit/${type}`);
   };
 
@@ -53,22 +52,27 @@ const UserAvatar = () => {
     try {
       setAnchorEl(null);
       if (user.id) {
-        const logOutUser = await axios.post(
+        const logOut = await axios.post(
           "http://localhost:3001/api/user/logout",
           {},
           { withCredentials: true }
         );
         dispatch(setUser({}));
-        dispatch(removeAllItems([]));
       }
       navigate("/login");
     } catch (error) {
-      alert("Couldn't logout");
+      alert("Couldn't logout ");
     }
   };
 
+  const searchByCategoryHandler = (category) => {
+    setAnchorEl(null);
+    navigate(`/category/${category}`);
+  };
+
   return (
-    <div className="navbarUserAvatar">
+    <div className="navbarResponsive">
+      {" "}
       <React.Fragment>
         <Box
           sx={{
@@ -78,7 +82,7 @@ const UserAvatar = () => {
             mt: 2.2,
           }}
         >
-          <Tooltip title="Account settings">
+          <Tooltip>
             <IconButton
               onClick={handleClick}
               size="small"
@@ -87,15 +91,14 @@ const UserAvatar = () => {
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
             >
-              <Avatar
+              <DehazeIcon
                 sx={{
+                  mt: 2,
                   width: 32,
                   height: 32,
-                  backgroundColor: "rgb(53, 136, 230)",
+                  color: "rgb(53, 136, 230)",
                 }}
-              >
-                {user.name ? user.name.charAt(0) : <FaUserAlt />}
-              </Avatar>
+              ></DehazeIcon>
             </IconButton>
           </Tooltip>
         </Box>
@@ -131,9 +134,21 @@ const UserAvatar = () => {
               },
             },
           }}
-          transformOrigin={{ horizontal: "right", vertical: "top" }}
-          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+          transformOrigin={{ horizontal: "center", vertical: "top" }}
+          anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
         >
+          <MenuItem readOnly>CATEGORIES</MenuItem>
+          {genres
+            ? genres.map((genre) => (
+                <MenuItem
+                  key={genre.id}
+                  onClick={() => searchByCategoryHandler(genre.name)}
+                >
+                  {genre.name}
+                </MenuItem>
+              ))
+            : null}
+          <Divider />
           {user?.isAdmin
             ? isAdminMenu.map((menu, i) => (
                 <MenuItem
@@ -145,10 +160,7 @@ const UserAvatar = () => {
               ))
             : user.name
             ? userMenu.map((menu, i) => (
-                <MenuItem
-                  key={i}
-                  onClick={() => navigate(menu.toLocaleLowerCase())}
-                >
+                <MenuItem key={i} onClick={() => navigate(menu)}>
                   <ListItemIcon>
                     <PersonAdd fontSize="small" />
                   </ListItemIcon>
@@ -169,4 +181,4 @@ const UserAvatar = () => {
   );
 };
 
-export default UserAvatar;
+export default NavbarResponsive;

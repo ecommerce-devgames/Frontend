@@ -1,9 +1,10 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import Searchbar from "./Searchbar";
 import Dropdown from "../components/Dropdown";
 import UserAvatar from "./UserAvatar";
+import NavbarResponsive from "./NavbarResponsive";
 import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
@@ -11,12 +12,14 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   //States
-  const cart = useSelector(state=> state.cart)
-  
+  const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user)
+
+
   //Handlers and functions
-  const cartNavigationHandler=()=>{
-    navigate("/cart")
-  }
+  const cartNavigationHandler = () => {
+    navigate("/cart");
+  };
 
   return (
     <div className="navbarContainer">
@@ -29,13 +32,18 @@ const Navbar = () => {
       <div className="navigationWrapper">
         <Searchbar />
         <Dropdown />
+
         <Link to="/cart">
-          <div className="cartWrapper" onClick={cartNavigationHandler}>
-            <FaShoppingCart className="cartIcon" />
-            <span className="cartCount">{cart.length}</span>
-          </div>
+          {user?.isAdmin ? null : (
+            <div className="cartWrapper" onClick={cartNavigationHandler}>
+              <FaShoppingCart className="cartIcon" />
+              <span className="cartCount">{cart.length}</span>
+            </div>
+          )}
         </Link>
+
         <UserAvatar />
+        <NavbarResponsive />
       </div>
     </div>
   );

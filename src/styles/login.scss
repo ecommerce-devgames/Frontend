@@ -3,23 +3,37 @@
 @import "./variables";
 
 .loginConteiner {
-  background-image: url(../assets/login.jpg);
+  background-image: url(../assets/login2.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-
-  //width: 100vw;
+  margin-top: 0;
+  padding-top: 17vh; 
   height: 100vh;
+  
 }
-.loginForm {
-  height: 500px;
-  width: 500px;
-  margin: 15vh auto;
+
+.loginForm {  
+  width: 25%;
+  margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.13);
   border-radius: 10px;
   padding: 50px 35px;
   border-radius: 10px;
   @include flex(column, space-evenly, center);
   backdrop-filter: blur(10px);
+  @media screen and (max-width: $big-medium-screen) {
+    width: 40%;
+  }
+  @media screen and (max-width: $medium-small-screen) {
+    width: 50%;
+  }
+  @media screen and (max-width: $small-screen) {
+    width: 70%;
+  }
+  @media screen and (max-width: $smallest-screen) {
+    width: 90%;
+    padding: 1rem;
+  }
 }
 
 

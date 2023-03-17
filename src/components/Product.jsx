@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import useStringGenerator from "../hooks/useStringGenerator";
 import { useNavigate } from "react-router";
+import stringGenerator from "../utils/stringGenerator";
 import { setCart } from "../state/cart";
-import ProductData from "../commons/ProductData.jsx";
+import { setGames } from "../state/games";
+import { setReviews } from "../state/reviews";
+import { TextField } from "@mui/material";
 import { FaCheck } from "react-icons/fa";
+import ProductData from "../commons/ProductData.jsx";
+import ProductRating from "../commons/ProductRating";
+import MyProductRating from "../commons/MyProductRating";
 
 const Product = () => {
   //Hooks
@@ -15,14 +21,15 @@ const Product = () => {
   const product = useSelector((state) => state.product);
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
+  const reviews = useSelector((state) => state.reviews);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [selectedReviews, setSelectedReviews] = useState([]);
 
   //Variables
-  //para product.developers. Nos tiene que llegar un array de strings
-  // const developersString = products.developers.join(" ")
-  const developerString = useStringGenerator(product.developers);
-  const platformString = useStringGenerator(product.platforms);
-  const genreString = useStringGenerator(product.genres);
-  const tagString = useStringGenerator(product.tags);
+  const developerString = stringGenerator(product.developers);
+  const platformString = stringGenerator(product.platforms);
+  const genreString = stringGenerator(product.genres);
+  const tagString = product.tags.join(", ");
 
   //Handlers and functions
   const buyHandler = () => {
@@ -33,24 +40,107 @@ const Product = () => {
     navigate(user ? "/cart" : "/login");
   };
 
-  const addToCartHandler = () => {
-    const validate = cart.some((el) => el.id === product.id);
-    if (!validate) {
-      dispatch(setCart(product));
+  const addToCartHandler = async () => {
+    try {
+      const validate = cart.some((el) => el.id === product.id);
+      if (!validate) {
+        dispatch(setCart(product));
+        if (user.id) {
+          const addToCart = await axios.post(
+            `http://localhost:3001/api/cart/addItem/${user.id}/${product.id}`,
+            {},
+            { withCredentials: true }
+          );
+        }
+      }
+    } catch (error) {
+      alert("Couldn't add to cart");
     }
   };
 
-  localStorage.setItem("cart", JSON.stringify(cart));
-  
+  const handleAdminNavigate = (item) => {
+    setAnchorEl(null);
+    navigate(`/edit/products/${item.id}`);
+  };
+
+  const handleAdminDeleteProduct = async (item) => {
+    try {
+      setAnchorEl(null);
+      const deletedGame = await axios.delete(
+        `http://localhost:3001/api/games/admin/delete/${item.id}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      const resetGames = await axios
+        .get("http://localhost:3001/api/games")
+        .then((res) => {
+          dispatch(setGames(res.data));
+        });
+        
+      navigate("/");
+    } catch (error) {
+      alert("Couldn't delete game");
+    }
+  };
+
   return (
     <div className="mainConteiner">
-      {/* upper div, imagen y ficha tecnica*/}
       <div className="upperConteiner">
         <div className="productImage">
-          <img src={product.background_image} alt="game" />
+          <img src={product.poster} alt="game" />
         </div>
+        <div className="lowerWrapper">
+          <div className="productTitleRating">
+            <h2 className="productTitle">{product.name}</h2>
+            <ProductRating className="productRating" />
+          </div>
+          <p className="productDescription">{product.description}</p>
+          <div className="productReviewsRating">
+            <p className="productReviewsTitle">
+              1910 reviews.
+              <span>Show reviews</span>
+            </p>
+            <div className="poductMyRates">
+              <p>Your Rate:</p>
+              <MyProductRating />
+            </div>
+          </div>
+          <div className="productUsersReviews">
+            <p className="usersReviewsDetails">
+              <span>Francisco García</span> (mail@mail.com), 18/07/2018:
+            </p>
+            <p className="usersReviewsContent">
+              Acá iría el contenido de una review,
+              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+            </p>
+          </div>
+
+          <form className="textFieldForm">
+            <TextField
+              className="productTextField"
+              id="outlined-size-normal"
+              label="Your review"
+              color="primary"
+              focused
+              multiline
+              placeholder="Add a review..."
+              sx={{
+                "& .MuiOutlinedInput-input": {
+                  color: "#fff",
+                },
+              }}
+            />
+            <button className="textFieldButton" type="submit">
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div className="lowerConteiner">
         <div className="productSidebar">
-          {/* ficha técnica: developers, platforms, release day, playtime*/}
           <div className="productDataSheet">
             <ProductData title="Release Date" info={product.released} />
             <ProductData title="Developers" info={developerString} />
@@ -59,9 +149,24 @@ const Product = () => {
             <ProductData title="Genres" info={genreString} />
             <ProductData title="Tags" info={tagString} />
           </div>
-          {/* botones  */}
+
           <div className="productButtonsWrapper">
-            {user.isAdmin ? null : (
+            {user.isAdmin ? (
+              <>
+                <button
+                  className="productButton"
+                  onClick={() => handleAdminNavigate(product)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="productButton"
+                  onClick={() => handleAdminDeleteProduct(product)}
+                >
+                  Delete
+                </button>
+              </>
+            ) : (
               <>
                 <button className="productButton" onClick={buyHandler}>
                   Buy
@@ -77,15 +182,6 @@ const Product = () => {
             )}
           </div>
         </div>
-      </div>
-
-      <div className="lowerConteiner">
-        {/* lower div, con titulo, descripcion, tags y genres*/}
-        <div className="lowerWrapper">
-          <h2 className="productTitle">{product.name}</h2>
-          <p className="productDescription">{product.description_raw}</p>
-        </div>
-        <div className="lowerFill"></div>
       </div>
     </div>
   );

@@ -1,39 +1,66 @@
 import React from "react";
-import { FaCheck, FaStar } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
+import AdminCardBtns from "../commons/AdminCardBtns";
+import GridRating from "./GridRating";
 
-const Card = ({ item, singleProductHandler, addToCartHandler, cart, user }) => {
+const Card = ({
+  singleGame,
+  singleProductHandler,
+  addToCartHandler,
+  cart,
+  user,
+  open,
+  anchorEl,
+  setAnchorEl,
+  handleClose,
+  handleClick,
+  handleAdminNavigate,
+  handleAdminDeleteProduct,
+}) => {
   return (
     <div className="cardConteiner">
       <img
         className="gridImage"
-        src={item.background_image}
+        src={singleGame.poster}
         alt="product"
-        onClick={() => singleProductHandler(item)}
+        onClick={() => singleProductHandler(singleGame)}
       />
 
       <div className="cardContent">
         <div className="cardSubconteiner">
-          <span className="cardTitle">{item.name}</span>
-          <span className="cardRanking">
-            {item.rating_top}
-            <FaStar />
-          </span>
+          <span className="cardTitle">{singleGame.name}</span>
+          {user?.isAdmin ? (
+            <AdminCardBtns
+              singleGame={singleGame}
+              open={open}
+              anchorEl={anchorEl}
+              handleClose={handleClose}
+              handleClick={handleClick}
+              handleAdminNavigate={handleAdminNavigate}
+              handleAdminDeleteProduct={handleAdminDeleteProduct}
+            />
+          ) : null}
         </div>
+        <span className="cardRanking">
+          <GridRating />
+        </span>
         <div className="cardSubcontainerB">
           {user?.isAdmin ? null : (
-            <button
-              className="cardButton"
-              onClick={() => addToCartHandler(item)}
-            >
-              {cart.some((el) => el.id === item.id) ? (
-                <FaCheck />
-              ) : (
-                "Add to cart"
-              )}
-            </button>
+            <>
+              {" "}
+              <button
+                className="cardButton"
+                onClick={() => addToCartHandler(singleGame)}
+              >
+                {cart.some((el) => el.id === singleGame.id) ? (
+                  <FaCheck />
+                ) : (
+                  "Add to cart"
+                )}
+              </button>
+              <p className="cardCart">USD {singleGame.price}</p>
+            </>
           )}
-
-          <p className="cardCart">$USD 60</p>
         </div>
       </div>
     </div>

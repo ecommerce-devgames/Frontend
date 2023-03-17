@@ -1,32 +1,45 @@
-import * as React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 
 const Dropdown = () => {
+  //Hooks
+  const navigate = useNavigate();  
+
+  //States
+  const genres = useSelector((state)=> state.genres)
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   //Variables
-  const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
   //Handlers
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
 
+  const searchByCategoryHandler = (category) => {
+    setAnchorEl(null);
+    navigate(`/category/${category}`);
+  };
+
   return (
-    <div>
+    <div className="navbarDropdown">
       <Button
         id="fade-button"
         aria-controls={open ? "fade-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        sx={{fontSize:"1.3rem", mt: 3.5, ml: 3, mr: 2}}
+        sx={{ fontSize: "1.3rem", mt: 3.5, ml: 3, mr: 2 }}
       >
         Categories
       </Button>
@@ -40,9 +53,14 @@ const Dropdown = () => {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        {genres? genres.map((genre) => (
+          <MenuItem
+            key={genre.id}
+            onClick={() => searchByCategoryHandler(genre.name)}
+          >
+            {genre.name}
+          </MenuItem>
+        )): null}
       </Menu>
     </div>
   );
