@@ -21,6 +21,7 @@ import EditProducts from "./components/EditProducts";
 import EditUsers from "./components/EditUsers";
 import EditCategories from "./components/EditCategories";
 import History from "./components/History";
+import Settings from  "./components/Settings"
 
 function App() {
   //Hooks
@@ -89,13 +90,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/products/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/Shopping history" element={<History />} />
+        <Route path="/shopping history" element={<History />} />
         <Route path="/create/products" element={<EditProducts />} />
         <Route path="/edit/products/:id" element={<EditProducts />} />
         <Route path="/edit/users" element={<EditUsers />} />
         <Route path="/edit/categories" element={<EditCategories />} />
         <Route path="/search" element={<Home />} />
         <Route path="/category/:category" element={<Home />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </div>
   );

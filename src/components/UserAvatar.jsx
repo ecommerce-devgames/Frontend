@@ -142,7 +142,7 @@ const UserAvatar = () => {
               ))
             : user.name
             ? userMenu.map((menu, i) => (
-                <MenuItem key={i} onClick={() => navigate(menu)}>
+                <MenuItem key={i} onClick={() => navigate(menu.toLocaleLowerCase())}>
                   <ListItemIcon>
                     <PersonAdd fontSize="small" />
                   </ListItemIcon>
