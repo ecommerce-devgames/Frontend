@@ -44,7 +44,9 @@
   letter-spacing: 0.02em;
   text-shadow: 0 1px 0 #00000030;
   margin: 5rem auto;
+ 
   @media screen and (max-width: $big-medium-screen) {
+    font-size: map-get($font-size, "x-large");
     margin: 4rem auto;
   }
   @media screen and (max-width: $medium-screen) {

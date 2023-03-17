@@ -1,7 +1,7 @@
 import React from "react";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const AdminCardBtns = ({
   singleGame,
@@ -13,10 +13,11 @@ const AdminCardBtns = ({
   handleAdminDeleteProduct,
 }) => {
   const ITEM_HEIGHT = 50;
-  
+
   return (
     <div>
       <IconButton
+        className="adminBtns"
         aria-label="more"
         id="long-button"
         aria-controls={open ? "long-menu" : undefined}
@@ -27,9 +28,10 @@ const AdminCardBtns = ({
         onClick={handleClick}
         onClose={handleClose}
       >
-        <EditIcon onClick={()=> handleAdminNavigate(singleGame.id)}/>
-      </IconButton>      
+        <EditIcon onClick={() => handleAdminNavigate(singleGame.id)} />
+      </IconButton>
       <IconButton
+        className="adminBtns"
         aria-label="more"
         id="long-button"
         aria-controls={open ? "long-menu" : undefined}
@@ -40,8 +42,8 @@ const AdminCardBtns = ({
         onClick={handleClick}
         onClose={handleClose}
       >
-        <DeleteIcon onClick={()=> handleAdminDeleteProduct(singleGame.id)}/>
-      </IconButton> 
+        <DeleteIcon onClick={() => handleAdminDeleteProduct(singleGame.id)} />
+      </IconButton>
     </div>
   );
 };
