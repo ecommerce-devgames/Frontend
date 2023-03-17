@@ -39,24 +39,21 @@ function App() {
       .then((data) => dispatch(setUser(data)));
     axios
       .get("http://localhost:3001/api/genres/", { withCredentials: true })
-      .then((res) => {
-        console.log(res);
+      .then((res) => {        
         dispatch(setGenres(res.data));
       });
     axios
       .get("http://localhost:3001/api/developers/", { withCredentials: true })
-      .then((res) => {
-        console.log(res);
+      .then((res) => {        
         dispatch(setDevelopers(res.data));
       });
     axios
       .get("http://localhost:3001/api/platforms/", { withCredentials: true })
-      .then((res) => {
-        console.log(res);
+      .then((res) => {        
         dispatch(setPlatforms(res.data));
       });
      
-      
+      console.log("el id del user es", user.id)
       if (user.id) {
         axios
           .get(`http://localhost:3001/api/cart/${user.id}`, {

@@ -3,7 +3,6 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { removeFromCart, setCart, removeAllItems } from "../state/cart";
-import { setShoppedProducts } from "../state/shoppedProducts";
 import { FaTrash } from "react-icons/fa";
 
 const Cart = () => {
@@ -16,7 +15,7 @@ const Cart = () => {
   const user = useSelector((state) => state.user);
 
   //Handlers
-  const deleteItemHandler = (item) => {
+  const deleteItemHandler =(item) => {
     dispatch(removeFromCart(item));
     if (user.id) {
       axios
@@ -31,8 +30,6 @@ const Cart = () => {
   
   const purchaseHandler = () => {
     if (!user.name) return navigate("/login");
-
-    dispatch(setShoppedProducts(cart));
     if (user.id) {
       axios
         .post(
@@ -60,7 +57,7 @@ const Cart = () => {
             </div>
             <div className="cartInfoBottom">
               <p className="cartExtraInfo">
-                Aca me imagino tags o alguna descripcion corta
+               Tags: {item.tags.join(", ")}
               </p>
             </div>
           </div>

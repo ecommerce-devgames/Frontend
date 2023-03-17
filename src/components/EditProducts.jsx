@@ -8,6 +8,15 @@ import ProductData from "../commons/ProductData.jsx";
 import FormSelectBtn from "../commons/FormSelectBtn";
 
 const EditProducts = () => {
+  //States
+  const [gameGenres, setGameGenres] = useState([]);
+  const [gameDevelopers, setGameDevelopers] = useState([]);
+  const [gamePlatforms, setGamePlatforms] = useState([]);
+  const [selectedGame, setSelectedGame] = useState("");
+  const genres = useSelector((state) => state.genres);
+  const developers = useSelector((state) => state.developers);
+  const platforms = useSelector((state) => state.platforms);
+
   //Hooks
   const params = useParams();
   const navigate = useNavigate();
@@ -18,15 +27,6 @@ const EditProducts = () => {
   const price = useInput();
   const image = useInput();
   const tags = useInput();
-
-  //States
-  const [gameGenres, setGameGenres] = useState([]);
-  const [gameDevelopers, setGameDevelopers] = useState([]);
-  const [gamePlatforms, setGamePlatforms] = useState([]);
-  const [selectedGame, setSelectedGame] = useState("");
-  const genres = useSelector((state) => state.genres);
-  const developers = useSelector((state) => state.developers);
-  const platforms = useSelector((state) => state.platforms);
 
   //Handlers
   useEffect(() => {
@@ -108,7 +108,7 @@ const EditProducts = () => {
         });
     }
   };
-  
+
   return (
     <div className="editProductsWrapper">
       {params.id ? (
@@ -157,6 +157,10 @@ const EditProducts = () => {
                       .join(", ")
                   : null
               }
+            />
+            <ProductData
+              title="Tags"
+              info={selectedGame.tags ? selectedGame.tags.join(", ") : null}
             />
           </div>
         </div>

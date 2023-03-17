@@ -16,7 +16,7 @@ const Card = ({
   handleClick,
   handleAdminNavigate,
   handleAdminDeleteProduct,
-}) => {
+}) => {  
   return (
     <div className="cardConteiner">
       <img

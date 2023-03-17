@@ -6,7 +6,7 @@ import cartReducer from "./cart";
 import userReducer from "./user";
 import usersDbReducer from "./usersDb";
 import gamesReducer from "./games";
-import shoppedProductsReducer from "./shoppedProducts";
+import shoppingHistoryReducer from "./shoppingHistory";
 import reviewsReducer from "./reviews";
 import searchQueryReducer from "./searchQuery";
 import genresReducer from "./genres";
@@ -20,7 +20,7 @@ const store = configureStore({
     cart: cartReducer,     
     user: userReducer,
     games: gamesReducer,
-    shoppedProducts: shoppedProductsReducer,
+    shoppingHistory : shoppingHistoryReducer,
     usersDb: usersDbReducer,
     reviews: reviewsReducer,
     searchQuery: searchQueryReducer,

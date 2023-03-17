@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import useStringGenerator from "../hooks/useStringGenerator";
+import stringGenerator from "../utils/stringGenerator";
 import { setCart } from "../state/cart";
 import { setGames } from "../state/games";
 import { setReviews } from "../state/reviews";
@@ -26,10 +26,10 @@ const Product = () => {
   const [selectedReviews, setSelectedReviews] = useState([]);
 
   //Variables
-  const developerString = useStringGenerator(product.developers);
-  const platformString = useStringGenerator(product.platforms);
-  const genreString = useStringGenerator(product.genres);
-  const tagString = useStringGenerator(product.tags);
+  const developerString = stringGenerator(product.developers);
+  const platformString = stringGenerator(product.platforms);
+  const genreString = stringGenerator(product.genres);
+  const tagString = product.tags.join(", ")
 
   //Handlers and functions
   const buyHandler = () => {
