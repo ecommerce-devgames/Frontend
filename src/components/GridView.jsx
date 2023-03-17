@@ -40,7 +40,6 @@ const GridView = () => {
           withCredentials: true,
         })
         .then((result) => {
-          console.log(result);
           dispatch(setGames(result.data));
         });
     }
@@ -50,7 +49,6 @@ const GridView = () => {
           withCredentials: true,
         })
         .then((result) => {
-          console.log(result);
           dispatch(setGames(result.data));
         });
     }
@@ -58,7 +56,6 @@ const GridView = () => {
 
   const singleProductHandler = (item) => {
     axios.get(`http://localhost:3001/api/games/${item.id}`).then((res) => {
-      console.log("producto", res.data);
       dispatch(setProduct(res.data));
       localStorage.setItem("singleProduct", JSON.stringify(res.data));
       navigate(`/products/${res.data.id}`);
@@ -104,7 +101,7 @@ const GridView = () => {
 
   const handleAdminDeleteProduct = (id) => {
     setAnchorEl(null);
-    console.log(id);
+
     axios
       .delete(`http://localhost:3001/api/games/admin/delete/${id}`, {
         withCredentials: true,

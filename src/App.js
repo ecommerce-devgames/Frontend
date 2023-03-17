@@ -8,8 +8,6 @@ import { setUser } from "./state/user";
 import { setGenres } from "./state/genres";
 import { setDevelopers } from "./state/developers";
 import { setPlatforms } from "./state/platforms";
-import { setTags } from "./state/tags";
-import { setCartTotalPrice } from "./state/cartTotalPrice";
 import { importCartFromLs, importCartFromDb } from "./state/cart";
 import Home from "./commons/Home";
 import Navbar from "./components/Navbar";
@@ -21,7 +19,7 @@ import EditProducts from "./components/EditProducts";
 import EditUsers from "./components/EditUsers";
 import EditCategories from "./components/EditCategories";
 import History from "./components/History";
-import Settings from  "./components/Settings"
+import Settings from "./components/Settings";
 
 function App() {
   //Hooks
@@ -55,7 +53,6 @@ function App() {
         dispatch(setPlatforms(res.data));
       });
 
-    console.log("el id del user es", user.id);
     if (user.id) {
       axios
         .get(`http://localhost:3001/api/cart/${user.id}`, {
@@ -69,9 +66,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    dispatch(
-      setCartTotalPrice(cart.reduce((acc, game) => (acc += game.price), 0))
-    );
+    // dispatch(
+    //   setCartTotalPrice(cart.reduce((acc, game) => (acc += game.price), 0))
+    // );
 
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);

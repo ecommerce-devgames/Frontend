@@ -1,34 +1,40 @@
-import React, { useState } from "react";
-
-import useInput from "../hooks/useInput";
-
-import { useSelector } from "react-redux";
-
+import React from "react";
 import axios from "axios";
+import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
+import useInput from "../hooks/useInput";
+import Input from "../commons/Input";
+
 const Settings = () => {
+  //States
+  const user = useSelector((state) => state.user);
+
+  //Hooks
+  const navigate = useNavigate();
   const name = useInput();
   const lastName = useInput();
   const email = useInput();
   const password = useInput();
 
-  const verifyPassword = (e) => {
-    e.preventDefault();
-  };
-
+  //Handlers and functions
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    axios.put(
-      "http://localhost:3001/api/user/me/edit",
-      verifyData({
-        name: name.value,
-        lastName: lastName.value,
-        email: email.value,
-        password: password.value,
-      }),
-
-      { withCredentials: true }
-    );
+    axios
+      .put(
+        "http://localhost:3001/api/user/me/edit",
+        verifyData({
+          name: name.value,
+          lastName: lastName.value,
+          email: email.value,
+          password: password.value,
+        }),
+        { withCredentials: true }
+      )
+      .then(() => {
+        alert("Updated successfuly");
+        navigate("/");
+      });
   };
 
   const verifyData = (data) => {
@@ -41,53 +47,36 @@ const Settings = () => {
     return dataV;
   };
 
-  const user = useSelector((state) => state.user);
-
-  console.log(user);
-
   return (
-    <div className="editCategoiresForm">
-      <form className="loginForm" onSubmit={onSubmitHandler}>
-        <label>
-          your name is {user.name} dearly player
-          <input
-            className="registerInput"
-            onChange={(e) => {
-              name.value = e.target.value;
-            }}
-          ></input>
-        </label>
-
-        <label>
-          your player lastName is {user.lastName}
-          <input
-            className="registerInput"
-            onChange={(e) => {
-              lastName.value = e.target.value;
-            }}
-          ></input>
-        </label>
-        <label>
-          your player e email is {user.email}
-          <input
-            className="registerInput"
-            onChange={(e) => {
-              email.value = e.target.value;
-            }}
-          ></input>
-        </label>
-        <label>
-          {" "}
-          change your player passowrd!
-          <input
-            className="registerInput"
-            onChange={(e) => (password.value = e.target.value)}
-          ></input>
-        </label>
-
+    <div style={{ marginTop: "15vh" }}>
+      <form className="registerForm" onSubmit={onSubmitHandler}>
+        <h3 className="registerTitle">Update your personal info</h3>
+        <Input
+          name="name"
+          type="text"
+          placeholder="New name"
+          valueHandler={name}
+        />
+        <Input
+          name="lastname"
+          type="text"
+          placeholder="New last name"
+          valueHandler={lastName}
+        />
+        <Input
+          name="email"
+          type="email"
+          placeholder="New email"
+          valueHandler={email}
+        />
+        <Input
+          name="password"
+          type="password"
+          placeholder="New password"
+          valueHandler={password}
+        />
         <button className="registerButton" type="submit">
-          {" "}
-          Change!
+          Update
         </button>
       </form>
     </div>

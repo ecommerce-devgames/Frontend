@@ -31,15 +31,16 @@ const Login = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        dispatch(setUser(res.data));    
-        console.log("ID USER LOGIN ", res.data)   
+        dispatch(setUser(res.data));
         axios
           .get(`http://localhost:3001/api/cart/${res.data.id}`, {
             withCredentials: true,
           })
           .then((res) => {
-            if(res.data.length) return dispatch(importCartFromDb(res.data))     
-            dispatch(importCartFromLs(JSON.parse(localStorage.getItem('cart'))))       
+            if (res.data.length) return dispatch(importCartFromDb(res.data));
+            dispatch(
+              importCartFromLs(JSON.parse(localStorage.getItem("cart")))
+            );
           });
         navigate("/");
       });

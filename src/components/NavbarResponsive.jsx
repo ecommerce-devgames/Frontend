@@ -41,7 +41,6 @@ const NavbarResponsive = () => {
 
   const handleAdminActions = (type) => {
     setAnchorEl(null);
-    console.log(type);
     navigate(type === "products" ? `/create/${type}` : `/edit/${type}`);
   };
 
@@ -58,7 +57,6 @@ const NavbarResponsive = () => {
         { withCredentials: true }
       );
       dispatch(setUser({}));
-      console.log("user logout", user);
     }
     navigate("/login");
   };
@@ -136,14 +134,16 @@ const NavbarResponsive = () => {
           anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
         >
           <MenuItem readOnly>CATEGORIES</MenuItem>
-          {genres? genres.map((genre) => (
-            <MenuItem
-              key={genre.id}
-              onClick={() => searchByCategoryHandler(genre.name)}
-            >
-              {genre.name}
-            </MenuItem>
-          )) : null}
+          {genres
+            ? genres.map((genre) => (
+                <MenuItem
+                  key={genre.id}
+                  onClick={() => searchByCategoryHandler(genre.name)}
+                >
+                  {genre.name}
+                </MenuItem>
+              ))
+            : null}
           <Divider />
           {user?.isAdmin
             ? isAdminMenu.map((menu, i) => (

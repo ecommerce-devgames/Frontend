@@ -63,7 +63,6 @@ const Product = () => {
 
   const handleAdminDeleteProduct = (item) => {
     setAnchorEl(null);
-    console.log(item.id);
     axios
       .delete(`http://localhost:3001/api/games/admin/delete/${item.id}`, {
         withCredentials: true,

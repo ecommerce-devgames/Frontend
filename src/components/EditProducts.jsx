@@ -110,29 +110,6 @@ const EditProducts = () => {
     }
   };
 
-  console.log(
-    params.id,
-    "name",
-    name.value,
-    "description",
-    description.value,
-    "playtime",
-    Number(playtime.value),
-    "released",
-    released.value,
-    "poster",
-    image.value,
-    "price",
-    Number(price.value),
-    "genres",
-    gameGenres,
-    "developers",
-    gameDevelopers,
-    "platforms",
-    gamePlatforms,
-    "tags",
-    tags.value
-  );
   return (
     <div className="editProductsWrapper">
       {params.id ? (
