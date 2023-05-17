@@ -17,15 +17,12 @@ const Register = () => {
   const onSubmitHandler = async (e) => {
     try {
       e.preventDefault();
-      const registeredUser = await axios.post(
-        "http://localhost:3001/api/user/register",
-        {
-          name: name.value,
-          lastName: lastname.value,
-          email: email.value,
-          password: password.value,
-        }
-      );
+      const registeredUser = await axios.post("/api/user/register", {
+        name: name.value,
+        lastName: lastname.value,
+        email: email.value,
+        password: password.value,
+      });
 
       navigate("/login");
     } catch (error) {

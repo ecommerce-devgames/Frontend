@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:3001/api/user/login",
+        "/api/user/login",
         {
           email: email.value,
           password: password.value,
@@ -33,7 +33,7 @@ const Login = () => {
       .then((res) => {
         dispatch(setUser(res.data));
         axios
-          .get(`http://localhost:3001/api/cart/${res.data.id}`, {
+          .get(`/api/cart/${res.data.id}`, {
             withCredentials: true,
           })
           .then((res) => {

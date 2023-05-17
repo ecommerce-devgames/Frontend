@@ -9,7 +9,19 @@ import { setGenres } from "./state/genres";
 import { setDevelopers } from "./state/developers";
 import { setPlatforms } from "./state/platforms";
 import { importCartFromLs, importCartFromDb } from "./state/cart";
-import {Home, Navbar, Register, Login, Product, Cart, EditProducts, EditCategories, EditUsers, History, Settings} from "../src/utils/index";
+import {
+  Home,
+  Navbar,
+  Register,
+  Login,
+  Product,
+  Cart,
+  EditProducts,
+  EditCategories,
+  EditUsers,
+  History,
+  Settings,
+} from "../src/utils/index";
 
 function App() {
   //Hooks
@@ -24,28 +36,22 @@ function App() {
   useEffect(() => {
     dispatch(setProduct(JSON.parse(localStorage.getItem("singleProduct"))));
     axios
-      .get("http://localhost:3001/api/user/me", { withCredentials: true })
+      .get("/api/user/me", { withCredentials: true })
       .then((res) => res.data)
       .then((data) => dispatch(setUser(data)));
-    axios
-      .get("http://localhost:3001/api/genres/", { withCredentials: true })
-      .then((res) => {
-        dispatch(setGenres(res.data));
-      });
-    axios
-      .get("http://localhost:3001/api/developers/", { withCredentials: true })
-      .then((res) => {
-        dispatch(setDevelopers(res.data));
-      });
-    axios
-      .get("http://localhost:3001/api/platforms/", { withCredentials: true })
-      .then((res) => {
-        dispatch(setPlatforms(res.data));
-      });
+    axios.get("/api/genres/", { withCredentials: true }).then((res) => {
+      dispatch(setGenres(res.data));
+    });
+    axios.get("/api/developers/", { withCredentials: true }).then((res) => {
+      dispatch(setDevelopers(res.data));
+    });
+    axios.get("/api/platforms/", { withCredentials: true }).then((res) => {
+      dispatch(setPlatforms(res.data));
+    });
 
     if (user.id) {
       axios
-        .get(`http://localhost:3001/api/cart/${user.id}`, {
+        .get(`/api/cart/${user.id}`, {
           withCredentials: true,
         })
         .then((res) => dispatch(importCartFromDb(res.data)));

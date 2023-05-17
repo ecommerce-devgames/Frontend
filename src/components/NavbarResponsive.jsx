@@ -53,7 +53,7 @@ const NavbarResponsive = () => {
       setAnchorEl(null);
       if (user.id) {
         const logOut = await axios.post(
-          "http://localhost:3001/api/user/logout",
+          "/api/user/logout",
           {},
           { withCredentials: true }
         );

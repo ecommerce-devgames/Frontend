@@ -22,7 +22,7 @@ const Settings = () => {
       e.preventDefault();
 
       const updateInfo = await axios.put(
-        "http://localhost:3001/api/user/me/edit",
+        "/api/user/me/edit",
         verifyData({
           name: name.value,
           lastName: lastName.value,

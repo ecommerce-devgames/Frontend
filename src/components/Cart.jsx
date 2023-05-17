@@ -24,7 +24,7 @@ const Cart = () => {
     if (user.id) {
       axios
         .post(
-          `http://localhost:3001/api/cart/removeItem/${user.id}/${item.id}`,
+          `/api/cart/removeItem/${user.id}/${item.id}`,
           {},
           { withCredentials: true }
         )
@@ -36,11 +36,7 @@ const Cart = () => {
     if (!user.name) return navigate("/login");
     if (user.id) {
       axios
-        .post(
-          `http://localhost:3001/api/cart/purchase/${user.id}`,
-          {},
-          { withCredentials: true }
-        )
+        .post(`/api/cart/purchase/${user.id}`, {}, { withCredentials: true })
         .then((res) => {
           dispatch(removeAllItems([]));
         });
