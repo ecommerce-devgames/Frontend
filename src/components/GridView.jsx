@@ -26,11 +26,13 @@ const GridView = () => {
   //Variables
   const open = Boolean(anchorEl);
   const pathname = location.pathname.split("/")[1];
+  console.log("pathname ==>>", pathname);
 
   //Handlers and functions
   useEffect(() => {
     if (pathname === "") {
       axios.get("/api/games").then((res) => {
+        console.log("games ==>>", res.data);
         dispatch(setGames(res.data));
       });
     }
