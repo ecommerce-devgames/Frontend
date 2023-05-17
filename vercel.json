@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "https://backend-five-eta.vercel.app"
+      "destination": "https://backend-five-eta.vercel.app/$1"
     }
   ]
 }
