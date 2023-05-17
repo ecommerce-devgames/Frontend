@@ -23,7 +23,7 @@ const EditCategories = () => {
     e.preventDefault();
     try {
       const createdGenre = await axios.post(
-        "http://localhost:3001/api/genres/create",
+        "/api/genres/create",
         { name: newCategory.value },
         { withCredentials: true }
       );
@@ -42,17 +42,14 @@ const EditCategories = () => {
 
     try {
       const updatedGenre = await axios.put(
-        `http://localhost:3001/api/genres/edit/${oldCategory.value}`,
+        `/api/genres/edit/${oldCategory.value}`,
         { name: editedCategory.value },
         { withCredentials: true }
       );
 
-      const updateGenres = await axios.get(
-        "http://localhost:3001/api/genres/",
-        {
-          withCredentials: true,
-        }
-      );
+      const updateGenres = await axios.get("/api/genres/", {
+        withCredentials: true,
+      });
 
       dispatch(setGenres(updateGenres.data));
       editedCategory.value = "";
@@ -65,16 +62,12 @@ const EditCategories = () => {
 
   const handleAdminDeleteCategory = async (id) => {
     try {
-      const deletedGenre = axios.delete(
-        `http://localhost:3001/api/genres/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const deletedGenre = axios.delete(`/api/genres/${id}`, {
+        withCredentials: true,
+      });
 
       dispatch(deleteGenres(id));
       navigate("/edit/categories");
-      
     } catch {
       alert("Could't delete category");
       navigate("/");

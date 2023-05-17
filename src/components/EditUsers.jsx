@@ -20,7 +20,7 @@ const EditUsers = () => {
   //Handlers and functions
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/user/admin", {
+      .get("/api/user/admin", {
         withCredentials: true,
       })
       .then((res) => {
@@ -30,12 +30,9 @@ const EditUsers = () => {
 
   const deleteUserHandler = async (id) => {
     try {
-      const deletedUser = await axios.delete(
-        `http://localhost:3001/api/user/admin/delete/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const deletedUser = await axios.delete(`/api/user/admin/delete/${id}`, {
+        withCredentials: true,
+      });
       dispatch(removeFromUsersDb(id));
     } catch (error) {
       alert("Couldn't delete user");
@@ -45,7 +42,7 @@ const EditUsers = () => {
   const editAdminHandler = async (id) => {
     try {
       const editedUser = await axios.put(
-        `http://localhost:3001/api/user/admin/access/${id}`,
+        `/api/user/admin/access/${id}`,
         {},
         {
           withCredentials: true,

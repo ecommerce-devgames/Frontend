@@ -48,13 +48,12 @@ const UserAvatar = () => {
     setAnchorEl(event.currentTarget);
   };
 
-
   const handleAccess = async () => {
     try {
       setAnchorEl(null);
       if (user.id) {
         const logOutUser = await axios.post(
-          "http://localhost:3001/api/user/logout",
+          "/api/user/logout",
           {},
           { withCredentials: true }
         );

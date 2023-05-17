@@ -51,7 +51,7 @@ const Product = () => {
         dispatch(setCart(product));
         if (user.id) {
           const addToCart = await axios.post(
-            `http://localhost:3001/api/cart/addItem/${user.id}/${product.id}`,
+            `/api/cart/addItem/${user.id}/${product.id}`,
             {},
             { withCredentials: true }
           );
@@ -71,17 +71,15 @@ const Product = () => {
     try {
       setAnchorEl(null);
       const deletedGame = await axios.delete(
-        `http://localhost:3001/api/games/admin/delete/${item.id}`,
+        `/api/games/admin/delete/${item.id}`,
         {
           withCredentials: true,
         }
       );
 
-      const resetGames = await axios
-        .get("http://localhost:3001/api/games")
-        .then((res) => {
-          dispatch(setGames(res.data));
-        });
+      const resetGames = await axios.get("/api/games").then((res) => {
+        dispatch(setGames(res.data));
+      });
       navigate("/");
     } catch (error) {
       alert("Couldn't delete game");
@@ -89,7 +87,7 @@ const Product = () => {
   };
 
   const showReviewsHandler = () => {
-    axios.get(`http://localhost:3001/api/review/${product.id}`).then((res) => {
+    axios.get(`/api/review/${product.id}`).then((res) => {
       console.log("revieewwsss", res.data);
       dispatch(setReviews(res.data));
     });
@@ -98,7 +96,7 @@ const Product = () => {
   const reviewSubmitHandler = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:3001/api/review/${product.id}/${user.id}`, {
+      .post(`/api/review/${product.id}/${user.id}`, {
         content: content.value,
         rating: ratingValue.value,
       })
@@ -109,7 +107,7 @@ const Product = () => {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/review/${product.id}`).then((res) => {
+    axios.get(`/api/review/${product.id}`).then((res) => {
       const averageArray = res.data.map((review) => review.rating);
       const average =
         averageArray.reduce((acc, num) => (acc += num)) / averageArray.length;

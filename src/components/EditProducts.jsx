@@ -31,11 +31,9 @@ const EditProducts = () => {
   //Handlers
   useEffect(() => {
     if (params.id) {
-      axios
-        .get(`http://localhost:3001/api/games/${Number(params.id)}`)
-        .then((res) => {
-          setSelectedGame(res.data);
-        });
+      axios.get(`/api/games/${Number(params.id)}`).then((res) => {
+        setSelectedGame(res.data);
+      });
     }
   }, [params]);
 
@@ -65,7 +63,7 @@ const EditProducts = () => {
     if (params.id) {
       try {
         const editedGame = await axios.put(
-          `http://localhost:3001/api/games/admin/edit/${params.id}`,
+          `/api/games/admin/edit/${params.id}`,
           {
             name: name.value,
             description: description.value,
@@ -79,7 +77,7 @@ const EditProducts = () => {
             //tags: [tags.value]
           },
           { withCredentials: true }
-        );   
+        );
         alert("Game updated successfully");
         navigate("/");
       } catch (error) {
@@ -88,7 +86,7 @@ const EditProducts = () => {
     } else {
       try {
         const createdGame = await axios.post(
-          `http://localhost:3001/api/games/admin/create`,
+          `/api/games/admin/create`,
           {
             name: name.value,
             description: description.value,
@@ -102,7 +100,7 @@ const EditProducts = () => {
             tags: tags.value,
           },
           { withCredentials: true }
-        );        
+        );
         alert("Game created successfully");
         navigate("/");
       } catch (error) {
