@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
     axios
       .post(
-        "/api/user/login",
+        "https://backend-five-eta.vercel.app/api/user/login",
         {
           email: email.value,
           password: password.value,
