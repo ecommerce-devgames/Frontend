@@ -45,7 +45,8 @@ function App() {
             .get(`/api/cart/${user.id}`, {
               withCredentials: true,
             })
-            .then((res) => dispatch(importCartFromDb(res.data)));
+            .then((res) => dispatch(importCartFromDb(res.data)))
+            .catch((error) => console.log("error al recuperar /me!"));
         } else {
           dispatch(importCartFromLs(JSON.parse(localStorage.getItem("cart"))));
         }
