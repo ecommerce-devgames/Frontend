@@ -31,10 +31,11 @@ const Login = () => {
         { withCredentials: true }
       )
       .then((res) => res.data)
-      .then((user) => {
-        dispatch(setUser(user));
+      .then((newUser) => {
+        dispatch(setUser(newUser));
+        console.log("newUser log ==>", newUser);
         axios
-          .get(`/api/cart/${user.id}`, {
+          .get(`/api/cart/${newUser.id}`, {
             withCredentials: true,
           })
           .then((res) => res.data)
