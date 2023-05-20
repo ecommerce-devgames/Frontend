@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { removeFromCart, setCart, removeAllItems } from "../state/cart";
 import { FaTrash } from "react-icons/fa";
+import { message } from "antd";
 
 const Cart = () => {
   //Hooks
@@ -28,7 +29,7 @@ const Cart = () => {
           {},
           { withCredentials: true }
         )
-        .then((res) => console.log(res));
+        .then((res) => message.success(res));
     }
   };
 

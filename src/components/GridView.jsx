@@ -8,6 +8,7 @@ import { setCart } from "../state/cart";
 import { setGames } from "../state/games";
 import Card from "../commons/Card";
 import Grid from "@mui/material/Grid";
+import { message } from "antd";
 
 const GridView = () => {
   //Hooks
@@ -26,13 +27,11 @@ const GridView = () => {
   //Variables
   const open = Boolean(anchorEl);
   const pathname = location.pathname.split("/")[1];
-  console.log("pathname ==>>", pathname);
 
   //Handlers and functions
   useEffect(() => {
     if (pathname === "") {
       axios.get("/api/games").then((res) => {
-        console.log("games ==>>", res.data);
         dispatch(setGames(res.data));
       });
     }
@@ -63,7 +62,7 @@ const GridView = () => {
       localStorage.setItem("singleProduct", JSON.stringify(singleProduct.data));
       navigate(`/products/${singleProduct.data.id}`);
     } catch (error) {
-      console.log(error);
+      message("error", error.message);
     }
   };
 
