@@ -38,8 +38,20 @@ function App() {
     axios
       .get("/api/user/me", { withCredentials: true })
       .then((res) => res.data)
-      .then((me) => dispatch(setUser(me)))
+      .then((user) => {
+        dispatch(setUser(user));
+        if (user.id) {
+          axios
+            .get(`/api/cart/${user.id}`, {
+              withCredentials: true,
+            })
+            .then((res) => dispatch(importCartFromDb(res.data)));
+        } else {
+          dispatch(importCartFromLs(JSON.parse(localStorage.getItem("cart"))));
+        }
+      })
       .catch((error) => console.log("error al recuperar /me!"));
+
     axios.get("/api/genres/", { withCredentials: true }).then((res) => {
       dispatch(setGenres(res.data));
     });
@@ -50,15 +62,6 @@ function App() {
       dispatch(setPlatforms(res.data));
     });
 
-    if (user.id) {
-      axios
-        .get(`/api/cart/${user.id}`, {
-          withCredentials: true,
-        })
-        .then((res) => dispatch(importCartFromDb(res.data)));
-    } else {
-      dispatch(importCartFromLs(JSON.parse(localStorage.getItem("cart"))));
-    }
     // eslint-disable-next-line
   }, []);
 
