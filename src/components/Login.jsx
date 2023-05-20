@@ -30,14 +30,16 @@ const Login = () => {
         },
         { withCredentials: true }
       )
-      .then((res) => {
-        dispatch(setUser(res.data));
+      .then((res) => res.data)
+      .then((user) => {
+        dispatch(setUser(user));
         axios
-          .get(`/api/cart/${res.data.id}`, {
+          .get(`/api/cart/${user.id}`, {
             withCredentials: true,
           })
-          .then((res) => {
-            if (res.data.length) return dispatch(importCartFromDb(res.data));
+          .then((res) => res.data)
+          .then((cart) => {
+            if (cart.length) return dispatch(importCartFromDb(cart));
             dispatch(
               importCartFromLs(JSON.parse(localStorage.getItem("cart")))
             );
