@@ -39,7 +39,7 @@ function App() {
       .get("/api/user/me", { withCredentials: true })
       .then((res) => res.data)
       .then((me) => dispatch(setUser(me)))
-      .catch((error) => console.log(error.message));
+      .catch((error) => console.log("error al recuperar /me!"));
     axios.get("/api/genres/", { withCredentials: true }).then((res) => {
       dispatch(setGenres(res.data));
     });
