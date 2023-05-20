@@ -34,17 +34,19 @@ const Login = () => {
       .then((newUser) => {
         dispatch(setUser(newUser));
         console.log("newUser log ==>", newUser);
-        axios
-          .get(`/api/cart/${newUser.id}`, {
-            withCredentials: true,
-          })
-          .then((res) => res.data)
-          .then((cart) => {
-            if (cart.length) return dispatch(importCartFromDb(cart));
-            dispatch(
-              importCartFromLs(JSON.parse(localStorage.getItem("cart")))
-            );
-          });
+        if (newUser.id) {
+          axios
+            .get(`/api/cart/${newUser.id}`, {
+              withCredentials: true,
+            })
+            .then((res) => res.data)
+            .then((cart) => {
+              if (cart.length) return dispatch(importCartFromDb(cart));
+              dispatch(
+                importCartFromLs(JSON.parse(localStorage.getItem("cart")))
+              );
+            });
+        }
         navigate("/");
       });
   };
